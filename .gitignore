@@ -26,3 +26,5 @@ prisma/dev.db-journal
 # misc
 *.tsbuildinfo
 tmp-*.html
+
+.vercel
