@@ -13,8 +13,8 @@ export default async function LocalePage({ params }: LocalePageProps) {
   const { locale } = (await params) ?? { locale: "zh" };
   const t = await getTranslations({ locale, namespace: "HomePage" });
   const session = await auth();
-  const primaryHref = session?.user ? "/modules" : "/login";
-  const secondaryHref = session?.user ? "/tools" : "/login";
+  const primaryHref = "/modules";
+  const secondaryHref = session?.user ? "/tools" : "/modules";
   const featureCards = [
     {
       title: t("featureModulesTitle"),
