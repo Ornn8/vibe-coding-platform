@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import type { Locale } from "@/i18n/routing";
 import { getCurrentUserId, getProjectById } from "@/lib/learning";
@@ -13,6 +13,11 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   const { locale, projectId } = (await params) ?? { locale: "zh", projectId: "" };
   const t = await getTranslations({ locale, namespace: "ProjectDetailPage" });
   const userId = await getCurrentUserId();
+
+  if (!userId) {
+    redirect(`/${locale}/login`);
+  }
+
   const projectModule = await getProjectById(locale as Locale, projectId, userId);
 
   if (!projectModule || !projectModule.project.exerciseId) {

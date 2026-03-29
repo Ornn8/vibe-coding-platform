@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { notFound } from "next/navigation";
+import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import type { Locale } from "@/i18n/routing";
 import { getCurrentUserId, getLearnerProfile } from "@/lib/learning";
@@ -15,7 +15,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
   const userId = await getCurrentUserId();
 
   if (!userId) {
-    notFound();
+    redirect(`/${locale}/login`);
   }
 
   const profile = await getLearnerProfile(locale as Locale, userId);

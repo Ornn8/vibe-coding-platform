@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -12,6 +13,11 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   const { locale } = (await params) ?? { locale: "zh" };
   const t = await getTranslations({ locale, namespace: "ProjectsPage" });
   const userId = await getCurrentUserId();
+
+  if (!userId) {
+    redirect(`/${locale}/login`);
+  }
+
   const projects = await getProjectsOverview(locale as Locale, userId);
   const formatTier = (tier: "CORE" | "ADVANCED") => (tier === "ADVANCED" ? t("advancedTier") : t("coreTier"));
   const formatStatus = (status: "DRAFT" | "SUBMITTED" | "REVIEWED" | "COMPLETED") => {

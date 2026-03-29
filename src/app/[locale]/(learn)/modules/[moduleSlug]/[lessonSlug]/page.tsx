@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { CompleteLessonButton } from "@/components/learn/complete-lesson-button";
 import { LessonContent } from "@/components/learn/lesson-content";
 import { Button } from "@/components/ui/button";
+import { auth } from "@/auth";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { getCanonicalLessonSlug, getCurrentUserId, getLessonBySlug } from "@/lib/learning";
@@ -19,6 +20,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
     moduleSlug: "",
     lessonSlug: ""
   };
+  const session = await auth();
   const t = await getTranslations({ locale, namespace: "LessonPage" });
   const userId = await getCurrentUserId();
   const canonicalLessonSlug = getCanonicalLessonSlug(moduleSlug, lessonSlug);
@@ -80,7 +82,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
             </p>
           </div>
 
-          {lessonData.lesson.id ? (
+          {session?.user && lessonData.lesson.id ? (
             <form
               action={async () => {
                 "use server";
@@ -94,7 +96,20 @@ export default async function LessonPage({ params }: LessonPageProps) {
                 completedLabel={t("completed")}
               />
             </form>
-          ) : null}
+          ) : (
+            <div className="rounded-2xl border border-dashed border-border/70 bg-background px-4 py-3 text-sm text-muted-foreground">
+              <p>
+                {locale === "zh"
+                  ? "登录后可以记录这一课的完成状态。"
+                  : "Sign in to save completion for this lesson."}
+              </p>
+              <Button asChild variant="outline" className="mt-3 w-full rounded-full">
+                <Link href="/login" locale={locale as Locale}>
+                  {locale === "zh" ? "登录以记录进度" : "Sign in to track progress"}
+                </Link>
+              </Button>
+            </div>
+          )}
 
           <div className="grid gap-3">
             {lessonData.previousLesson ? (
