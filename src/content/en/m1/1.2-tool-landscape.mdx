@@ -1,71 +1,90 @@
 ---
-title: "Tool Map: Choose the Right First Tool"
-description: "Understand the differences between browser, IDE, and CLI tools so you can choose a sensible starting point."
+title: "Tool Map: Choose the Right First Weapon"
+description: "Put browser tools, IDE tools, and CLI tools into one decision frame so you can choose a sensible starting stack."
 module: "m1"
 order: 2
-estimatedMins: 30
+estimatedMins: 25
 methodologyTag: "Planning-Driven"
 ---
 
 <Callout type="methodology" title="Methodology Focus">
-Choosing a tool is part of planning. The best tool is not the most powerful one, but the one that helps you make progress with the least friction.
+Do not chase the strongest tool. Match tool complexity to task complexity.
 </Callout>
 
-## Step 1: Browser Tools Are Great for Starting
+## Step 1: Why Browser Tools Are Great for Starting
+Open `bolt.new` or `lovable.dev` and you usually see one large input box and a preview area. Type:
 
-Browser-based tools have the lowest barrier to entry. You do not need a local environment, you do not need to understand a repository, and you can usually start generating pages or prototypes right away.
+```text
+Build a cafe menu page with latte, americano, and cappuccino.
+Show prices, categories, and a pickup button. Keep it modern and clean.
+```
 
-They are especially useful when you are validating an idea, do not yet know whether the project is worth continuing, or simply need a first successful result to build confidence. Their weakness shows up when the project becomes more complex and you need tighter control over files, dependencies, and verification.
+In under a minute, you often get a full page in the preview. That "open it, ask once, see something real" loop is the biggest strength of browser tools. They are great for landing pages, small demos, and first MVP validation.
 
-| Tool | Best fit | Typical strength | Tradeoff |
-|------|----------|------------------|----------|
-| Bolt.new | Fast web prototypes | Very quick first draft | Less control over the repo |
-| Lovable | Product-style landing pages | Smooth visual iteration | Can hide file-level details |
-| Replit | Small runnable apps | Easy to run and share | Not ideal for large existing codebases |
+<Callout type="scenario" title="When browser tools should win">
+Situation: you are still validating whether a page direction is worth pursuing. Action: start with a browser tool and get a visible draft. Why: at this stage you need low setup cost and fast feedback more than deep engineering control.
+</Callout>
 
-<Exercise id="ex-1.2.1.1" level="L1" title="Spot the right browser-tool scenarios" description="List three projects you might build and decide which ones are good candidates for browser-based tools and which ones are not." />
+| Tool category | Setup cost | Time to first use | Best project size | Typical jobs |
+|---|---|---|---|---|
+| Browser tool | Low, just sign in | 1-3 minutes | Single pages, demos, first MVPs | Landing pages, personal sites, quick concept pages |
+| IDE tool | Medium, local setup needed | 5-15 minutes | Real codebases, small to medium projects | Edit real files, reuse components |
+| CLI tool | Medium to high, terminal and repo context needed | 10-20 minutes | Multi-step delivery, verified project work | Plan, execute, review, verify |
 
-<Separator />
-
-## Step 2: When to Move to IDE or CLI
-
-IDE tools become useful when you need to read files, edit files, and work within an existing codebase. CLI tools go a step further and are strongest when the task needs precise context, explicit scope, and a clear verification process.
-
-The upgrade signal is not "can I use it?" but "does the work now require stable context, step-by-step execution, and better traceability?" When the answer becomes yes, it is time to level up.
-
-| Tool | Best fit | Why you would upgrade |
-|------|----------|-----------------------|
-| Cursor | You need file-aware editing inside a codebase | The project now needs repo context |
-| Windsurf | You want a more IDE-like AI workflow | The task needs stable file navigation |
-| Claude Code / Codex | You need explicit steps, review, and traceability | The task is ready for terminal-driven execution |
-
-<Exercise id="ex-1.2.2.1" level="L2" title="Decide whether you should upgrade tools" description="Pick one project you want to build, explain whether browser, IDE, or CLI is the best fit right now, and say when you would upgrade." />
+<Exercise id="ex-1.2.1.1" level="L1" title="Match scenarios to browser tools" description="Decide whether 'a marketing-page first draft', 'editing a login flow in an existing repo', and 'a quick course demo' should begin with a browser tool." />
 
 <Separator />
 
-## Step 3: Build a Small Starting Stack
+## Step 2: What IDE and CLI Tools Change
+Once you move from "try an idea" to "keep changing real work," browser tools become less stable. If you need to inspect files, reuse existing components, control dependencies, or run checks, IDE and CLI tools become much more useful.
 
-Most effective builders do not use only one tool. They build a starting stack: maybe a browser tool for the first draft, an IDE for refinement, and a CLI agent for structured repository work.
+Cursor and Windsurf feel like "editors that can talk back." You read code while asking AI to modify code. Claude Code and Codex feel more like "terminal partners that can operate a workflow." They do not just edit. They read plans, inspect repos, run checks, and summarize results.
 
-You do not need a complicated stack at the beginning. A practical starter setup is often one browser tool for generation and one place to capture prompts and decisions. If you already have code experience, you can add an IDE to the mix.
+```text
+Before: IDE and CLI both felt like "more advanced AI tools."
+After: I can choose them by task. If I need visual file editing, IDE makes sense. If I need plan-execute-verify delivery, CLI is usually stronger.
+```
 
-What matters is not having the most complete toolchain. What matters is having a stack you are willing to open repeatedly and learn from.
+| Task | Browser tool | IDE tool | CLI tool |
+|---|---|---|---|
+| First draft of a course landing page | Best speed | Usable but heavier | Too heavy |
+| Add a page inside an existing Next.js repo | Weak | Strong fit | Strong fit |
+| Build CRUD in four verified steps | Poor fit | Possible | Best fit |
+| Run `npm run lint` and `npx tsc --noEmit` and fix issues | Weak | Possible | Strong fit |
 
-For example, a beginner might start with Bolt.new for generation, then move to Cursor for file-aware editing, and later try Claude Code for repository work.
+<Exercise id="ex-1.2.2.1" level="L2" title="Pick the right tool layer for your project" description="Choose one project you want to build, explain whether browser, IDE, or CLI is the right starting layer, and say when you would move up." />
 
-<Exercise id="ex-1.2.3.1" level="L2" title="Write down your starter stack" description="Choose one or two AI tools you will use first and explain what each tool is responsible for." />
+<Separator />
+
+## Step 3: Make a Real First-Tool Decision
+Three questions are enough. First, am I validating an idea or editing a real project? Second, do I need AI to understand the whole repository? Third, do I need commands, checks, or step-by-step execution right now?
+
+If the answer is "I am validating an idea, I do not need repo context, and I do not need commands," start with a browser tool. If you already need code control, dependency control, or verification, do not force a browser tool to do a CLI job.
+
+<Callout type="scenario" title="What picking the wrong tool feels like">
+Wrong move: choose the terminal first just to feel professional. Better move: start with the lightest tool that can validate the task, then upgrade only when the complexity truly rises. Let the task drive the tool, not the other way around.
+</Callout>
+
+| Current state | Recommended starting tool | Your next move |
+|---|---|---|
+| I only want to test one page idea | Browser tool | Generate a first draft today |
+| I already have a local project and want to edit files | IDE tool | Open the repo and make a targeted change |
+| I need planning, execution, and verification | CLI tool | Read context first, then work in steps |
+
+<Exercise id="ex-1.2.3.1" level="L3" title="Sign up for and open your first tool" description="Choose a browser, IDE, or CLI tool, complete the real sign-up or install step, open the main interface, and record what the entry point, input area, or terminal prompt looks like." />
 
 ## Unit Summary
 
-- Browser tools are ideal for low-friction starts and quick validation.
-- IDE and CLI tools add stronger context control and more engineering discipline.
-- The right first stack is the one you can use consistently, not the one with the most features.
+- Browser tools win on low friction and fast feedback.
+- IDE tools are best when you want to keep editing real code with visual context.
+- CLI tools are strongest when planning, execution, and verification all matter.
 
 ## Methodology Review
 
-This unit keeps practicing planning-driven behavior: tool choice is a way of reducing risk before execution even begins.
+This unit turns planning-driven thinking into tool choice: let the task choose the tool.
 
 ## References
 
+- `content-revision-plan.md`
 - `curriculum-v3.md`
-- Product documentation from major AI coding tools
+- Public docs for Bolt.new, Lovable, Cursor, Claude Code, and similar tools

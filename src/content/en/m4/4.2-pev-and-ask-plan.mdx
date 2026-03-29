@@ -1,6 +1,6 @@
 ---
-title: "The PEV Loop and Ask/Plan Mode"
-description: "Turn Plan, Execute, Verify into a habit and learn when to ask or plan before acting."
+title: "The PEV Loop and Ask / Plan Mode"
+description: "Go beyond the concept and study one complete Plan -> Execute -> Verify record, then learn when to Ask, when to Plan, and when to act directly."
 module: "m4"
 order: 2
 estimatedMins: 35
@@ -8,59 +8,74 @@ methodologyTag: "Closed-Loop Delivery"
 ---
 
 <Callout type="methodology" title="Methodology Focus">
-PEV is the execution rhythm behind reliable AI collaboration. Ask/Plan mode decides whether you should proceed immediately or slow down first.
+Reliable AI collaboration is not AI running in one long burst. It is a visible loop with verification at the end of every round.
 </Callout>
 
-## Step 1: Plan, Execute, Verify
+## Step 1: Read One Full PEV Execution Record
+Imagine the task is "add a completion counter to the tomato-timer page." A full PEV record might look like this:
 
-PEV stands for Plan, Execute, Verify. It means you do not let the model run blindly. You state the task, you run the action, and then you check the result before moving on.
+| Stage | Real content |
+|---|---|
+| Plan | Put the counter on the homepage, do not add another page, and keep the count in local state for now |
+| Execute | Add a stats card and increment the count when one timer cycle completes |
+| Verify | Complete one full timer cycle, check whether the count increases, then reload and confirm whether reset behavior matches the plan |
 
-That rhythm is what keeps the work from drifting.
+That loop is simple, but it forces two pauses: one before action and one after action. A lot of rework comes from skipping the second one.
 
-For a small task, the plan might be "rename one component, run lint, confirm the page still builds." For a bigger task, it might be "outline the change first, then execute in stages, then verify each stage."
+<Callout type="scenario" title="Why PEV is safer than one long run">
+Situation: AI already produced the feature and you want to rush into the next step. Action: stop and verify whether the current result truly matches the original plan. Why: small mistakes become expensive when you carry them into later steps.
+</Callout>
 
-<Exercise id="ex-4.2.1.1" level="L1" title="Describe a PEV loop" description="For one small task, write the Plan, Execute, and Verify steps in order." />
-
-<Separator />
-
-## Step 2: Ask or Plan Before You Act
-
-Not every task should be executed immediately. Sometimes you should ask the model to explain its plan first. Sometimes you should ask clarifying questions. Sometimes you should simply proceed.
-
-Ask/Plan mode is the judgment call that helps you decide which path is right.
-
-Examples:
-
-- Ask when the task is unclear or could change the scope.
-- Plan when the task is important but needs a safe sequence.
-- Execute directly when the change is tiny and the risk is low.
-
-<Exercise id="ex-4.2.2.1" level="L2" title="Choose Ask, Plan, or Execute" description="For three tasks of different complexity, decide whether you should Ask, Plan, or execute directly." />
+<Exercise id="ex-4.2.1.1" level="L1" title="Spot which step is missing" description="Read several short task logs and identify which one is missing Plan and which one is missing Verify, then explain the risk." />
 
 <Separator />
 
-## Step 3: Nest PEV Inside Bigger Work
+## Step 2: Ask, Plan, and Direct Execute Are Timing Decisions
+These three modes are easier to understand as timing choices:
 
-A large task can be broken into smaller ones, and each smaller one can still follow PEV. That is how the rhythm scales. You do not abandon verification when the task gets bigger; you make verification more explicit.
+| Mode | When to use it | Example |
+|---|---|---|
+| Ask | The target is still unclear or the solution space is wide | Should the stats card live on the homepage or in a detail view? |
+| Plan | The target is clear, but the change carries risk | Show me the change scope and the verification steps first |
+| Execute directly | The task is tiny, low-risk, and already bounded | Change the button label from "Start" to "Start Focus" |
 
-That nested structure is one of the reasons AI collaboration becomes more stable over time.
+```text
+Before: every task goes straight to execution.
+After: unclear target means Ask, risky path means Plan, and only tiny bounded work goes straight to Execute.
+```
 
-For example, "add an edit form" can become: plan the fields, implement the form, verify the save path. Each of those substeps can also be checked with PEV.
+<Exercise id="ex-4.2.2.1" level="L2" title="Choose Ask, Plan, or Execute for six tasks" description="Take six tasks of different sizes and choose whether each one should start with Ask, Plan, or direct execution, then explain what risk you are controlling." />
 
-<Exercise id="ex-4.2.3.1" level="L3" title="Expand one step into a mini PEV" description="Take one larger task and break one step into a smaller Plan, Execute, Verify sequence." />
+<Separator />
 
-The bigger the task, the more important it is to make the plan visible before you start changing things.
+## Step 3: Large Work Needs Nested PEV Loops
+PEV is not only for whole projects. It should also appear inside substeps. Even "work on the database" can be split like this:
+
+| Subtask | Plan | Execute | Verify |
+|---|---|---|---|
+| Design fields | Decide field names and types | Write the schema | Check whether the fields cover the requirement |
+| Create the table | Confirm migration approach | Run the migration | Confirm the table exists correctly |
+| Query data | Decide the returned shape | Write the query | Confirm the page gets the right data |
+
+That is why engineering workflows look slower at first while staying much more stable over time.
+
+<Callout type="scenario" title="One large action vs nested PEV">
+Wrong move: treat "do the database" as one black-box step. Better move: separate field design, migration, and querying, and verify each part. One path is hard to debug. The other creates usable checkpoints.
+</Callout>
+
+<Exercise id="ex-4.2.3.1" level="L3" title="Expand one real subtask into a nested PEV loop" description="Pick one subtask from your plan, expand it into a smaller Plan, Execute, Verify sequence, and if possible run that smaller loop in a real or simulated task." />
 
 ## Unit Summary
 
-- PEV makes execution predictable.
-- Ask/Plan is a judgment layer that helps you decide how to proceed.
-- Larger tasks become manageable when you nest PEV inside smaller steps.
+- The most important letter in PEV is often V.
+- Ask helps with direction, Plan helps with path, and direct Execute belongs only to small bounded work.
+- Large work becomes safer when you nest smaller PEV loops inside it.
 
 ## Methodology Review
 
-This unit applies closed-loop delivery in the execution layer.
+This unit turns closed-loop delivery into a concrete execution rhythm.
 
 ## References
 
+- `content-revision-plan.md`
 - `curriculum-v3.md`

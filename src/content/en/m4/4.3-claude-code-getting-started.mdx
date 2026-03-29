@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with Claude Code"
-description: "Install Claude Code, enter a project, read context, inspect a plan, and build your first terminal-agent workflow."
+description: "Cover Windows, macOS, and Linux setup paths, common errors, and the first small agent workflow that builds trust in terminal-based collaboration."
 module: "m4"
 order: 3
 estimatedMins: 35
@@ -8,57 +8,83 @@ methodologyTag: "Context Stabilization"
 ---
 
 <Callout type="methodology" title="Methodology Focus">
-Claude Code works best when the repository context is explicit. The more clearly you frame the task, the more useful the agent becomes.
+CLI tools are not just "more advanced chat." They are environments where context, plans, and verification matter much more explicitly.
 </Callout>
 
-## Step 1: Install and Enter a Real Repo
+## Step 1: Install It and Enter the Project Correctly
+The first setup path depends on the operating system:
 
-Claude Code is different from a chat-only workflow because it works inside an actual repository. That means it can read structure, follow conventions, and make changes that need to fit the existing codebase.
+| System | What you usually do first | Most common issue |
+|---|---|---|
+| Windows | Open PowerShell or Terminal and confirm Node, npm, and PATH | Path or permission issues |
+| macOS | Open Terminal and confirm shell access and directory permissions | Terminal and folder access issues |
+| Linux | Check shell, Node environment, and repo permissions | Missing dependencies or permission problems |
 
-The first goal is simply to get in the project and learn to orient yourself there.
+Once the tool opens in the project directory, do not rush into feature work. First let it inspect the repo, read `AGENTS.md`, read `CLAUDE.md`, and orient itself. The first run is more like "read the drawings before building."
 
-<Exercise id="ex-4.3.1.1" level="L2" title="Complete first setup" description="Install Claude Code and open it inside a real project, then confirm that it can see the repository structure." />
+<Callout type="scenario" title="What the first prompt should do">
+Situation: the tool is open inside the project directory. Action: ask it to inspect the repository structure, key constraint files, and the stack before making any change. Why: without shared context, a terminal agent is much more likely to act in ways that do not fit the repo.
+</Callout>
 
-<Separator />
-
-## Step 2: Let It Analyze Before It Acts
-
-A good first-run prompt gives the agent context before asking for edits. Explain what the project is, what files matter, and what kind of change you want. Then let it think before it changes anything.
-
-That habit prevents a lot of blind guessing.
-
-<Exercise id="ex-4.3.2.1" level="L2" title="Write a kickoff prompt" description="Draft a prompt that includes the goal, constraints, file scope, and verification method for one small task." />
-
-<Separator />
-
-## Step 3: Verify as Part of the Work
-
-Lint, typecheck, and route checks are not extras. They are the thing that turns a change into something trustworthy. If you skip verification, you only know that the model produced something, not that the project is actually healthy.
-
-In agent workflows, verification is part of the request, not an afterthought.
-
-<Exercise id="ex-4.3.3.1" level="L3" title="Run a small agent-assisted task" description="Use Claude Code to complete one small task and record what it changed plus how you verified it." />
+<Exercise id="ex-4.3.1.1" level="L1" title="Classify setup failures by root cause" description="Look at several setup failures and decide whether each one is mainly caused by PATH, permissions, dependencies, or project-directory confusion." />
 
 <Separator />
 
-## Step 4: Compare Claude Code and GUI Tools
+## Step 2: Learn the First 'Analyze, Do Not Edit' Prompt
+A stronger kickoff prompt often looks like this:
 
-Claude Code is strongest when the task needs repository context, explicit steps, and reproducible verification. GUI tools still have value for quick visual exploration.
+```text
+Read AGENTS.md, CLAUDE.md, and README first.
+Summarize the repository stack, key directories, and main constraints.
+Do not edit any files yet. Only give me a short analysis.
+```
 
-The important lesson is not that one tool is universally better. It is that different phases of the work favor different tools.
+That prompt changes the agent from "executor" into "analyst" before any risk is introduced.
 
-<Exercise id="ex-4.3.4.1" level="L3" title="Compare two workflows" description="Use the same task in Claude Code and in a GUI tool, then write down the differences in speed, clarity, and confidence." />
+| Prompt style | Risk | Better alternative |
+|---|---|---|
+| Fix the homepage | The agent may act before it understands context | Read the constraint files and summarize the repo first |
+| Look at this project | Too vague | Ask for stack, key directories, and main constraints explicitly |
+
+<Exercise id="ex-4.3.2.1" level="L2" title="Write a first-repo analysis prompt" description="Write the first Claude Code prompt you would use in a real repository. It should request context analysis only, with no file edits." />
+
+<Separator />
+
+## Step 3: Build Trust with One Small Complete Task
+The first real execution task should be small enough to finish in 15 to 30 minutes.
+
+| Small task | Why it works well for a first run |
+|---|---|
+| Change an empty-state sentence | Low risk and easy to verify |
+| Rewrite one button label | Small blast radius and clear before/after |
+| Add one short helper paragraph | Lets you run analysis -> plan -> edit -> verify once end to end |
+
+Also remember the most common troubleshooting checks:
+
+| Problem | What to inspect first |
+|---|---|
+| Command not found | Whether Node, npm, and the tool are on PATH |
+| Cannot read the repo | Current directory and folder permissions |
+| Unsure whether the change is safe | Run `lint`, `tsc`, or a manual check before trusting it |
+
+<Callout type="scenario" title="Large first task vs small first loop">
+Wrong move: ask Claude Code to refactor a large page on the first run. Better move: complete one small task through analyze, plan, edit, and verify. One approach gambles with the repository. The other builds collaboration trust.
+</Callout>
+
+<Exercise id="ex-4.3.3.1" level="L3" title="Use Claude Code for one real small task" description="Choose a real repository, ask Claude Code to analyze first, then plan, then complete one small edit, and record how you verified the outcome." />
 
 ## Unit Summary
 
-- Claude Code is strongest inside a real repository.
-- A good kickoff prompt gives context before execution.
-- Verification is part of delivery, not a bonus step.
+- Setup success depends on PATH, permissions, dependencies, and project location.
+- The first repo interaction should be analysis-first, not edit-first.
+- Small tasks are the safest way to build early trust in a terminal agent workflow.
 
 ## Methodology Review
 
-This unit turns context stabilization into a real terminal-agent workflow.
+This unit brings context stabilization and planning-driven habits into CLI collaboration.
 
 ## References
 
+- `content-revision-plan.md`
 - `curriculum-v3.md`
+- Claude Code documentation

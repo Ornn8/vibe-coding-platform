@@ -1,78 +1,101 @@
 ---
 title: "The Soul Questions: User, Pain, and Solution"
-description: "Clarify user, pain, and differentiation so later prompts and plans stay grounded."
+description: "Turn 'I want to build an app' into an AI-executable requirement by clarifying who it is for, what hurts, and why this solution should exist."
 module: "m2"
 order: 2
-estimatedMins: 40
-methodologyTag: "Planning-Driven"
 ---
 
 <Callout type="methodology" title="Methodology Focus">
-The soul questions are the minimum planning layer before any AI build: who is using this, what hurts, and why should they choose this solution.
+The soul questions are the lightest useful planning move in the requirement stage. They stop drift before AI starts building.
 </Callout>
 
-## Step 1: Who Is the User?
+## Step 1: Question one, who is the user
 
-Before you ask AI to build anything, define a real person or a clearly scoped group. "Everyone" is not a user. A good user description includes context, habits, and the situation in which the product is used.
+Do not write "everyone," "young people," or "people who want to learn." A usable persona should include role, situation, and current behavior.
 
-When the user is concrete, the rest of the project becomes easier. The page structure, tone, flow, and feature choices all become more grounded.
+<Callout type="scenario" title="Scenario: What a useful persona looks like">
+Weak: For people who want to learn English.
 
-Consider the difference:
+Better: For first-year college students who review vocabulary during a 30-minute commute.
 
-| Weak user description | Strong user description |
-|-----------------------|-------------------------|
-| People who want to learn | A college student who wants to review vocab on the bus between classes |
-| Anyone who needs notes | A freelance designer who tracks client ideas on mobile during meetings |
+Why: The second version tells you when the user opens the product and what the homepage must prioritize.
+</Callout>
 
-<Exercise id="ex-2.2.1.1" level="L1" title="Define the user" description="Pick one product idea and describe the user as specifically as possible." />
+| Description style | How AI will read it | Resulting difference |
+|---|---|---|
+| People who want to learn English | General-purpose audience | The product becomes broad and generic |
+| Students reviewing vocabulary during their commute | Clear usage context | The first version becomes more focused |
 
-<Exercise id="ex-2.2.1.2" level="L2" title="Write a concrete user persona" description="For a vocabulary app, write a short user persona with context, habit, and usage scenario." />
+Specific users naturally create narrower scope.
 
-<Separator />
+<Exercise id="ex-2.2.1.1" level="L1" title="Choose the more executable user description" description="Compare several user descriptions and decide which one is specific enough to drive AI implementation." />
 
-## Step 2: What Pain Are You Solving?
-
-Good products solve a specific pain, not an abstract desire. The pain can be obvious, like "I waste too much time," or subtle, like "I do not know what to do next." If you cannot name the pain, AI will usually fill the gap with guesses.
-
-The goal is not to write a marketing slogan. The goal is to describe a problem precise enough that implementation decisions can be made later.
-
-You can test the quality of the pain statement by asking whether the current workaround is obvious. If the user already has a decent way to solve the problem, your solution needs to beat that specific workaround.
-
-<Exercise id="ex-2.2.2.1" level="L1" title="Separate true pain from fake pain" description="For three statements, decide whether each one is a real pain point or a vague desire." />
-
-<Exercise id="ex-2.2.2.2" level="L2" title="Define the pain" description="Write one concrete pain point and explain how the user currently tries to solve it." />
+<Exercise id="ex-2.2.1.2" level="L2" title="Write a concrete user persona" description="Write a persona for one project that includes role, situation, and current behavior in 60 to 100 words." />
 
 <Separator />
 
-## Step 3: Why This Solution
+## Step 2: Question two, where is the pain
 
-Once the user and pain are clear, explain why your idea should exist. This is the place to state the angle, the difference, or the reason this is better for the chosen user than the obvious alternatives.
+Real pain is not "this would be nice." Real pain is a repeated cost in time, attention, or money. A strong test is to ask how the user is currently hacking around the problem.
 
-This question matters because it helps you avoid building a generic clone. AI is very good at making generic things that look complete. Your job is to keep the project pointed at a real difference.
+<Callout type="scenario" title="Scenario: Real pain vs fake demand">
+Fake demand: I want a cooler homepage.
 
-<Exercise id="ex-2.2.3.1" level="L2" title="Write a short requirement statement" description="Combine user, pain, and solution into one short paragraph that AI could use as a build brief." />
+Real pain: The user manually sorts expense screenshots and retypes them into a spreadsheet every day.
+
+Why: The first is product imagination. The second is an actual cost the user already pays.
+</Callout>
+
+| Statement | More like what | Why |
+|---|---|---|
+| The homepage should feel cooler | Fake demand | No clear user cost is attached |
+| The user repeatedly organizes screenshots and amounts by hand | Real pain | There is a measurable inefficient behavior |
+
+If you cannot describe the user's current workaround, the problem is probably still too vague.
+
+<Exercise id="ex-2.2.2.1" level="L1" title="Separate real pain from fake demand" description="Read several requirement statements and decide which ones represent real pain and which ones are just attractive ideas." />
+
+<Exercise id="ex-2.2.2.2" level="L2" title="Write the user's current workaround" description="For one project, explain how the target user is currently coping with the problem and why that workaround is not good enough." />
 
 <Separator />
 
-## Step 4: Combine the Three Answers
+## Step 3: Question three, why this solution
 
-The final step is to put the user, pain, and solution together in a form that AI can actually use. That means the statement should read like a build brief, not like a slogan.
+"Why this solution" does not mean claiming you are better than every competitor. It means narrowing the product to one concrete advantage: faster, lighter, easier, or more suitable for a specific context.
 
-When the three parts fit, later planning becomes much easier because the project has a clear direction and a clear reason to exist.
+<Callout type="warning" title="Before / After: Slogan vs usable differentiation">
+Wrong: I want to build an app that is better than every competitor.
 
-<Exercise id="ex-2.2.4.1" level="L3" title="Write a complete build brief" description="Write a single paragraph that combines the user, pain, and solution into one AI-readable requirement statement." />
+Right: I want to build a vocabulary tool that works for five-minute commute sessions.
+
+Difference: The wrong version has no boundary. The right version does.
+</Callout>
+
+| Solution statement | Executable? | Why |
+|---|---|---|
+| Better than everyone | No | No specific advantage is defined |
+| Built for short commute sessions | Yes | The value and boundary are clear |
+
+Once question three is clear, the project becomes a bounded solution rather than a vague idea.
+
+<Exercise id="ex-2.2.3.1" level="L2" title="Write your one-sentence differentiation" description="Explain in one sentence why your solution fits the user's situation better than the current workaround." />
+
+<Exercise id="ex-2.2.3.2" level="L3" title="Combine the soul questions into a requirement summary" description="Turn your user, pain, and solution into a 120- to 200-word requirement summary, then send it to AI and check whether the response reflects your intended boundary." />
+
+<Separator />
 
 ## Unit Summary
 
-- The soul questions turn vague ideas into concrete product direction.
-- User, pain, and solution are the core structure of a useful brief.
-- Clear differentiation helps you avoid building a generic clone.
+- Specific users naturally shrink the scope.
+- Real pain usually means the user already tolerates a clumsy workaround.
+- Differentiation is about boundary, not slogans.
 
-## Methodology Review
+**Methodology Review**: The soul questions compress "I want to build an app" into a real problem AI can work on.
 
-This unit keeps strengthening planning-driven behavior by forcing clarity before generation.
+**Next Unit Preview**: The next unit compresses that requirement further into MVP boundaries and P0/P1/P2 priorities.
 
-## References
+---
 
+**References**
+- `content-revision-plan.md`
 - `curriculum-v3.md`
-- `content-authoring-plan.md`

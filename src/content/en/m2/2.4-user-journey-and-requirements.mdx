@@ -1,68 +1,105 @@
 ---
 title: "User Journey Maps and Requirement Expression"
-description: "Map the user journey from the user's perspective and express requirements in a format both AI and teammates can understand."
+description: "Start from the user's action chain and turn feature ideas into requirement text that both AI and teammates can execute."
 module: "m2"
 order: 4
-estimatedMins: 35
-methodologyTag: "Closed-Loop Delivery"
 ---
 
 <Callout type="methodology" title="Methodology Focus">
-Closed-loop delivery starts here: a requirement is only useful if it can be understood, implemented, and reviewed without guessing.
+Closed-loop delivery starts in the requirement stage. A journey map is the bridge between user problems and implementation paths.
 </Callout>
 
-## Step 1: See the Product Through the User's Eyes
+## Step 1: Draw the journey before listing features
 
-A user journey map describes what happens from the user's point of view, not the internal architecture. The important parts are the moments where the user opens the product, uses it, and finishes the task.
+Take a reading-club signup page as an example. Do not begin with page names such as home, signup form, or FAQ. Begin with the user's action chain.
 
-When you draw the journey, you start seeing friction points that are invisible in feature lists.
+| User action | What the user sees | What the user feels | Design implication |
+|---|---|---|---|
+| Opens a shared link | A hero section that explains the reading club and event time | I need to know if this is worth my time | The first screen must explain value and schedule fast |
+| Scrolls to learn more | Highlights, flow, speaker info | I need to know whether this fits me | Order the content from value to detail |
+| Decides to sign up | A clear CTA and short form | I want the action to be easy | The CTA must be visible and the form must stay short |
+| Finishes signup | Confirmation and next-step guidance | I want certainty about what happens next | The success state must feel final and clear |
 
-Feature lists are about what exists. Journey maps are about what happens. For AI, the second is usually easier to understand because it reflects the sequence of actions.
+<Callout type="scenario" title="Scenario: Why the journey map beats a feature list">
+Situation: You listed many features, but you still do not know what belongs on the first screen.
 
-<Exercise id="ex-2.4.1.1" level="L1" title="Map a first journey" description="Describe one product journey in three phases: open, use, and complete." />
+Action: Start with what the user does, sees, and feels.
+
+Why: AI understands a user flow better than a random list of pages.
+</Callout>
+
+<Exercise id="ex-2.4.1.1" level="L1" title="Choose the better planning artifact" description="Compare a feature list with a user action chain and decide which one helps AI understand the full flow better." />
 
 <Separator />
 
-## Step 2: Requirements Must Be Expressible
+## Step 2: Turn the journey into requirement text
 
-Even a good idea fails if nobody can read it clearly. A requirement should be specific enough that AI can act on it and teammates can review it. That means avoiding vague wording and writing the decision points out explicitly.
+When you rewrite the journey as requirements, include at least the target user, core flow, boundary, and exclusions.
 
-If a sentence cannot help someone build or verify the work, it is probably still too fuzzy.
+```text
+Build a signup page for first-time reading-club participants.
+The user should first understand the value and time of the event, then view the flow and speaker info, and finally complete signup.
+This first version only includes the event intro, flow explanation, and signup form.
+Do not add payments, comments, or community features.
+```
 
-For example, "The user can save a favorite lesson for later review" is clearer than "Users should have a better learning experience."
+| Requirement part | Minimum level of clarity |
+|---|---|
+| User | Who opens the page |
+| Flow | The key steps from open to completion |
+| Boundary | What sections or pages belong in this round |
+| Exclusions | What must not be built yet |
 
-<Exercise id="ex-2.4.2.1" level="L2" title="Rewrite a vague requirement" description="Take one fuzzy requirement and rewrite it so the user, action, and expected result are all clear." />
+<Callout type="warning" title="Before / After: Vague requirement vs executable requirement">
+Wrong: Build a better reading-club page with more complete features.
+
+Right: Build a signup page for first-time reading-club participants. Include event intro, flow, and signup form only. Do not add payments or community features.
+
+Difference: The first version has no user and no boundary. The second version can be executed.
+</Callout>
+
+<Exercise id="ex-2.4.2.1" level="L2" title="Rewrite your journey into requirement text" description="Turn your own journey map into a 120- to 180-word requirement statement that includes user, flow, boundary, and exclusions." />
 
 <Separator />
 
-## Step 3: Turn the Journey Into a Build Brief
+## Step 3: Spot the most common requirement mistakes
 
-Once you have the journey and the requirement language, combine them into a short build brief. This is the kind of document you can hand to AI later so it knows what problem it is solving and how to frame the output.
+The most common mistakes are: too vague, too greedy, outcome-only with no constraints, talking about technology before the user problem, and mixing future ideas into the first version.
 
-That is the bridge from product thinking into execution discipline.
+| Mistake type | Typical example | How to fix it |
+|---|---|---|
+| Too vague | Build a better expense app | Add the user and the core flow |
+| Too greedy | First version includes auth, social, and rankings | Shrink to P0 only |
+| Missing constraints | Build an event page | Add user, flow, and exclusions |
+| Technology first | Use the latest framework to build a system | Start with the user problem |
+| Future ideas mixed in | Build phase two features now as well | Separate first version from later ideas |
 
-The following kinds of requirement mistakes usually cause trouble:
+<Callout type="scenario" title="Scenario: One very common bad requirement">
+Bad requirement: Build a better expense app with lots of complete features and a premium design.
 
-- Too vague: "Make it better"
-- Too greedy: "Add everything the product could ever need"
-- Only output: "Just give me the result"
-- No constraints: "Do whatever you think is best"
-- Skipping requirements and jumping to technology
+Why it is bad: There is no user, no flow, no boundary, and no clear success criterion.
 
-<Exercise id="ex-2.4.3.1" level="L1" title="Identify requirement mistakes" description="Look at five sample requirements and identify which mistake each one makes." />
+How to improve it: Add who it is for, what the key action is, and what is explicitly out of scope.
+</Callout>
 
-<Exercise id="ex-2.4.3.2" level="L2" title="Fix a bad requirement set" description="Rewrite three weak requirements so they become specific enough for implementation." />
+<Exercise id="ex-2.4.3.1" level="L2" title="Fix three weak requirements" description="Take three fuzzy requirements and rewrite them so that user, flow, boundary, and constraints are all clear." />
+
+<Exercise id="ex-2.4.3.2" level="L3" title="Test a real requirement statement with AI" description="Write a requirement statement for your project, send it to AI, and ask for a restatement. Check whether AI preserved your user, flow, and boundary, then refine the requirement once more if needed." />
+
+<Separator />
 
 ## Unit Summary
 
-- User journey maps reveal friction that feature lists hide.
-- Requirements must be clear enough for both AI and humans to act on.
-- The journey becomes useful when it turns into a build brief.
+- Journey maps are closer to real user behavior than feature lists.
+- Good requirement text must include user, flow, and boundary.
+- Requirement mistakes are cheapest to fix early.
 
-## Methodology Review
+**Methodology Review**: Closed-loop delivery starts earlier than shipping. It starts with executable requirements.
 
-This unit is about closing the gap between product thinking and execution artifacts.
+**Next Unit Preview**: The next unit gathers the soul questions, MVP boundaries, and journey map into a real requirement doc and a first MVP build.
 
-## References
+---
 
+**References**
+- `content-revision-plan.md`
 - `curriculum-v3.md`

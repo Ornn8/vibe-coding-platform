@@ -1,63 +1,119 @@
 ---
 title: "Module Project: Requirement Document and MVP Build"
-description: "Turn the previous four units into a requirement document and a testable MVP built with a GUI tool."
+description: "Turn the soul questions, MVP boundary, and journey map into a real requirement document, then use a GUI tool to build a testable first version."
 module: "m2"
 order: 5
-estimatedMins: 45
-methodologyTag: "Closed-Loop Delivery"
 ---
 
 <Callout type="methodology" title="Methodology Focus">
-This module project asks you to turn product thinking into something executable. The best proof of understanding is a document plus a working MVP.
+The requirement document is not a side artifact. It is the construction drawing for the MVP.
 </Callout>
 
-## Step 1: Write the Requirement Document
+## Step 1: Write a requirement document that AI can actually use
 
-Use the soul questions, the MVP scope, and the user journey to create a short requirement document. It should clearly state the user, the pain point, the solution, the scope, and what counts as success.
+This document does not need to be long. It does need to be complete. At minimum, include:
 
-The document is not for decoration. It is the brief that lets AI and humans stay aligned while building.
+- Project background
+- Target user
+- Core pain
+- Core flow
+- P0 / P1 / P2 boundaries
+- Acceptance criteria
 
-Think of it as the bridge between product thinking and implementation: the more concrete the requirement document is, the less guessing the tool has to do later.
+| Section | What question it must answer |
+|---|---|
+| Background | Why this project exists now |
+| User | Who it is for |
+| Pain | What inefficiency or frustration the user currently tolerates |
+| Flow | What happens from open to completion |
+| Scope | What this round includes and excludes |
+| Acceptance | What counts as a successful first version |
 
-<Exercise id="ex-2.5.1.1" level="L3" title="Submit the requirement doc" description="Write a one-page requirement document that combines the soul questions, MVP boundary, and user journey." />
+<Callout type="scenario" title="Scenario: The right length for a first requirement doc">
+Situation: You worry that a short document will look unprofessional, but a long one will be unreadable.
+
+Action: Write the strongest one-page version first.
+
+Why: The goal is not formal documentation. The goal is a stable execution input for the next step.
+</Callout>
+
+<Exercise id="ex-2.5.1.1" level="L1" title="Check whether a requirement doc is complete" description="Use the table above to review a requirement doc and decide whether background, user, pain, flow, scope, and acceptance criteria are all present." />
+
+<Exercise id="ex-2.5.1.2" level="L2" title="Write your one-page requirement doc" description="Write a one-page requirement doc for your project, including target user, core flow, P0 boundary, and acceptance criteria." />
 
 <Separator />
 
-## Step 2: Build the MVP With a GUI Tool
+## Step 2: Use the document to drive the first MVP
 
-After the requirement is clear, build the first version with a GUI-first tool or other fast prototyping stack. The goal is to create something testable, not something polished enough to be final.
+When you reopen a GUI tool, your first prompt should not begin from memory. It should begin from a requirement summary.
 
-Make sure the build stays close to the original hypothesis. If it starts drifting, the requirement document should help pull it back.
+```text
+Build the first MVP from this requirement:
+Target user: first-time reading-club participants.
+Core flow: understand the event value, review the flow and schedule, then sign up.
+This round only includes: event intro, process explanation, and signup form.
+Do not build: payments, comments, or personal accounts.
+Acceptance criterion: the user can understand the event and complete signup within one minute.
+```
 
-Use the document as a guardrail:
+<Callout type="warning" title="Before / After: Improvised prompting vs document-driven prompting">
+Wrong: Open the tool and improvise the request from memory.
 
-- If the tool adds a feature that does not support the hypothesis, remove it.
-- If the design starts looking busy, return to the smallest testable version.
-- If the build feels stuck, compare the current output with the requirement and ask what changed.
+Right: Extract a first-version summary directly from the requirement doc and use that as the prompt baseline.
 
-<Exercise id="ex-2.5.2.1" level="L3" title="Build the MVP" description="Create the first working version and record the key prompts or choices you used." />
+Difference: Improvisation changes direction every round. The document gives every round the same baseline.
+</Callout>
+
+| Execution style | What AI is more likely to do |
+|---|---|
+| Prompt from memory | Drift in structure and scope |
+| Prompt from the requirement doc | Stay closer to the intended boundary |
+
+<Exercise id="ex-2.5.2.1" level="L3" title="Generate the first MVP from your requirement doc" description="Compress your one-page requirement doc into a first-version prompt, run it in a real tool, and record whether AI crossed into P1 or P2 and how you pulled it back." />
 
 <Separator />
 
-## Step 3: Package the Result
+## Step 3: Submit both the result and the process
 
-The point of this project is not only the output, but also the trace of how you got there. Package the requirement document, the deployment link or screenshots, and a short retrospective that explains what you learned.
+This module does not ask for a link only. It asks for a project pack:
 
-That complete package is what makes the work reviewable and reusable later.
+- Requirement doc
+- MVP link or screenshots
+- First prompt
+- Key iteration notes
+- Short retrospective
 
-<Exercise id="ex-2.5.3.1" level="L3" title="Submit the full package" description="Submit the requirement doc, the MVP link or screenshots, and a short retrospective." />
+<Callout type="scenario" title="Scenario: Why process evidence matters">
+Situation: Two learners both built a page, but only one can explain how the scope stayed under control.
+
+Action: Keep the requirement doc, prompt log, and iteration evidence together with the final result.
+
+Why: The course is training reviewable delivery, not just visible output.
+</Callout>
+
+| Deliverable | Minimum requirement |
+|---|---|
+| Requirement doc | One-page readable version with boundaries and acceptance criteria |
+| MVP result | Link or screenshots that show the core flow |
+| Prompt log | First prompt plus at least one boundary-correction round |
+| Retrospective | What worked, and where drift still appeared |
+
+<Exercise id="ex-2.5.3.1" level="L3" title="Submit the full project pack" description="Submit the requirement doc, MVP link or screenshots, first prompt, key iteration notes, and a short retrospective explaining how the document and boundaries helped you control the first version." />
+
+<Separator />
 
 ## Unit Summary
 
-- A good module project turns product thinking into an executable brief and a working MVP.
-- The requirement document keeps the build aligned with the hypothesis.
-- The final package should include both the result and the process.
+- A one-page requirement doc is enough to drive a real MVP.
+- Document-driven prompting is far more stable than improvisation.
+- Result and process evidence must be submitted together for real review.
 
-## Methodology Review
+**Methodology Review**: This unit connects planning-driven work and closed-loop delivery into one path: requirement doc -> MVP -> process evidence.
 
-This unit closes the loop from idea to artifact to deliverable.
+**Next Unit Preview**: M3 pushes the same clarity downward into prompt design and context design.
 
-## References
+---
 
+**References**
+- `content-revision-plan.md`
 - `curriculum-v3.md`
-- `content-authoring-plan.md`

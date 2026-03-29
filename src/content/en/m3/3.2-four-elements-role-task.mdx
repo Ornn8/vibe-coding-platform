@@ -1,6 +1,6 @@
 ---
 title: "Four Prompt Elements I: Role and Task"
-description: "Clarify the role AI should play and the job it must do so the output actually lines up with your intent."
+description: "Compare four role settings on the same task, then compress vague requests into truly executable task statements."
 module: "m3"
 order: 2
 estimatedMins: 40
@@ -8,69 +8,108 @@ methodologyTag: "Context Stabilization"
 ---
 
 <Callout type="methodology" title="Methodology Focus">
-Before AI can do good work, it needs a role and a task. If those are vague, the output usually looks right while still being wrong.
+Role changes the way AI thinks. Task changes the boundary of what it is allowed to do. If either one is vague, later constraints are just cleanup work.
 </Callout>
 
-## Step 1: Define the Role
+## Step 1: The Same Task Changes When the Role Changes
+Use the task "improve the lesson-page intro area." Keep the task almost the same, but swap the role:
 
-The role tells AI what kind of behavior to adopt: planner, editor, reviewer, teacher, or builder. A good role is concrete enough to influence tone and decision-making, but not so dramatic that it becomes useless.
+| Role setting | What AI is more likely to focus on |
+|---|---|
+| Frontend engineer | Layout, components, responsive structure |
+| Content editor | Wording, clarity, information order |
+| Course designer | Learning path, cognitive load, exercise progression |
+| Code reviewer | Risk, regressions, implementation boundaries |
 
-Role definition is one of the simplest ways to improve prompt quality.
+```text
+Role 1: You are a senior frontend engineer. Improve the structure
+and mobile hierarchy of the lesson-page hero.
 
-Examples:
+Role 2: You are a curriculum editor. Improve the copy and
+information order of the lesson-page hero.
 
-- Weak: "You are an expert."
-- Strong: "You are a product reviewer who checks scope, usability, and clarity."
-- Stronger: "You are a curriculum editor who rewrites lesson drafts for clarity without changing the lesson goal."
+Role 3: You are a course designer. Check whether the hero helps
+beginners understand the unit goal quickly.
 
-<Exercise id="ex-3.2.1.1" level="L1" title="Choose the better role" description="Pick the stronger role from three pairs of role statements." />
+Role 4: You are a code reviewer. Find the most likely regressions
+that a hero redesign could introduce.
+```
 
-<Exercise id="ex-3.2.1.2" level="L2" title="Write role statements for real tasks" description="For three tasks, write a role statement that matches the work and avoid vague labels like 'expert'." />
+The task family is almost identical, but the model's default attention changes with the role. Role is not there to sound impressive. It is there to preset the judgment angle.
 
-<Separator />
-
-## Step 2: Define the Task
-
-The task tells AI what it must actually accomplish. "Help me with this" is too weak. A strong task says what the output should do, where it will be used, and what success looks like.
-
-When the task is precise, the model spends less time guessing and more time producing useful output.
-
-<Exercise id="ex-3.2.2.1" level="L2" title="Rewrite the task" description="Write a stronger task description for three different requests and explain why each version is better." />
-
-<Separator />
-
-## Step 3: Combine Role and Task
-
-Role and task work best together. If the role is "product reviewer" but the task is "fix the CSS," the prompt is already confused. A strong prompt makes the role and task reinforce each other.
-
-That is the first half of the four-element frame.
-
-<Exercise id="ex-3.2.3.1" level="L1" title="Spot the mismatch" description="Look at three prompts and identify whether the role and task support each other." />
-
-<Exercise id="ex-3.2.3.2" level="L2" title="Write a combined prompt" description="Choose one project request and write a prompt that clearly includes both role and task." />
+<Exercise id="ex-3.2.1.1" level="L1" title="Pick the best-matching role" description="For three concrete tasks, choose the role that matches best and explain whether your reason is expression, structure, or risk." />
 
 <Separator />
 
-## Step 4: Make the Combination Clear Enough to Use
+## Step 2: Vague Roles Barely Help
+Statements like "you are a top expert" sound strong, but they do not actually constrain AI in a useful way. A good role is directly tied to the work.
 
-When role and task are both strong, the prompt becomes easier to review, easier to improve, and easier to reuse later. That is the point of this frame: the prompt should say who AI is being, what it is doing, and why that combination makes sense.
+```text
+Before: You are a very powerful AI.
+After: You are a curriculum editor responsible for a learning-platform content upgrade, and you should prioritize structure completeness, scenario vividness, and exercise progression.
+```
 
-If you can read the prompt out loud and immediately understand the job, you are probably close.
+| Role phrasing | Problem | Better direction |
+|---|---|---|
+| You are a top expert | No concrete working boundary | Name the responsibility and criteria |
+| You are a content editor | Still wide | Add what content and what standards matter |
+| You are the curriculum editor for this lesson upgrade | More executable | The role and target start to align |
 
-For example, "You are a product reviewer. Review this onboarding flow and point out where users may get confused" is much clearer than "You are an expert. Help me improve this."
+<Callout type="scenario" title="When to rewrite the role first">
+Situation: AI keeps giving reasonable-looking output, but it still focuses on the wrong things. Action: rewrite the role before piling on more task detail. Why: if the role is wrong, the model's starting perspective is already off.
+</Callout>
 
-<Exercise id="ex-3.2.4.1" level="L3" title="Write a full role-task prompt" description="Write one complete prompt for your project that includes role and task, then test whether the output matches your intent." />
+<Exercise id="ex-3.2.2.1" level="L2" title="Turn vague roles into responsible roles" description="Take three vague role statements and rewrite them into role definitions that include the responsibility and at least one review standard." />
+
+<Separator />
+
+## Step 3: The Task Has to Be Executable
+Task statements cannot stop at "improve this" or "check this page." A stronger task needs at least three things:
+
+| Task element | What it should say |
+|---|---|
+| Goal | What should be completed |
+| Scope | Which parts are in play |
+| Completion standard | What counts as acceptable |
+
+```text
+Weak: Improve this lesson page.
+Strong: Only review the hero title, description, and CTA of this lesson page. The goal is that a beginner should understand what this unit teaches within 10 seconds. Do not change any other section.
+```
+
+<Callout type="scenario" title="Vague task vs executable task">
+Wrong move: ask AI to "improve it." Better move: limit the work to the hero title, description, and CTA, state the beginner-understanding goal, and exclude the rest of the page. The second version already carries goal, scope, and a finish line.
+</Callout>
+
+<Exercise id="ex-3.2.3.1" level="L2" title="Rewrite vague tasks into executable tasks" description="Take three common vague tasks and rewrite them so they include a goal, a scope boundary, and a completion standard." />
+
+<Separator />
+
+## Step 4: Combine Role and Task into a Prompt You Can Actually Test
+Once both parts are clear, you can combine them into a prompt you can test, review, and reuse:
+
+```text
+You are a curriculum editor working on a learning-platform content upgrade.
+Only review Step 1 and Step 2 of this MDX file.
+Your goal is to help Chinese beginners enter the scenario faster.
+Output the result as problems first, then revision suggestions.
+```
+
+That kind of prompt is no longer guesswork. It is a reusable working template.
+
+<Exercise id="ex-3.2.4.1" level="L3" title="Write and test a real role-plus-task prompt" description="Write one prompt for a real task that includes both the role and the task, send it to AI, and check whether the model's attention matches your intent." />
 
 ## Unit Summary
 
-- Role tells AI how to behave.
-- Task tells AI what to accomplish.
-- Good prompts align both pieces instead of mixing them loosely.
+- Role shapes the model's working perspective.
+- Task shapes the boundary of action.
+- Vague roles and vague tasks both create outputs that look right while still drifting.
 
 ## Methodology Review
 
-This unit starts the four-element prompt frame and continues context stabilization.
+This unit compresses planning-driven work into the prompt skeleton: choose the perspective first, then define the job.
 
 ## References
 
+- `content-revision-plan.md`
 - `curriculum-v3.md`

@@ -1,48 +1,125 @@
 ---
-title: "上线前的安全检查"
-description: "学会在发布前识别 AI 生成代码常见的安全风险，并完成上线检查。"
+title: "上线前安全检查"
+description: "通过“有漏洞的代码 vs 修复后的代码”对比，把抽象安全提醒变成真实可执行的上线前审查动作。"
 module: "m8"
 order: 2
-estimatedMins: 30
+estimatedMins: 40
 methodologyTag: "闭环交付"
 ---
 
 <Callout title="本单元方法论焦点" tone="warning">
-上线前的安全检查不是锦上添花，而是防止“能用但有洞”的最后防线。
+AI 不只会帮你更快交付功能，也会帮你更快复制风险。安全检查不是上线前的装饰，而是负责任交付的一部分。
 </Callout>
 
-## Step 1: 先认识 AI 代码最常见的安全风险
-AI 生成代码最容易带来的风险包括：硬编码密钥、缺少输入校验、暴露敏感信息、SQL 注入、错误的权限判断。  
-你要做的不是背结论，而是训练自己能在代码里迅速认出这些信号。
-场景对比：一个页面能跑不代表它安全；如果密钥、权限和输入校验没处理好，发布后反而会变成漏洞入口。
+## Step 1: 先看漏洞代码和修复代码的直接对比
+这是一个硬编码密钥的错误示例：
 
-<Exercise id="ex-8.2.1" level="L1" title="找出安全问题" description="阅读 5 段代码，指出其中有哪些安全隐患。" />
+```ts
+const stripe = new Stripe("sk_live_123");
+```
+
+更安全的版本：
+
+```ts
+const stripeKey = process.env.STRIPE_SECRET_KEY;
+
+if (!stripeKey) {
+  throw new Error("Missing STRIPE_SECRET_KEY");
+}
+
+const stripe = new Stripe(stripeKey);
+```
+
+这是一个权限边界过宽的示例：
+
+```ts
+export async function GET() {
+  return Response.json(await prisma.review.findMany());
+}
+```
+
+更安全的版本：
+
+```ts
+export async function GET() {
+  const session = await auth();
+
+  if (!session?.user || session.user.role !== "ADMIN") {
+    return Response.json({ error: "Forbidden" }, { status: 403 });
+  }
+
+  return Response.json(await prisma.review.findMany());
+}
+```
+
+| 风险类型 | 有漏洞的写法 | 修复后的写法 |
+|---|---|---|
+| 密钥管理 | 把真实 key 写进源码 | 从 env 读取，并在缺失时安全失败 |
+| 权限边界 | 敏感数据公开读取 | 显式鉴权 + 角色校验 |
+
+<Exercise id="ex-8.2.1" level="L1" title="解释修复版本到底保护了什么" description="阅读漏洞代码和修复代码，对比说明修复版本具体降低了什么风险。" />
 
 <Separator />
 
-## Step 2: 环境变量为什么必须规范管理
-`.env` 里的内容不应该提交到仓库，`env.example` 才是告诉别人需要哪些变量的地方。  
-如果你没有把这一步做好，很多部署失败其实不是代码错，而是环境配置没有跟上。
-场景对比：把密钥硬写在代码里，短期看最省事，长期却是最危险的做法；用环境变量和示例文件才能兼顾协作和安全。
+## Step 2: 把密钥和输入处理当成正式上线工作
+另一个常见问题，是过早信任输入：
 
-<Exercise id="ex-8.2.2" level="L2" title="检查环境变量配置" description="检查你的项目是否正确忽略了 `.env`，并确认没有硬编码密钥。" />
+```ts
+await prisma.post.create({ data: req.body });
+```
+
+更安全的版本：
+
+```ts
+const parsed = postSchema.safeParse(await req.json());
+
+if (!parsed.success) {
+  return Response.json({ error: "Invalid input" }, { status: 400 });
+}
+
+await prisma.post.create({ data: parsed.data });
+```
+
+| 审查项 | 上线前要确认什么 |
+|---|---|
+| 密钥 | 没有真实密钥被提交或硬编码 |
+| `.env` 处理 | `.env` 被忽略，`.env.example` 只保留占位符 |
+| 输入校验 | 外部输入在使用前被解析和校验 |
+| 错误处理 | 不向用户暴露敏感实现细节 |
+
+<Callout title="场景卡片：为什么本地 happy path 正常，不代表能安全上线" tone="info">
+情境：表单在本地提交流程里一切正常，所以你觉得它已经安全。做法：继续检查异常输入、缺失密钥和未授权访问时的行为。原因：很多安全问题在 happy path 里根本不会暴露出来。
+</Callout>
+
+<Exercise id="ex-8.2.2" level="L2" title="做一次真实的安全配置审查" description="围绕一个真实项目，检查硬编码密钥、`.env` 处理、权限校验和输入验证，并记录哪些项通过了、哪些没有通过。" />
 
 <Separator />
 
-## Step 3: 上线前最后要检查什么
-上线前的检查清单应至少包含：HTTPS、环境变量、输入校验、错误处理、认证授权、CORS 配置。  
-这一步的目标是把潜在风险在发布前尽可能暴露出来，而不是等线上用户帮你发现。
-场景对比：上线前审计像最后一次体检，目的是在发布按钮按下之前发现会导致事故的问题。
+## Step 3: 把安全变成可重复的上线 checklist
+第一天不需要企业级安全体系，但必须有一套每次上线前都能重复执行的最小检查。
 
-<Exercise id="ex-8.2.3" level="L3" title="做一次上线前审计" description="用检查清单审计你已部署的项目，并记录发现的问题和修复建议。" />
+| Checklist 项 | 为什么必须上线前确认 |
+|---|---|
+| 密钥已外置 | 避免凭证泄漏 |
+| 敏感路由有权限边界 | 避免数据误暴露 |
+| 输入已校验 | 避免危险写入和崩溃 |
+| 日志和错误信息已审查 | 避免内部实现暴露 |
+
+```text
+Before：上线前我只会检查“页面能不能打开、功能能不能跑通”。
+After：我会继续检查密钥、输入校验、权限边界和错误暴露，再决定这个版本是否真的能上线。
+```
+
+<Exercise id="ex-8.2.3" level="L3" title="在真实项目上跑一次上线前安全审计" description="拿一个真实项目，跑一遍你的安全 checklist，并记录发现的问题、风险等级，以及哪些问题必须在上线前修复。" />
 
 ## 本单元小结
-- AI 代码常见风险要能被快速识别。
-- 环境变量管理是上线安全的基础。
-- 上线前审计应形成可复查的清单和记录。
+- 安全更容易通过“漏洞代码 vs 修复代码”的方式被真正理解。
+- 密钥处理、权限边界和输入校验必须在上线前检查，而不是上线后补救。
+- 一份短但可重复的 checklist，比空泛的安全说教更有价值。
 
 ## 方法论回顾
-安全检查让“上线”从一次冒险，变成可控的交付步骤。
+闭环交付在这里增加了上线安全门：不只问“能不能用”，还要问“给真实用户用之前是否足够安全”。
 
 ## 参考来源
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

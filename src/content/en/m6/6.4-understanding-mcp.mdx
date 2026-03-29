@@ -1,68 +1,75 @@
 ---
 title: "MCP: Connect AI to External Systems"
-description: "Understand how MCP provides access, how Skills provide operating guidance, and how both combine inside real workflows."
+description: "Start from the story of AI gaining a new ability, then see how MCP provides connection and Skills provide the operating method."
 module: "m6"
 order: 4
 estimatedMins: 40
 methodologyTag: "Glue Coding"
 ---
 
-<Callout title="Method Focus" tone="warning">
-MCP answers "Can AI connect to this system?" Skills answer "How should AI use that connection well?" You usually need both.
+<Callout title="Method Focus" tone="success">
+MCP is not just a list of tool names. It is the capability layer that upgrades AI from "only talking about the world" to "actually reaching real external systems."
 </Callout>
 
-## Step 1: What MCP actually solves
+## Step 1: Think of MCP as a new ability for AI
+Compare two assistants:
 
-Without a shared protocol, every external integration needs its own adapter. MCP standardizes how AI tools access outside systems like repositories, databases, and document platforms.
+| State | What AI can do |
+|---|---|
+| No MCP | It can only answer from the chat and the context already in memory |
+| GitHub MCP connected | It can read the real repository, issues, and pull requests directly |
 
-### Scenario
+That is the most intuitive value of MCP. It does not merely make AI "better at talking." It gives AI a way to touch the repo, docs, database, or another real system.
 
-Before MCP:
-- Every tool needs a custom integration path
-- Each connection behaves differently
+```text
+Before: AI has to guess what is in your repository.
+After: AI can inspect the repository directly, then act from real evidence.
+```
 
-After MCP:
-- One standard protocol can connect many systems
-- The toolchain becomes easier to extend and reason about
-
-<Exercise id="ex-6.4.1.1" level="L1" title="Explain MCP in your own words" description="Explain what MCP solves inside an AI toolchain and why that matters." />
-
-<Separator />
-
-## Step 2: Access is not the same as good usage
-
-Even if AI can connect to GitHub, a database, or Drive, that does not mean it knows how to use those systems safely or efficiently. That is why MCP often needs to be paired with a Skill: one provides access, the other provides method.
-
-### Scenario
-
-Access without guidance is like giving a person keys without a manual. They can enter the room, but they may still not know which actions are safe, repeatable, or correct.
-
-<Exercise id="ex-6.4.2.1" level="L2" title="Design access plus guidance" description="Choose one external system and define both the MCP capability and the Skill guidance it would need." />
+<Exercise id="ex-6.4.1" level="L1" title="Explain MCP as a new capability layer" description="Without using protocol jargon, explain what extra ability AI gains when MCP is available." />
 
 <Separator />
 
-## Step 3: Design the combined workflow
+## Step 2: Connection alone does not make usage stable
+Even when AI can connect to GitHub, a database, or a docs platform, it still might not know how to use that connection safely or consistently.
 
-Once MCP and Skills work together, you need to think about the full chain:
-- What triggers the work?
-- What system is accessed?
-- What data is used?
-- Where does the output go?
-- Who verifies it?
+| Only MCP | MCP plus Skill |
+|---|---|
+| AI can reach the system | AI knows when to reach it, what to read first, and how to verify the result |
+| Easy to over-query or misuse | Easier to stay inside the intended workflow |
 
-### Scenario
+The strongest pattern is not "MCP only." It is "MCP provides capability, Skill defines method."
 
-The curriculum's point is that a useful workflow is not just "call the tool." It is a chain with inputs, outputs, and a verification boundary.
+<Callout title="Scenario: why access is still not enough" tone="warning">
+Situation: AI can access the repository, but every time it inspects files in a different order and reports results inconsistently. Action: add a Skill that explains when to inspect, what to inspect first, and how to summarize findings. Why: capability without method is difficult to reuse safely.
+</Callout>
 
-<Exercise id="ex-6.4.3.1" level="L3" title="Design one MCP workflow" description="Design a real workflow that includes an MCP connection, Skill guidance, and a verification step." />
+<Exercise id="ex-6.4.2" level="L2" title="Pair one MCP capability with operating guidance" description="Choose one external system you know well and describe what MCP would provide and what a Skill would still need to constrain." />
+
+<Separator />
+
+## Step 3: The real value is the full workflow, not one call
+A useful MCP workflow usually has four stages:
+
+| Stage | Question to answer |
+|---|---|
+| Trigger | When should this MCP capability be used? |
+| Access | What should AI read or write? |
+| Process | How should the result be organized? |
+| Verify | Who confirms the result is correct? |
+
+If you only care about "Can it connect?", you will miss the more important question: "Once connected, how does this become a repeatable workflow?"
+
+<Exercise id="ex-6.4.3" level="L3" title="Design one real MCP plus Skill workflow" description="For a real external system, design the full chain from trigger to access to processing to verification, and explain what MCP handles versus what the Skill handles." />
 
 ## Summary
-- MCP standardizes how AI connects to external systems.
-- Access alone is not enough, so Skills still matter.
-- Real workflows require both connection and method.
+- MCP gives AI a new way to access real external systems.
+- Access still needs workflow guidance, which is where Skills fit.
+- Stable glue coding comes from the full chain, not just a single successful connection.
 
 ## Methodology Review
-This unit pushes glue coding outward: MCP provides the connection to the external world, while method keeps that connection useful and safe.
+Glue coding grows outward here: MCP carries the connection to the external world, while Skills keep that connection safe, useful, and repeatable.
 
 ## References
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

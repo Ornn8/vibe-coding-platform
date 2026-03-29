@@ -1,6 +1,6 @@
 ---
-title: "System Prompts: CLAUDE.md"
-description: "Learn project-level prompting through CLAUDE.md and decide what must be explicit for long-running collaboration."
+title: "System Prompts and CLAUDE.md"
+description: "Go beyond the template and explain, section by section, why a project-level system prompt is written the way it is."
 module: "m3"
 order: 4
 estimatedMins: 40
@@ -8,67 +8,92 @@ methodologyTag: "Context Stabilization"
 ---
 
 <Callout type="methodology" title="Methodology Focus">
-System prompts are the project manual for AI. They capture the stable rules that should not need to be repeated every time.
+The value of a system prompt is not that it looks professional. The value is that it turns long-running project knowledge into reusable rules.
 </Callout>
 
-## Step 1: What a System Prompt Is
+## Step 1: `CLAUDE.md` Is a Project Manual, Not a Template Demo
+When you place `CLAUDE.md` in a repository, you are really telling AI three things: what the project is, what long-term rules matter, and which boundaries must not be crossed casually.
 
-A system prompt is not just a fancy instruction. It is the project-level agreement that tells AI how to behave over time: what its role is, what principles matter, and what should remain consistent.
+| Section type | What question it answers |
+|---|---|
+| Project background | What kind of project this is and who it serves |
+| Stack declaration | Which frameworks and patterns should stay in place |
+| File and boundary rules | What should not be changed lightly |
+| Verification and delivery rules | How a change should prove itself |
 
-That is why files like `CLAUDE.md`, `AGENTS.md`, or similar project instructions matter so much. They reduce repetition and help collaboration stay stable.
+Without those sections, AI has to re-guess the project in every new task.
 
-<Exercise id="ex-3.4.1.1" level="L1" title="Describe the purpose of a system prompt" description="Write a short explanation of what a project-level system prompt is and why it matters." />
-
-<Separator />
-
-## Step 2: What Belongs in CLAUDE.md
-
-Useful system prompts usually define role, principles, guardrails, and delivery expectations. They may also list stack choices, communication habits, verification rules, or project-specific constraints.
-
-The goal is to turn invisible team knowledge into something that AI can actually use.
-
-Use a structure like this:
-
-- Role: who AI should be in the project
-- Principles: the stable habits it should follow
-- Boundaries: what it should not change without asking
-- Delivery rules: how work should be verified and handed off
-
-For example, a small CLAUDE.md might say: "You are a careful pair-programming assistant for this repository. Keep the current route structure intact, do not change file names without permission, run lint before finalizing, and summarize the change in one short paragraph."
-
-<Exercise id="ex-3.4.2.1" level="L2" title="Draft a project-level prompt" description="Write a first draft of CLAUDE.md for a real project, including role, principles, boundaries, and delivery style." />
+<Exercise id="ex-3.4.1.1" level="L1" title="Choose what belongs in the system prompt" description="From a list of project facts, decide which ones belong in long-term system guidance and which ones belong only in a one-off task prompt." />
 
 <Separator />
 
-## Step 3: Keep It Maintainable
+## Step 2: Why the Stack Declaration Needs to Be Specific
+Look at a system-level statement like this:
 
-A good system prompt is not overloaded with every possible detail. It should stay readable and stable. If it becomes too long or too specific, people stop using it.
+```text
+This project uses Next.js App Router, TypeScript strict mode,
+Tailwind CSS, and shadcn/ui.
+Preserve the current route structure and do not introduce new frameworks
+or state-management patterns without approval.
+```
 
-The best version is the one that actually helps you start work faster and stay aligned longer.
+That text is not there to show off stack names. It exists to stop AI from making silent architectural choices that the repository did not ask for.
 
-<Exercise id="ex-3.4.3.1" level="L3" title="Trim a noisy system prompt" description="Take a bloated system prompt and rewrite it so only the stable, reusable parts remain." />
+```text
+Before: Please follow the project rules.
+After: This project uses Next.js App Router and TypeScript strict mode. Do not change the route structure or introduce a new framework casually.
+```
+
+<Callout type="scenario" title="What the stack declaration is really preventing">
+Situation: you only wanted a page change, but AI starts suggesting new state libraries or a different routing style. Action: write the stack and the preserve rules directly into the system prompt. Why: the stack declaration is not decoration; it is an anti-drift mechanism.
+</Callout>
+
+<Exercise id="ex-3.4.2.1" level="L2" title="Write a stack and boundary declaration for a real project" description="Pick a real project and write 4 to 6 lines of system-level stack guidance that includes both preserve rules and explicit no-go areas." />
 
 <Separator />
 
-## Step 4: Apply Construction Principles
+## Step 3: Keep Long-Running Rules Separate from One-Off Exceptions
+`CLAUDE.md` should hold rules that remain useful across many tasks.
 
-System prompt construction should follow a few simple principles: keep it clear, keep it consistent, and keep the boundaries explicit. That is how a reusable project manual stays useful over time.
+| Good for `CLAUDE.md` | Better left in a one-off prompt |
+|---|---|
+| Read the project constraints before editing | Only change the hero in this task |
+| Explain verification before finalizing | Use a table for this particular answer |
+| Do not modify the database schema casually | Leave the CTA position alone for this round |
 
-When a system prompt is well built, it becomes a shared memory layer instead of a pile of reminders.
+If you keep promoting one-time instructions into the system prompt, the file quickly becomes bloated and noisy.
 
-<Exercise id="ex-3.4.4.1" level="L3" title="Improve your CLAUDE.md" description="Review your CLAUDE.md against the construction principles and revise at least three sections." />
+<Callout type="scenario" title="Temporary exception vs reusable rule">
+Wrong move: take something said once in a temporary task and upgrade it into a permanent system rule. Better move: only promote rules that keep proving useful across tasks. Otherwise the system file gets louder while becoming less trustworthy.
+</Callout>
+
+<Exercise id="ex-3.4.3.1" level="L2" title="Decide what should become a long-term rule" description="Take six project requirements and decide which ones deserve a place in `CLAUDE.md` and which ones should stay in one-off prompts, then explain why." />
+
+<Separator />
+
+## Step 4: Use Real Failures to Discover Missing System Rules
+The most practical feedback loop is this: when AI keeps making the same class of mistake, ask whether the missing fix is actually a system-layer rule.
+
+| Repeated AI mistake | Missing system rule that might help |
+|---|---|
+| Keeps trying to add new libraries | Reuse existing dependencies unless explicitly asked otherwise |
+| Keeps skipping checks | Explain verification steps before finalizing |
+| Keeps editing beyond scope | Confirm file scope and exclusions before making changes |
+
+<Exercise id="ex-3.4.4.1" level="L3" title="Turn one repeated failure into a system rule" description="Think of one repeated AI mistake in a real project, write a rule that belongs in `CLAUDE.md`, and explain what problem it is meant to prevent." />
 
 ## Unit Summary
 
-- System prompts capture long-running collaboration rules.
-- CLAUDE.md is where a project turns hidden knowledge into reusable guidance.
-- Good system prompts are concise enough to stay maintainable.
+- `CLAUDE.md` is a project collaboration manual, not a decorative template.
+- Stack declarations exist to prevent silent architectural drift.
+- Only rules that stay useful across tasks should become system-level guidance.
 
 ## Methodology Review
 
-This unit strengthens context stabilization by moving stable project knowledge into a reusable system-level prompt.
+This unit is pure context stabilization: take recurring project knowledge and turn it into explicit, reusable rules.
 
 ## References
 
+- `content-revision-plan.md`
 - `curriculum-v3.md`
-- `AGENTS.md`
+- This repository's `AGENTS.md` and `CLAUDE.md`

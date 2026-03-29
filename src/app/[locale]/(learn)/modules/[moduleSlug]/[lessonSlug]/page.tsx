@@ -7,7 +7,7 @@ import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { getCanonicalLessonSlug, getCurrentUserId, getLessonBySlug } from "@/lib/learning";
 import { loadLessonMdx } from "@/lib/mdx";
-import { markLessonComplete, saveLessonExerciseSubmission } from "../../../actions";
+import { markLessonComplete } from "../../../actions";
 
 type LessonPageProps = {
   params: Promise<{ locale: string; moduleSlug: string; lessonSlug: string }>;
@@ -70,43 +70,6 @@ export default async function LessonPage({ params }: LessonPageProps) {
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <div className="space-y-8">
           <LessonContent>{content}</LessonContent>
-
-          {lessonData.lesson.exercise?.id ? (
-            <section className="rounded-[1.75rem] border border-border/70 bg-card/80 p-6 shadow-lg shadow-primary/5">
-              <div className="space-y-3">
-                <p className="text-sm uppercase tracking-[0.28em] text-primary">{t("exerciseEyebrow")}</p>
-                <h2 className="font-[family-name:var(--font-display)] text-2xl font-semibold">
-                  {lessonData.lesson.exercise.title}
-                </h2>
-                <p className="text-sm leading-7 text-muted-foreground">{lessonData.lesson.exercise.description}</p>
-              </div>
-
-              <form
-                className="mt-6 grid gap-3"
-                action={async (formData) => {
-                  "use server";
-                  await saveLessonExerciseSubmission(formData, revalidateTarget);
-                }}
-              >
-                <input type="hidden" name="exerciseId" value={lessonData.lesson.exercise.id} />
-                <textarea
-                  name="text"
-                  defaultValue={lessonData.lesson.exercise.submission?.text ?? ""}
-                  placeholder={t("exerciseTextPlaceholder")}
-                  className="min-h-32 rounded-2xl border border-border/70 bg-background px-4 py-3 text-sm outline-none"
-                />
-                <textarea
-                  name="links"
-                  defaultValue={(lessonData.lesson.exercise.submission?.links ?? []).join("\n")}
-                  placeholder={t("exerciseLinksPlaceholder")}
-                  className="min-h-24 rounded-2xl border border-border/70 bg-background px-4 py-3 text-sm outline-none"
-                />
-                <Button type="submit" className="w-fit rounded-full px-6">
-                  {t("submitExercise")}
-                </Button>
-              </form>
-            </section>
-          ) : null}
         </div>
 
         <aside className="space-y-4 rounded-[1.75rem] border border-border/70 bg-card/80 p-5 shadow-lg shadow-primary/5">

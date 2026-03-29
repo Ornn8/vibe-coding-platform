@@ -1,6 +1,6 @@
 ---
-title: "Stepwise Implementation: Do Not Ship Everything at Once"
-description: "Learn to break work into 15-30 minute verifiable steps instead of asking AI for a whole system at once."
+title: "Stepwise Implementation: Do Not Swallow the Whole Project"
+description: "Compare coarse, overly fine, and well-sized decomposition on real features, then build a 15-30 minute implementation rhythm you can actually verify."
 module: "m5"
 order: 1
 estimatedMins: 30
@@ -8,67 +8,77 @@ methodologyTag: "Closed-Loop Delivery"
 ---
 
 <Callout title="Method Focus" tone="warning">
-Closed-loop delivery starts when you stop asking for a full system in one shot and start designing work that can be verified step by step.
+Closed-loop delivery is not about slowing AI down. It is about making every step verifiable, stoppable, and reversible.
 </Callout>
 
-## Step 1: Why one prompt for everything usually fails
+## Step 1: Compare Three Real Step Sizes
+Imagine you need to add "user login and registration" to a learning platform. Here are three common decompositions:
 
-When you ask AI to build authentication, a database, an admin panel, and deployment in one go, it loses the chance to inspect the middle of the process. If one early assumption is wrong, everything that follows is built on a broken base.
+| Decomposition | What it sounds like | What is wrong with it |
+|---|---|---|
+| Too coarse | Build the whole auth system | The scope is too large, and the errors will blur together |
+| Too fine | First add one input, then one button, then one line of validation | The management cost becomes absurdly high |
+| Well sized | Form structure -> validation -> submit API -> signed-in state display | Each step has a visible completion signal |
 
-The curriculum's point is not that AI is weak. The point is that large requests hide the moment where you should have stopped, checked, and corrected. One-shot delivery looks efficient until the first hidden error compounds into a full rewrite.
+```text
+Before: ask AI to build login and registration in one shot.
+After: build the form structure first, then validation, then the API, then the signed-in state.
+```
 
-### Scenario
+The right step size is not the shortest or the longest one. It is the size that still lets you get a real signal inside 15 to 30 minutes.
 
-Compare two requests for the same app:
-- Request A: "Build the whole app, including auth, CRUD, admin, and deployment."
-- Request B: "First build login only, verify it, then add the database, then the protected page, then the admin surface."
+<Callout title="Scenario: why coarse steps are the most dangerous" tone="warning">
+Situation: AI generates the login page, registration page, API logic, and redirect behavior all at once. Action: do not celebrate too early. Ask yourself whether you could even identify which layer failed first. Why: the coarsest steps create the strongest illusion of progress while making diagnosis much harder.
+</Callout>
 
-The first request often returns a broad scaffold that seems complete but is difficult to trust. The second request gives you checkpoints you can inspect before the next step begins.
-
-<Exercise id="ex-5.1.1" level="L1" title="Compare one-shot and stepwise work" description="Compare a one-shot implementation approach with a stepwise approach and explain which one fits a real project better." />
-
-<Separator />
-
-## Step 2: How to choose the right step size
-
-A good step usually has three traits: one clear scope, progress that fits inside about 30 minutes, and a result you can verify right away. If the step is too big, risk gets hidden. If it is too small, you drown in management overhead.
-
-This is why the curriculum contrasts three decompositions of the same feature: too coarse, too fine, and just right. A step is healthy when it can produce a visible signal of completion, not just "some progress."
-
-### Scenario
-
-For a user registration feature:
-- Too coarse: "Implement registration" as one step
-- Too fine: 20 tiny steps that each change one line
-- Just right: 4-6 steps such as form UI, validation, API route, persistence, confirmation, and verification
-
-The middle option is the only one that balances clarity with momentum.
-
-<Exercise id="ex-5.1.2.1" level="L1" title="Judge the best step size" description="Decide which of three step decompositions is the most appropriate and explain why." />
-<Exercise id="ex-5.1.2.2" level="L2" title="Split a real feature into steps" description='Break "user registration" into 4-6 steps and write a visible completion signal for each.' />
+<Exercise id="ex-5.1.1" level="L1" title="Choose the healthiest step size" description="Compare coarse, overly fine, and well-sized decomposition for the same feature and explain which one fits real project work best." />
 
 <Separator />
 
-## Step 3: Give AI a discipline rule
+## Step 2: A Good Step Must Satisfy Three Conditions
+A strong implementation step usually satisfies all three:
 
-Stepwise work is not only for you. It also needs to be explicit to AI. A useful instruction is: finish the current step and verify it, and do not move to the next step until I confirm.
+| Condition | Why it matters | Example |
+|---|---|---|
+| Single scope | One step should solve one class of problem | Only build form validation |
+| Short execution window | You should see progress within 15-30 minutes | Finish one pass and inspect it |
+| Explicit completion signal | You should know what "done" means | An invalid email now shows a validation message |
 
-That single rule prevents AI from imagining future work on its own. It keeps you in control of pacing and makes verification the gate between steps. The curriculum wants you to practice this as a rule of collaboration, not as a preference.
+If you cannot explain how to tell whether a step is complete, the step is usually still too fuzzy.
 
-### Scenario
+<Exercise id="ex-5.1.2.1" level="L2" title="Break one real feature into 4-6 good steps" description="Choose a real feature such as login, filtering, search, or comments, then split it into 4-6 steps and write a completion signal for each one." />
 
-Without the rule, AI often starts writing step 3 while step 1 is still unverified. With the rule, the assistant waits, asks for validation, and only then continues. That difference is what makes the workflow recoverable.
+<Separator />
 
-<Exercise id="ex-5.1.3.1" level="L2" title="Apply the verification gate" description="In your current project, complete the first step of a small feature and verify it before moving on." />
-<Exercise id="ex-5.1.3.2" level="L3" title="Record a three-step implementation" description="Choose a small feature, deliver it in three steps, and record the input, output, and verification action for each step." />
+## Step 3: Put the Step Discipline into the AI Prompt Too
+Stepwise implementation is not only for your notebook. It also needs to be visible to AI:
+
+```text
+Finish the current step and explain the verification method.
+Do not move to the next step until I confirm.
+```
+
+That discipline line gives you the pacing control back. Otherwise AI will often continue into step two or step three before step one is even verified.
+
+| Did you state the discipline? | What AI is more likely to do |
+|---|---|
+| No | Keep inventing future work on its own |
+| Yes | Stop at the current step and wait for confirmation |
+
+<Callout title="before / after: default forward motion vs forced pause" tone="info">
+Wrong move: let AI continue automatically after finishing the current step. Better move: require it to stop, show the current result, and explain the verification method. The difference is whether risk gets pushed forward or resolved in the current round.
+</Callout>
+
+<Exercise id="ex-5.1.3.1" level="L3" title="Run one real three-step implementation" description="Choose a small feature, ship it in three steps, and record the input, output, and verification action for each step while keeping AI on the current step until you confirm." />
 
 ## Summary
-- The goal of stepwise implementation is earlier feedback, not extra ceremony.
-- A good step needs a clear completion signal.
-- Keep AI on the current step until verification passes.
+- Coarse steps hide risk, and tiny steps drown you in management.
+- A good step has a clear completion signal within a short working window.
+- Step discipline only works if it is explicit to both you and the model.
 
 ## Methodology Review
-Closed-loop delivery starts when you move from impulse generation to step-based delivery.
+The first discipline of closed-loop delivery is step design: make work small enough to verify, stop, and reverse.
 
 ## References
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

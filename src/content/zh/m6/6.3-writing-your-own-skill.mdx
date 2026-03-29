@@ -1,6 +1,6 @@
 ---
 title: "编写你自己的 Skill"
-description: "学会把一个稳定流程写成可复用的 SKILL.md，并通过测试不断迭代。"
+description: "用 Tailwind CSS 这个真实主题，从零写出一份可用的 `SKILL.md`，再放进任务里测试。"
 module: "m6"
 order: 3
 estimatedMins: 45
@@ -8,50 +8,94 @@ methodologyTag: "胶水编程"
 ---
 
 <Callout title="本单元方法论焦点" tone="success">
-写 Skill 的重点不是炫技，而是把你已经验证过的方法变成 AI 下次还能稳定执行的流程。
+写 Skill 不是炫技，而是把你已经验证过的方法压缩成 AI 下次还能稳定执行的流程。
 </Callout>
 
-## Step 1: 先写出最小可用的 SKILL.md
-一个可复用 Skill 至少要说清楚：它什么时候被触发、它要做什么、不要做什么、输出长什么样。  
-你可以先用一个简单场景试写，比如 Tailwind CSS 的常见操作，先做骨架，再慢慢补约束和示例。
-场景对比：如果只是给 AI 一堆背景，它会自由发挥；如果把触发、边界和输出写清，它就会更像在执行一份说明书。
+## Step 1: 先用一个具体主题，而不是空谈模板
+我们直接用 `Tailwind CSS` 作为主题。假设你已经发现自己反复需要告诉 AI：
 
-<Exercise id="ex-6.3.1" level="L2" title="写一个最小 Skill 骨架" description="用 Tailwind CSS 或类似场景，写出一个最小可用的 SKILL.md 骨架。" />
+| 重复说明 | 为什么适合做 Skill |
+|---|---|
+| 优先用现有类名模式 | 是稳定规则 |
+| 不随意写大段自定义 CSS | 是明确边界 |
+| 修改后要检查移动端 | 是固定验证动作 |
 
-<Separator />
+这就说明，问题已经不再是“这次怎么说”，而是“这类任务怎么固定下来”。
 
-## Step 2: 好 Skill 和坏 Skill 的差别
-坏 Skill 往往是触发条件模糊、边界不清、示例太少、约束不具体。好 Skill 则会告诉 AI：什么时候用、怎么用、什么时候停。  
-对比三段片段时，你很容易发现，最有效的不是最长的那段，而是最能降低歧义的那段。
-场景对比：同一个操作，坏 Skill 让 AI 每次都猜一步，好 Skill 则让它按固定结构执行。
-
-<Exercise id="ex-6.3.2" level="L1" title="判断哪段 Skill 更好" description="比较 3 段 Skill 片段，指出哪一段质量更高并说明理由。" />
+<Exercise id="ex-6.3.1" level="L1" title="找出一个适合写 Skill 的重复任务" description="列出你在同一类任务里反复告诉 AI 的 3 条规则，并判断它们是否足够稳定，值得写成 Skill。" />
 
 <Separator />
 
-## Step 3: 用 AI 帮你生成 Skill
-如果你已经有一套成熟流程，可以把技术文档、API 参考和流程说明喂给 AI，让它先帮你整理成 Skill 草稿。  
-这个做法的关键是：AI 不是凭空发明，而是把你已经验证过的经验提炼成可执行结构。
-场景对比：手写草稿容易漏结构，用 AI 草稿可以先把骨架搭出来，再由你补边界和示例。
+## Step 2: 从最小可用骨架开始写 `SKILL.md`
+下面是一份 Tailwind Skill 的最小骨架：
 
-<Exercise id="ex-6.3.3" level="L3" title="为一个库生成 Skill 草稿" description="选择一个你熟悉的库或框架，用 AI 生成一个 Skill 草稿，并整理成规范结构。" />
+```md
+# Tailwind Layout Editing
+
+## Trigger
+- When editing existing Tailwind-based UI
+
+## Boundaries
+- Reuse current utility style first
+- Avoid introducing custom CSS unless necessary
+- Keep mobile-first responsive behavior
+
+## Workflow
+1. Read the current component structure
+2. Identify layout or spacing issue
+3. Prefer utility-class edits
+4. Check mobile and desktop behavior
+
+## Example
+- Fix uneven card spacing without rewriting the component tree
+```
+
+这还不完美，但已经足够让 AI 知道：什么时候触发、什么不能乱做、按什么顺序工作。
+
+<Exercise id="ex-6.3.2" level="L2" title="写出你的最小 Skill 骨架" description="围绕一个真实主题，写出包含 Trigger、Boundaries、Workflow、Example 的最小 `SKILL.md` 骨架。" />
 
 <Separator />
 
-## Step 4: 测试并迭代你的 Skill
-Skill 不是写完就结束，而是要拿到真实任务里测试。你要观察它是否真的减少了返工、是否减少了重复解释、是否让 AI 更稳定。  
-发现问题后就迭代：补触发条件、收紧约束、补真实示例，直到它在真实任务里能稳定发挥作用。
-场景对比：如果 Skill 在真实任务里总让 AI 走偏，那说明不是“写得差不多”就行，而是必须继续调到能稳定复用。
+## Step 3: 再把骨架补成真正能执行的说明书
+真正可用的 Skill 往往还要补两类内容：
 
-<Exercise id="ex-6.3.4" level="L3" title="用真实任务测试 Skill" description="把你写的 Skill 用在一个真实任务中，记录效果和下一轮迭代要补的地方。" />
+| 要补的内容 | 作用 |
+|---|---|
+| 触发例子 | 帮 AI 更稳定识别场景 |
+| 明确禁止项 | 防止它自由发挥到别的层面 |
+
+```text
+Before：编辑 UI 时尽量用 Tailwind。
+After：当任务涉及现有 Tailwind 组件的布局、间距、响应式问题时触发本 Skill；不要新增自定义 CSS 文件，不要改组件结构除非明确要求。
+```
+
+<Callout title="场景卡片：为什么禁止项不能省" tone="warning">
+情境：AI 明明只该调类名，却顺手改了组件结构或写了一堆 CSS。做法：把禁止项明确写进 Skill。原因：没有禁止项，AI 会把‘帮忙’理解成‘我可以顺手多做一点’。
+</Callout>
+
+<Exercise id="ex-6.3.3" level="L2" title="把一个 Skill 骨架补成完整草稿" description="在你刚写的 Skill 骨架上，补上至少 2 条触发例子和 2 条明确禁止项，使它更接近真实可执行版本。" />
+
+<Separator />
+
+## Step 4: Skill 必须放进真实任务里测试
+Skill 和代码一样，不测试就不知道它是不是真的好用。
+
+| 测试问题 | 你要观察什么 |
+|---|---|
+| AI 是否更少偏航 | 是否还会乱改不该动的部分 |
+| AI 是否更少需要重复解释 | 你有没有少说很多老规则 |
+| 输出是否更稳定 | 结果是否更接近你想要的工作流 |
+
+<Exercise id="ex-6.3.4" level="L3" title="用真实任务测试你的 Skill" description="把你写好的 Skill 用在一个真实任务里，记录它让 AI 少犯了什么错、还缺什么约束，并据此迭代一次。" />
 
 ## 本单元小结
-- Skill 要写成可复用的操作说明，不是写成灵感笔记。
-- 好 Skill 的核心是边界清楚、约束具体、示例真实。
-- 必须把 Skill 放进真实任务中测试，再根据结果迭代。
+- Skill 最适合承接重复出现的稳定任务规则。
+- 最小 `SKILL.md` 至少要有 Trigger、Boundaries、Workflow、Example。
+- 不测试的 Skill 只是文档，测试过并迭代过的 Skill 才是资产。
 
 ## 方法论回顾
-胶水编程在这里变成“把经验产品化”。
+胶水编程在这里变成‘把经验产品化’：不是重复讲规则，而是把规则做成可反复调用的能力包。
 
 ## 参考来源
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

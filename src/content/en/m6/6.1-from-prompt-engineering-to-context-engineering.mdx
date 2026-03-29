@@ -1,76 +1,83 @@
 ---
 title: "From Prompt Engineering to Context Engineering"
-description: "Understand the limits of one-off prompts and adopt a layered view of system instructions, project context, task input, and tools."
+description: "Use a long-project decay story to see why better wording stops being enough, and why multi-layer context management becomes the real work."
 module: "m6"
 order: 1
-estimatedMins: 45
+estimatedMins: 35
 methodologyTag: "Context Stabilization"
 ---
 
 <Callout title="Method Focus" tone="success">
-Prompt engineering asks, "How should I phrase this turn?" Context engineering asks, "What must stay available across the whole collaboration?"
+Prompt engineering improves a single turn. Context engineering keeps long-term collaboration stable. The longer the project gets, the more the center of gravity shifts from phrasing to memory design.
 </Callout>
 
-## Step 1: Why a single prompt is not enough
+## Step 1: Watch a long project slowly degrade
+Imagine a course-platform project that continues for 20 rounds of collaboration.
 
-For a short task, one strong prompt can be enough. For a long project, the work spans files, sessions, tools, and decisions. At that point, the problem is no longer only wording. It is keeping the right context available.
+| Round | What AI feels like | What is actually happening |
+|---|---|---|
+| 1 | Clear, aligned, fast | The task is short and the context is still intact |
+| 5 | Mostly good, but occasionally forgetful | Early constraints start falling out of view |
+| 10 | Style drifts and old decisions get questioned again | Project-level memory is no longer stable |
+| 20 | It behaves like a new project | The thread has lost durable continuity |
 
-The curriculum contrasts a one-hour project with a two-week project for a reason. In the short case, you can often keep everything in your head. In the long case, you need a durable system that survives the gaps between sessions.
+This is the moment where "I just need a stronger prompt" stops being a good diagnosis.
 
-### Scenario
+<Callout title="Scenario: when you should stop patching prompts and fix the system" tone="warning">
+Situation: you have reminded AI for the tenth time not to change the database schema. Action: stop adding one more sentence to the prompt and move that rule into the system or project layer. Why: repeated reminders are a signal that the missing thing is durable context, not one more clever phrasing tweak.
+</Callout>
 
-- Short project: the assistant can complete the task before the context gets messy.
-- Long project: the assistant starts forgetting rules, repeating itself, or missing earlier decisions.
-
-The second case is where prompt engineering stops being enough.
-
-<Exercise id="ex-6.1.1.1" level="L1" title="Decide when context engineering is needed" description="Compare three scenarios and decide which ones can be handled with prompting alone and which ones require a broader context system." />
-
-<Separator />
-
-## Step 2: The four-layer context model
-
-You can think about AI collaboration in four layers:
-
-- System layer: the lasting rules and priorities
-- Project layer: the background, goals, and shared history
-- Task layer: the current assignment and success criteria
-- Tool layer: the capabilities, integrations, and commands that are available
-
-The point of the model is not decoration. It gives you a map for diagnosing where collaboration is failing.
-
-### Scenario
-
-If the model keeps ignoring a rule, the problem might be at the system layer. If it remembers the rule but not the project's current state, the issue might be in the project layer. If it understands the project but not the current request, the task layer is weak.
-
-<Exercise id="ex-6.1.2.1" level="L2" title="Map the four layers" description="Map the system, project, task, and tool layers for one real project and describe what belongs in each." />
+<Exercise id="ex-6.1.1" level="L1" title="Decide which tasks exceed one-off prompting" description="Compare several projects with different durations and complexity, then decide which ones can still rely mostly on prompts and which ones now require context engineering." />
 
 <Separator />
 
-## Step 3: What to do when context degrades
+## Step 2: Context engineering manages multiple layers
+The most practical model is a four-layer stack:
 
-If AI starts repeating old mistakes, ignoring rules, or drifting in style, the context has usually degraded. The fix is not to paste more random history into the thread. The fix is to restore the missing layer.
+| Layer | What it stores |
+|---|---|
+| System layer | Long-lived principles, guardrails, and collaboration rules |
+| Project layer | Background, goals, architecture, and known constraints |
+| Task layer | What this round needs to produce right now |
+| Tool layer | What capabilities and integrations are currently available |
 
-### Scenario
+Prompt engineering mostly strengthens the task layer. Context engineering manages how all four layers stay available together.
 
-Common degradation signals:
-- AI keeps making the same mistake
-- It forgets a project rule you already wrote down
-- The output style changes for no good reason
-- It answers the wrong question even when the prompt is clear
+<Callout title="Scenario: same failure, different broken layer" tone="info">
+Situation: AI keeps ignoring a no-schema-change rule. Action: decide whether the rule was never written at the system layer, buried in project context, or missing from the current task handoff. Why: the fix depends on which layer failed, not on how annoyed you feel.
+</Callout>
 
-The right response is to compress history, restore the important context, or start a new conversation when the thread is no longer trustworthy.
+<Exercise id="ex-6.1.2" level="L2" title="Map your own four-layer context stack" description="For one real project, write what belongs in the system, project, task, and tool layers, and identify which layer is easiest to neglect." />
 
-<Exercise id="ex-6.1.3.1" level="L2" title="Analyze one decay example" description="Review one case where AI drifted on a project and explain which context layer had broken down." />
-<Exercise id="ex-6.1.3.2" level="L3" title="Recover a degraded thread" description="Apply a recovery strategy to one degraded conversation and record what you restored." />
+<Separator />
+
+## Step 3: When context decays, repair the right layer
+Common decay signals include repeated mistakes, forgotten project rules, style drift, and answers that target the wrong problem.
+
+| Decay signal | Most likely weak layer |
+|---|---|
+| Stable rules keep getting ignored | System layer |
+| AI forgets the project goal or past decision | Project layer |
+| The current assignment is misunderstood | Task layer |
+| AI does not use available capabilities well | Tool layer |
+
+```text
+Before: when AI drifted, I just kept adding more text to the prompt.
+After: I first diagnosed which layer had degraded, then repaired that exact layer.
+```
+
+That shift matters because random history stuffing makes threads heavier, not clearer.
+
+<Exercise id="ex-6.1.3" level="L3" title="Analyze and repair one context-decay case" description="Choose one long conversation or long project you have seen, identify the decay signal, decide which layer failed, and write a repair plan for that specific layer." />
 
 ## Summary
-- Long-lived work shifts the problem from prompt design to context design.
-- Layered context makes failure easier to diagnose.
-- Fixing drift means restoring the right layer, not just adding more text.
+- Long projects fail when durable context is not managed across time.
+- The four-layer model gives you a practical diagnostic map.
+- When collaboration degrades, repair the missing layer instead of only extending the prompt.
 
 ## Methodology Review
-This unit deepens context stabilization by treating system rules, project memory, task framing, and tool setup as layers that must be maintained together.
+Context stabilization becomes context engineering here: the goal is no longer to help AI remember more text, but to organize the right information in the right layer for the next round of work.
 
 ## References
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

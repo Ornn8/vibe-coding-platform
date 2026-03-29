@@ -1,6 +1,6 @@
 ---
 title: "Deployment Landscape: Put the Project on the Internet"
-description: "Compare common deployment paths and learn how to choose based on project type, complexity, and operational cost."
+description: "Walk through a concrete Vercel deployment flow step by step, then compare hosting choices by setup cost, control, and project fit."
 module: "m8"
 order: 1
 estimatedMins: 35
@@ -8,63 +8,76 @@ methodologyTag: "Closed-Loop Delivery"
 ---
 
 <Callout title="Method Focus" tone="warning">
-A project that runs locally is not automatically ready for release. Deployment is the final stretch of the delivery loop, not an optional extra.
+Deployment is not an afterthought. It is the last part of the delivery loop, where local success gets tested against real build, real config, and real runtime conditions.
 </Callout>
 
-## Step 1: Compare the main deployment options
+## Step 1: Experience one concrete deployment flow
+Take a Next.js project and deploy it to Vercel:
 
-Frontend-heavy apps often fit Vercel or Netlify. Full-stack apps may fit Railway, Render, or similar managed platforms. More complex systems may need containers and deeper operational control.
+1. Open the Vercel dashboard and click `Add New...` -> `Project`.
+2. Choose your Git repository.
+3. On the import page, confirm the framework is detected as `Next.js`.
+4. Open the environment variables section and fill in values such as `DATABASE_URL` and `AUTH_SECRET`.
+5. Click `Deploy`.
+6. Watch the build log move through install, build, and route generation.
+7. Open the preview URL and test the real deployed page.
 
-### Scenario
+That "open -> choose -> fill -> deploy -> verify" sequence is the real deployment experience learners need to picture.
 
-The curriculum's comparison is practical:
-- Vercel for simple Next.js delivery
-- Netlify for frontend-first hosting
-- Railway or Render for full-stack projects
-- Docker plus VPS for maximum control and maximum responsibility
+| Step | What you click or enter | What you should see |
+|---|---|---|
+| Import repo | Select the Git repository | Framework auto-detection and project settings |
+| Add env vars | Paste runtime secrets and config | Variables listed before deploy |
+| Deploy | Click the deploy button | Build logs and a preview URL |
 
-The right answer depends on the project type and the cost you are willing to carry.
+<Callout title="Scenario: the most common first-deploy mistake" tone="warning">
+Situation: the build succeeds, but the app fails at runtime. Action: check whether the required environment variables were added in the deployment dashboard, not only in local `.env` files. Why: many first deploy failures are configuration gaps, not code failures.
+</Callout>
 
-<Exercise id="ex-8.1.1.1" level="L1" title="Choose a deployment target" description="Choose one deployment option for your project and explain the tradeoffs in cost, complexity, and maintenance." />
+<Exercise id="ex-8.1.1" level="L1" title="Write the click-by-click deployment path" description="For one real project, write the exact sequence of dashboard actions, values to fill, and outputs you expect to see during deployment." />
 
 <Separator />
 
-## Step 2: Plan environment and configuration before you click deploy
+## Step 2: Choose the platform with hard tradeoffs in mind
+The platform choice should be based on real cost and control tradeoffs.
 
-Many deployment failures are not really platform failures. They come from missing environment variables, broken callbacks, unplanned database connections, or unclear build requirements.
+| Platform style | Setup cost | Control level | Best fit |
+|---|---|---|---|
+| Vercel / Netlify | Low | Lower | Frontend-heavy apps, Next.js sites, fast launch |
+| Railway / Render | Medium | Medium | Small full-stack apps with managed services |
+| Docker on VPS | High | High | Teams that need custom infra control and can carry ops work |
 
-### Scenario
+The right answer is not "the most powerful one." It is the one whose operational cost still makes sense for the project.
 
-Before deploy:
-- the environment variables are checked
-- the auth callbacks are mapped
-- the database connection is verified
-- the build command is known
-
-After deploy:
-- you are not guessing why the site failed
-
-<Exercise id="ex-8.1.2.1" level="L2" title="Write a deployment checklist" description="List the configuration items your project must confirm before deployment, including env vars, database, auth, and build commands." />
+<Exercise id="ex-8.1.2" level="L2" title="Choose a platform using real tradeoffs" description="Pick a deployment target for your project and justify it using setup cost, control level, and project fit rather than vague preference." />
 
 <Separator />
 
 ## Step 3: Debug deployment failures by layer
+When deploys fail, debug in layers instead of jumping randomly.
 
-When deployment fails, debug it by layer: build layer, environment layer, service connection layer, and application logic layer. That is the same debugging skill you already practiced, applied to release instead of implementation.
+| Layer | Typical symptom | First check |
+|---|---|---|
+| Build layer | Install or compile failure | Build logs and missing dependencies |
+| Environment layer | App crashes on startup | Missing env vars or wrong secrets |
+| Service layer | API or DB calls fail | Connection strings, callbacks, network rules |
+| Application layer | Page loads but logic is wrong | Runtime logs and real user flow |
 
-### Scenario
+```text
+Before: the deploy failed, so I clicked around the dashboard without a clear order.
+After: I check build, environment, service connection, and application logic in a fixed sequence.
+```
 
-The failure may look like one problem, but the cause usually sits in a specific layer. If you debug by layer, you stop jumping randomly between the logs, the platform dashboard, and the app itself.
-
-<Exercise id="ex-8.1.3.1" level="L2" title="Write a deployment debugging path" description="Assume your project fails to deploy and describe the order in which you would investigate the problem." />
+<Exercise id="ex-8.1.3" level="L3" title="Run one real deployment and record the debug path" description="Deploy a real project or preview build, then write down the exact order you used to verify logs, environment variables, service connections, and runtime behavior." />
 
 ## Summary
-- Deployment choice should match project type and operational cost.
-- Configuration review before deployment saves more time than reactive debugging.
-- Release failures should be debugged by layer.
+- Learners need a concrete deployment experience, not only platform names.
+- Deployment targets should be chosen by setup cost, control, and project fit.
+- Failed deploys become easier to fix when you debug by layer.
 
 ## Methodology Review
-This unit closes the delivery loop by treating deployment as a planned engineering step with explicit platform choice, configuration review, and verification paths.
+Closed-loop delivery reaches the release boundary here: build, config, and runtime verification become the final checks that turn local work into a real product.
 
 ## References
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

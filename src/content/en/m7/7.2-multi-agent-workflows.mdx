@@ -1,6 +1,6 @@
 ---
 title: "Multi-Agent Workflows"
-description: "Split planning, coding, testing, and review across roles and learn when parallel agent work actually helps."
+description: "Move past the concept diagram and study a real sub-agent flow so you know when multi-agent work helps and when it just adds noise."
 module: "m7"
 order: 2
 estimatedMins: 40
@@ -8,55 +8,77 @@ methodologyTag: "Planning-Driven"
 ---
 
 <Callout title="Method Focus" tone="warning">
-The value of multiple agents is not "more windows." It is lower cognitive load through clear role design and bounded parallel work.
+The value of multiple agents is not "more windows." It is lower coordination cost through clear write scope, explicit handoffs, and bounded parallel work.
 </Callout>
 
-## Step 1: Separate responsibility before you parallelize
+## Step 1: Do not split work until boundaries are real
+Parallel work only helps when subtasks have clean ownership.
 
-Not every task should be split across agents. Parallel work is only useful when subtasks have clear boundaries, controlled write scope, and outputs that can be integrated cleanly.
+| Task shape | Good for multiple agents? | Why |
+|---|---|---|
+| Rewrite eight unrelated MDX files | Yes | Each file can be owned and reviewed independently |
+| Debug one cross-cutting auth bug | Usually no | The diagnosis path changes too quickly |
+| Add a feature with separate planning and review steps | Yes | Different roles add value without overwriting each other |
 
-### Scenario
+If one agent is asked to plan, code, test, and review all at once, you do not get a system. You get faster confusion.
 
-If one agent is asked to plan, code, test, and review at once, you do not get a coordinated workflow. You get faster confusion. If the roles are separated, the handoff becomes inspectable and the overlap becomes smaller.
-
-<Exercise id="ex-7.2.1.1" level="L1" title="Decide what can run in parallel" description="Compare three tasks and decide which ones are good candidates for multi-agent parallel work and which are not." />
-
-<Separator />
-
-## Step 2: Common multi-agent role patterns
-
-A typical workflow may include a planning agent, an implementation agent, a testing agent, and a review agent. Those roles do not need to appear every time, but you should know when each one adds value.
-
-### Scenario
-
-The curriculum compares multi-agent work to a software team:
-- product thinking maps the work
-- development builds it
-- QA checks it
-- a tech lead reviews the release
-
-The only difference is that the team members are AI roles.
-
-<Exercise id="ex-7.2.2.1" level="L2" title="Design a three-agent workflow" description="Design a workflow for one real task with at least three agents, including responsibilities, handoff inputs, and validation points." />
+<Exercise id="ex-7.2.1" level="L1" title="Decide what should and should not be parallelized" description="Compare several real tasks and decide which ones are good candidates for multi-agent work and which ones should stay in a tighter single-thread loop." />
 
 <Separator />
 
-## Step 3: Move from workflow to automation
+## Step 2: Look at one real sub-agent workflow
+Imagine you are upgrading lesson content across a module.
 
-Once the role model becomes stable, you can ask whether certain tasks should flow automatically from issue to plan, implementation, test, and PR. The goal is not blind automation. The goal is to be explicit about what can be automated and what still needs human approval.
+| Role | Input | Output | Write scope |
+|---|---|---|---|
+| Planning agent | Revision rules and file list | Rewrite checklist and task split | No file edits |
+| Rewrite agent | One lesson file plus checklist | Updated lesson content | One lesson file |
+| Review agent | Updated lesson plus standards | Findings and missed requirements | No file edits |
 
-### Scenario
+Here is the actual flow:
 
-The issue-to-PR path becomes useful only when every step is clear enough to be delegated and every risky boundary is clear enough to hold back for human review.
+1. The planning agent reads the revision standard and splits the file list.
+2. The rewrite agent updates one lesson at a time.
+3. The review agent checks scenarios, tables, before/after, and L3 exercises.
+4. A human or primary agent resolves findings before the next batch starts.
 
-<Exercise id="ex-7.2.3.1" level="L3" title="Sketch one automated workflow" description="Write or diagram a workflow from task trigger to review outcome, and mark exactly where human intervention is required." />
+That is a real sub-agent workflow. It is not just a box diagram. It is a bounded exchange of inputs, outputs, and permissions.
+
+```text
+Before: I put planning, implementation, testing, and review into one agent.
+After: I split the role boundaries first, then let each agent handle only the segment it can own safely.
+```
+
+<Callout title="Scenario: what makes a sub-agent useful instead of decorative" tone="info">
+Situation: you want help on a batch rewrite. Action: give the rewrite agent only one file and one checklist, and give the review agent read-only responsibility. Why: the system gets safer when each role knows both what it should do and what it must not touch.
+</Callout>
+
+<Exercise id="ex-7.2.2" level="L2" title="Design your own three-role sub-agent flow" description="Take one real task and define a planning role, an implementation role, and a review role, including what each one receives, what each one returns, and what each one may edit." />
+
+<Separator />
+
+## Step 3: Automation should follow a stable workflow, not replace judgment
+Once a role pattern becomes stable, parts of it can be automated.
+
+| Workflow stage | Safe to automate? | Human checkpoint |
+|---|---|---|
+| Trigger task from a clear request | Often yes | Human confirms the scope |
+| Generate a plan draft | Often yes | Human checks boundary and risk |
+| Run lint and type checks | Yes | Human reviews failed or risky cases |
+| Auto-merge business logic changes | Usually no | Human approval stays mandatory |
+
+The goal is not maximum automation. The goal is explicit automation boundaries.
+
+<Exercise id="ex-7.2.3" level="L3" title="Map one real workflow from trigger to approval" description="Write or diagram one workflow from task trigger to final review, then mark which steps can be automated and which still require human approval in a real project." />
 
 ## Summary
-- Clear boundaries matter more than raw parallelism.
-- Multi-agent workflows are primarily a role-design problem.
+- Multi-agent work helps only when write boundaries and handoffs are clear.
+- A real sub-agent flow is defined by inputs, outputs, and permissions, not a concept sketch.
+- Automation becomes useful only after the workflow is already stable enough to trust.
 
 ## Methodology Review
-This unit combines planning-driven work with glue coding by making delegation rules, agent roles, and handoff structure explicit.
+Planning-driven work becomes orchestration here: the system is designed around role boundaries first, then parallel work and automation are added on top of that structure.
 
 ## References
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

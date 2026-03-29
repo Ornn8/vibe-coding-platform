@@ -1,58 +1,104 @@
 ---
 title: "Prompt 反模式与个人提示词库"
-description: "识别常见反模式，并把有效 prompt 沉淀成自己的 Prompt Portfolio。"
+description: "不只列问题类型，而是走完整的失败链路：prompt、AI 输出、问题、修正方式，再把有效 prompt 沉淀成可复用资产。"
 module: "m3"
 order: 5
 ---
 
 <Callout title="本单元方法论焦点" tone="warning">
-闭环交付不只体现在代码和文档，也体现在 prompt 资产本身。能复盘、能迁移的 prompt，才算真正的产出。
+能复盘、能修正、能复用的 prompt 才算资产。一次碰巧有效，不算方法。
 </Callout>
 
-## Step 1: 识别常见反模式
-最常见的反模式包括三类: 模糊、贪心、无约束。模糊会让 AI 猜，贪心会让它摊薄重点，无约束会让它跑到你没预期的方向。再往上还有上下文污染和幻觉引导，也就是把错误信息当背景反复强化。
+## Step 1: 反模式 1，模糊 prompt 会让 AI 全靠猜
+看一个失败链路：
+
+| 阶段 | 内容 |
+|---|---|
+| 原始 prompt | 帮我优化一下课程页 |
+| AI 输出 | 改了 Hero、加了营销文案、顺手改了按钮文案 |
+| 真正问题 | 你没说优化什么、范围在哪 |
+| 修正写法 | 只检查 Hero 标题、简介和 CTA，让初学者 10 秒内看懂本单元学什么，不改其他区域 |
+| 修正后效果 | 改动范围收窄，输出更可审查 |
+
+这类反模式的问题不是“字数太少”，而是缺目标、缺范围、缺完成标准。
+
+<Exercise id="ex-3.5.1.1" level="L1" title="判断失败 prompt 的主问题" description="阅读 3 条失败 prompt，判断它们主要是模糊、贪心，还是缺少验证。" />
+
+<Separator />
+
+## Step 2: 反模式 2，贪心 prompt 会把重点摊薄
+再看一个链路：
+
+| 阶段 | 内容 |
+|---|---|
+| 原始 prompt | 帮我把首页、登录、评论、支付、会员都做出来 |
+| AI 输出 | 每个点都做了一点，但没有一个点真的稳 |
+| 真正问题 | 你把多个阶段的事塞进了一轮 |
+| 修正写法 | 本轮只做登录和支付前的商品详情页，不做评论和会员 |
+| 修正后效果 | AI 更容易聚焦一个闭环 |
 
 ```text
-反模式：帮我优化一下这个页面。
-更好的写法：请只检查移动端导航、按钮间距和标题层级，不要改其他内容。
+Before：把所有想到的功能都塞进一轮。
+After：只围绕一个闭环推进，并明确不做项。
 ```
 
-<Exercise id="ex-3.5.1.1" level="L1" title="给失败 prompt 分类" description="阅读三个失败 prompt，判断它们各自主要踩中了哪类反模式。" />
-<Exercise id="ex-3.5.1.2" level="L2" title="改写反模式 prompt" description="把三个常见反模式 prompt 改写成更清晰的版本。" />
+<Callout title="场景卡片：为什么贪心 prompt 特别容易让人误判" tone="warning">
+情境：AI 一下给了很多功能，看起来很值。做法：先问自己有没有一个核心闭环真正做稳。原因：功能多不等于交付稳，贪心 prompt 很容易制造‘看起来完成’的幻觉。
+</Callout>
+
+<Exercise id="ex-3.5.2.1" level="L2" title="把一个贪心 prompt 缩成首版闭环" description="选一条你写过或见过的贪心 prompt，把它改写成只做一个闭环的版本，并补上不做项。" />
 
 <Separator />
 
-## Step 2: 学会做 Prompt 复盘
-复盘时要看三件事: 原始目标是什么、prompt 哪部分导致偏差、下一次应该如何改。这个动作会让你逐渐摆脱“靠感觉写 prompt”，转向有证据、有版本感的改进方式。
+## Step 3: 反模式 3，没有验证要求就很难形成闭环
+最后看第三类失败链路：
 
-一旦你开始这样复盘，你积累的就不再只是聊天记录，而是可重复使用的方法。
+| 阶段 | 内容 |
+|---|---|
+| 原始 prompt | 修好这个 bug |
+| AI 输出 | 给出一段看起来像修复的代码 |
+| 真正问题 | 你没要求它说明怎么验证 |
+| 修正写法 | 修好这个 bug，并说明你会如何验证，至少包含一条手动验证或命令检查 |
+| 修正后效果 | 结果不再停留在“看起来像修好了” |
 
-<Exercise id="ex-3.5.2.1" level="L1" title="识别高级反模式" description="判断一个 prompt 是否出现了上下文污染或幻觉引导。" />
-<Exercise id="ex-3.5.2.2" level="L2" title="复盘一个 prompt" description="选你自己写过的一条 prompt，说明原目标、问题点和下一轮改写方案。" />
+没有验证要求的 prompt，最大的问题是你会把“输出出现了”误当成“问题解决了”。
+
+<Exercise id="ex-3.5.3.1" level="L2" title="给 prompt 补验证闭环" description="把 3 条缺验证的 prompt 改写成包含验证要求的版本，至少写出一条命令、手动检查或对照标准。" />
 
 <Separator />
 
-## Step 3: 建立个人 Prompt Portfolio
-Portfolio 可以按任务类型分类，例如内容生成、代码修改、项目审查、需求拆解。每一条 prompt 除了正文，还要标注适用场景、常见坑和验证方式。这样它们才是资产，而不是历史记录。
+## Step 4: 把有效 prompt 沉淀成 Portfolio
+当你开始记录“任务类型、prompt、结果、适用场景、常见坑、验证方式”，你就不是在保存聊天记录，而是在管理 Prompt Portfolio。
 
-到这里为止，你已经从“会写提示词”走到了“会管理 prompt 资产”。这会直接为 M4 的工作流阶段做准备。
+| 资产字段 | 应该记录什么 |
+|---|---|
+| 任务类型 | 内容审阅、需求拆解、代码修复等 |
+| prompt 本体 | 真正有效的版本 |
+| 适用场景 | 什么时候用 |
+| 常见坑 | 容易跑偏在哪里 |
+| 验证方式 | 怎样判断这次结果算过关 |
 
-<Exercise id="ex-3.5.3.1" level="L3" title="整理你的 Prompt Portfolio" description="选出你最有效的 5 条 prompt，按任务类型整理，并为每条补上适用场景和验证方式。" />
+<Callout title="before / after：聊天记录 vs Prompt Portfolio" tone="info">
+错误做法：觉得‘我记得这条 prompt 以前好像有用过’。正确做法：把 prompt 连同场景、问题和验证方式一起记下来。差别在于，前者靠记忆，后者才是资产。
+</Callout>
+
+<Exercise id="ex-3.5.4.1" level="L3" title="整理你的 Prompt Portfolio" description="从你真实使用过的 prompt 里挑 5 条，按任务类型整理成小型 Portfolio，并为每条补上适用场景、常见坑和验证方式。" />
 
 ## 本单元小结
 
-- 失败 prompt 也有结构，可以被分类和修复。
-- Prompt 复盘让经验从感觉变成证据。
-- Portfolio 让你的 prompt 资产可迁移、可持续使用。
+- 模糊、贪心、缺验证是最常见的三类反模式。
+- 反模式要看完整失败链路，才能真正知道该怎么改。
+- Portfolio 让 prompt 从一次性对话变成可迁移的工作资产。
 
 ## 方法论回顾
 
-本单元把“闭环交付”扩展到了 prompt 层: 结果、问题、修正和复用都被记录下来。
+本单元把闭环交付扩展到了 prompt 层：不仅要有输出，还要能复盘、修正和复用。
 
 ## 下一单元预告
 
-下一单元会把 prompt 质量继续往执行层落，进入 PRD、Implementation Plan 和工作流协作。
+下一模块会把这些 prompt 和上下文能力继续往执行层下放，进入 PRD、Plan、PEV 和终端代理工作流。
 
 ## 参考来源
 
+- `content-revision-plan.md`
 - `curriculum-v3.md`

@@ -1,65 +1,84 @@
 ---
-title: "What Vibe Coding Is and Why Now Is the Time to Learn It"
-description: "Learn the origin of Vibe Coding, compare the three collaboration modes, and understand why now is the right time to start."
+title: "What Vibe Coding Is and Why It Matters Now"
+description: "Use one concrete task to compare Vibe, Spec, and Agentic modes and establish a planning-first mindset for the course."
 module: "m1"
 order: 1
-estimatedMins: 25
-methodologyTag: "Planning-Driven"
 ---
 
-<Callout type="methodology" title="Methodology Focus">
-Planning-driven learning does not mean moving slowly. It means you define the target, the boundary, and the next move before you let AI move fast.
+<Callout title="Methodology Focus" tone="info">
+Vibe Coding is not the opposite of planning. It is a low-friction way to validate ideas first, then move into the right level of control.
 </Callout>
 
-## Step 1: What Vibe Coding Actually Means
+## Step 1: Understand Vibe Coding Through One Task
+Imagine you want to build a simple weather page. You open a browser-based AI tool and type: "Build a Chinese weather page where users enter a city and see today's temperature, an icon, and a short clothing suggestion. Keep it clean and mobile-friendly." In about 30 seconds, you usually get a visible first version. You did not start by wiring a project, defining folders, or hand-writing the UI. That is the core Vibe Coding experience: describe the outcome first, then react to what the AI produces.
 
-Vibe Coding is a way of working, not a single tool or a magic phrase. You describe what you want in natural language, let AI produce a first draft, and then refine it through conversation. Compared with traditional coding, the center of gravity shifts from "write every line first" to "state the direction clearly, then converge on the result."
+The point is not "never read code again." The point is to lower the cost of the first useful result. When you are still testing an idea, exploring structure, or feeling out a page direction, this mode is extremely efficient.
 
-That shift matters because AI is no longer just autocomplete. It can understand longer context, handle flows, and revise its output based on feedback. Learning Vibe Coding today is really learning how to collaborate with a system that can produce, revise, and iterate with you.
+| Approach | What you do first | Typical startup time | Best fit |
+|---|---|---|---|
+| Traditional hand-coding | Create project, install deps, scaffold UI | 30-90 min | You already know the plan |
+| Vibe Coding | Describe the target outcome | 1-5 min | You are still validating the idea |
 
-<Exercise id="ex-1.1.1.1" level="L1" title="Explain Vibe Coding in your own words" description="Use 3 to 5 sentences to explain Vibe Coding to a non-technical friend and point out how it differs from writing code line by line." />
+<Callout title="Scenario Card: The Right First Expectation" tone="info">
+If your first generated page is imperfect, that is not failure. The job of Vibe Coding is not one-shot perfection. It is fast clarification.
+</Callout>
 
-<Separator />
-
-## Step 2: Vibe, Spec, and Agentic Are Three Modes
-
-Vibe mode is best for quick experiments and prototypes. Spec mode is better when the requirements are clearer and you want a proposal or design before execution. Agentic mode fits work that benefits from multiple roles, parallel steps, or review loops. These are not rivals; they are different levels of complexity.
-
-You can think about them like this:
-
-| Mode | Best when | Strength | Risk |
-|------|-----------|----------|------|
-| Vibe | You are still exploring the idea | Fastest path to a visible draft | Can drift if the target is vague |
-| Spec | You know the goal and want less rework | Better alignment before execution | Takes a little more planning time |
-| Agentic | The task needs roles, steps, or review | Stronger traceability and coordination | Overkill for tiny experiments |
-
-A simple rule of thumb works well: if you are still exploring what to make, start with Vibe. If you know what to build but want to reduce rework, move toward Spec. If the task is complex enough that it needs division of labor and traceability, Agentic is the right direction.
-
-<Exercise id="ex-1.1.2.1" level="L1" title="Choose the right mode for each scenario" description="For 'build a personal homepage', 'refactor a production login flow', and 'coordinate multiple agents writing and reviewing docs', choose Vibe, Spec, or Agentic." />
-
-<Exercise id="ex-1.1.2.2" level="L2" title="Decide when a new scenario should switch modes" description="Pick one new product idea and explain whether it should start in Vibe, Spec, or Agentic mode, and why." />
+<Exercise id="ex-1.1.1.1" level="L1" title="Explain Vibe Coding" description="Explain Vibe Coding to a non-technical friend in 3 to 5 sentences without hiding behind jargon." />
 
 <Separator />
 
-## Step 3: Why 2026 Is a Good Time to Start
+## Step 2: The Same Task in Three Modes
+Keep the weather page task. In Vibe mode, you ask the AI to make a visible first version. In Spec mode, you first define the user, the modules on the page, the data source, the mobile-first constraint, and what not to build yet. In Agentic mode, you split the work across roles: a planning agent outlines the solution, an execution agent builds it, and a review agent checks whether it respects mobile UX and accessibility.
 
-This is a special moment to learn. The tools are already good enough that a beginner can build something demo-worthy in a few hours, but the methodology is not fully standardized yet. That means the people who build the right habits now are the ones most likely to grow from "I can use the tool" to "I can ship with AI."
+These are not rankings. They are cost and fit decisions. A weekend side tool does not need Agentic overhead. A payment page should not rely on unbounded Vibe iteration.
 
-If you treat Vibe Coding as "just tell the AI to do stuff," you will quickly run into unstable output, drifting requirements, and painful rework. If you begin with mode selection, tool choice, and small planning habits, later units on prompt engineering, Claude Code, and multi-agent collaboration will feel much easier.
+| Mode | What happens first | Strength | Main risk |
+|---|---|---|---|
+| Vibe | Direct outcome request | Fast start, fast feedback | Scope drift |
+| Spec | Requirements and plan first | More stable output | More upfront thinking |
+| Agentic | Roles and review workflow first | Best for complex parallel work | Highest coordination cost |
 
-<Exercise id="ex-1.1.3.1" level="L2" title="Analyze a recent AI coding update" description="Find a recent AI coding tool update, decide whether it is more Vibe, Spec, or Agentic, and explain how you reached that conclusion." />
+**Before / After**
+
+Weak judgment: "AI is strong, so I should always start by asking it to build."
+
+Stronger judgment: "I first decide whether this task is idea validation, spec execution, or multi-role delivery, then choose Vibe, Spec, or Agentic."
+
+<Exercise id="ex-1.1.2.1" level="L1" title="Match the mode to the scenario" description="Choose the best mode for a birthday countdown page, a production login refactor, and a multi-agent documentation workflow." />
+<Exercise id="ex-1.1.2.2" level="L2" title="Rewrite the kickoff in three modes" description="Take one small task you know well and write the first opening request in Vibe, Spec, and Agentic form." />
+
+<Separator />
+
+## Step 3: Why This Is the Right Time to Learn
+This is a strong learning window because three things are true at once: models can hold more context, tools connect generation, editing, preview, and deploy into one loop, and the community has already discovered repeatable patterns. The opportunity is not just "I used AI early." The opportunity is "I learned how not to be dragged around by it."
+
+The course path reflects that. M1-M2 are about defining what to build and why. M3 stabilizes prompts and context. M4 and beyond move into planning, verification, terminal agents, and multi-agent workflows. This is not hype-following. It is capability-building.
+
+| Your current state | What you most need | Immediate payoff |
+|---|---|---|
+| You only try tools | Mode selection and scope judgment | Fewer wasted starts |
+| You can prototype but often derail | Requirement definition and context | Less rework |
+| You want to work in real repos | Planning, verification, agent workflows | More reliable delivery |
+
+<Callout title="Scenario Card: The Real Starting Point" tone="warning">
+If your main question is still "which tool is strongest," you are still choosing weapons. The course starts one level earlier: what kind of fight is this, and how much structure does it deserve?
+</Callout>
+
+<Exercise id="ex-1.1.3.1" level="L3" title="Do one real-world observation" description="Find a recent AI coding or vibe coding news item and explain who it helps, what risk it amplifies, and why it matters." />
+
+<Separator />
 
 ## Unit Summary
+- Vibe Coding turns ideas into visible results quickly.
+- Vibe, Spec, and Agentic are different collaboration modes on the same growth path.
+- The real skill is choosing the right mode for the task.
 
-- Vibe Coding is a natural-language-driven collaboration style, not a single tool.
-- Vibe, Spec, and Agentic fit different levels of complexity.
-- The real advantage today comes from better methods, not just better buttons.
+**Methodology Review**: This unit introduces planning-driven work by making you choose the mode before you act.
 
-## Methodology Review
+**Next Up**: The next unit turns browser, IDE, and CLI tools into an actual decision framework so you can choose a sensible starting tool.
 
-This unit introduces planning-driven thinking: even at the lightest Vibe stage, you still decide the mode before you start.
+---
 
-## References
-
+**Sources**
 - `curriculum-v3.md`
 - Public discussions by Karpathy on Vibe Coding and Agentic Engineering

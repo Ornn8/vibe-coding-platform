@@ -1,6 +1,6 @@
 ---
 title: "从 Vibe Coding 到 Agentic Engineering"
-description: "理解为什么单 Agent 协作开始碰壁，以及为什么需要把工作拆成多个角色。"
+description: "从“代码能跑但我不放心”的真实样例切入，理解为什么项目一旦变复杂，关键就不再是 prompt，而是协作系统设计。"
 module: "m7"
 order: 1
 estimatedMins: 35
@@ -8,41 +8,82 @@ methodologyTag: "规划驱动"
 ---
 
 <Callout title="本单元方法论焦点" tone="warning">
-进阶的关键不是让 AI 做更多，而是让你从“直接写提示词的人”变成“设计协作系统的人”。
+真正的升级，不是让 AI 在同一线程里做更多事，而是设计一个有角色、有检查、有交接边界的协作系统，让产出更可信。
 </Callout>
 
-## Step 1: 为什么 Vibe Coding 需要升级
-Karpathy 让我们看到“和 AI 一起快速做出来”这件事，但当项目进入生产级复杂度时，新的问题就出现了：AI Slop、边界不清、认知负债、以及安全风险。  
-对比一下：小项目里，快比稳更重要；大项目里，缺少规划和审查会把速度变成风险放大器。
-场景对比：做一个个人小工具时，Vibe Coding 很顺手；做一个会被多人持续使用的系统时，只靠快速生成就很容易堆出一层又一层债务。
+## Step 1: 先看两段“能跑，但其实危险”的代码
+下面这两段代码都能跑，但都不该直接信任：
 
-<Exercise id="ex-7.1.1.1" level="L1" title="识别 AI Slop" description="回看一段代码或输出，判断哪些部分属于表面正确、实际不可持续的 AI Slop。" />
+```ts
+export async function GET() {
+  const users = await prisma.user.findMany();
+  return Response.json(users);
+}
+```
+
+```ts
+export async function updateUser(id: string, input: any) {
+  return prisma.user.update({ where: { id }, data: input });
+}
+```
+
+| 代码样例 | 为什么第一眼看起来没问题 | 实际风险在哪里 |
+|---|---|---|
+| 公开用户接口 | 很快就能返回真实数据 | 没有任何鉴权和访问边界 |
+| 直接更新 helper | 很短、很灵活、很省事 | `any` 输入、没有校验、没有权限判断 |
+
+这就是 M7 要解决的问题。现在的问题已经不是“AI 会不会写代码”，而是“怎么防止看起来像成品的代码变成隐藏债务”。
+
+<Callout title="场景卡片：什么时候“能跑”已经不是完成标准" tone="warning">
+情境：页面能打开、接口也能返回结果，所以你下意识觉得任务结束了。做法：继续追问这个改动还没跨过哪些审查边界，比如鉴权、校验、可维护性。原因：项目变大之后，隐藏缺陷的成本往往比表面成功更高。
+</Callout>
+
+<Exercise id="ex-7.1.1" level="L1" title="识别能跑代码里的隐患" description="阅读两段技术上能运行的代码，指出它们为什么仍然不可靠、不安全或难维护。" />
 
 <Separator />
 
-## Step 2: Agentic Engineering 到底在做什么
-Agentic Engineering 的重点不是让 AI 写更长的代码，而是让你学会编排多个 Agent 的职责。  
-对比一下：Vibe Coder 更像“我说一句，它做一句”；Agentic Engineer 更像“我设计目标、流程和审查点，让不同角色分别完成不同工作”。
-场景对比：一个人负责到底时容易混在一起；把规划、实现和验证拆开后，复杂任务更容易被稳定推进。
+## Step 2: 角色变化，是从执行者变成系统设计者
+在 vibe coding 里，你更多是在提需求、接收结果。在 agentic engineering 里，你先设计角色、输入、输出和审查边界，再让系统开始运转。
 
-<Exercise id="ex-7.1.2.1" level="L2" title="描述角色转变" description="用自己的话说明 Vibe Coder 和 Agentic Engineer 的本质区别，以及为什么后者更适合复杂项目。" />
+| 工作方式 | 核心问题 |
+|---|---|
+| Vibe coding | “我下一步该怎么让 AI 帮我做？” |
+| Agentic engineering | “这件事该由哪个角色做，它要交付什么，谁来验证？” |
+
+这不是身份标签的变化，而是你把设计精力放在了哪里。
+
+```text
+Before：我让同一个助手在一个线程里同时规划、写代码、调试、审查。
+After：我在开始前先把规划、执行、验证拆成不同职责。
+```
+
+<Exercise id="ex-7.1.2" level="L2" title="把一个任务从“提要求模式”改写成“系统模式”" description="选一个真实开发任务，把它改写成一个带角色、输入、输出和验证边界的工作流。" />
 
 <Separator />
 
-## Step 3: PEV 如何升级成系统流程
-在 M4 里你学过 Plan、Execute、Verify。到了 M7，这个循环不再只发生在你和一个 AI 之间，而是可以分给不同角色：规划 Agent 负责拆解，执行 Agent 负责实现，验证 Agent 负责检查。  
-这就是从单人操作走向系统化协作的关键一步。
-场景对比：以前是你自己来回切换思路，现在可以让不同 Agent 分别承担计划、实现和审查，减少上下文切换成本。
+## Step 3: PEV 没消失，只是被分布到不同角色里
+PEV 循环依然成立，只是现在可以拆给不同角色：
 
-<Exercise id="ex-7.1.3.1" level="L2" title="为一个任务分配 PEV 角色" description="选一个真实任务，为 Plan、Execute、Verify 分别指定谁来负责，并说明输入输出是什么。" />
+| PEV 环节 | 可能承担的角色 | 具体交付物 |
+|---|---|---|
+| Plan | 规划 agent | 拆解方案、范围、验收标准 |
+| Execute | 编码 agent | 代码改动或内容改动 |
+| Verify | 审阅 agent / 测试 agent | findings、失败检查、通过或退回 |
+
+<Callout title="场景卡片：一个真实的角色化交接" tone="info">
+情境：你要给项目提交页增加 review note 展示。做法：让一个 agent 先写实现计划，一个 agent 修改代码，再由一个 agent 跑 lint、type check 并检查页面回归。原因：重点不是让系统更忙，而是让交接更清楚、闭环更可检查。
+</Callout>
+
+<Exercise id="ex-7.1.3" level="L3" title="设计并实际运行一个分角色的 PEV 流程" description="选一个真实功能或内容改写任务，定义谁做 Plan、谁做 Execute、谁做 Verify，并在真实工具或仓库流程里至少实际运行其中一个角色。" />
 
 ## 本单元小结
-- Vibe Coding 升级不是因为它无用，而是因为任务规模变复杂了。
-- Agentic Engineering 的核心是编排角色，而不是单纯增加输出。
-- PEV 在进阶阶段会变成多角色协作流程。
+- AI Slop 往往是“能跑，但有隐藏风险”的产物。
+- Agentic engineering 的关键升级是角色和边界设计，而不只是 prompt 技巧。
+- PEV 在多角色系统里反而更重要，因为它决定了交接是否清晰。
 
 ## 方法论回顾
-当你开始设计协作系统，而不是只写提示词时，Agentic Engineering 才真正开始。
+规划驱动在这里不再只是“先写计划”，而是“先把整套协作系统设计清楚，再让执行发生”。
 
 ## 参考来源
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

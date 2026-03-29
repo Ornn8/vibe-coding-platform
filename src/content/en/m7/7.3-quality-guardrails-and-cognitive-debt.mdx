@@ -1,6 +1,6 @@
 ---
 title: "Quality Guardrails and Cognitive Debt"
-description: "Understand how multi-agent systems amplify both output and defects, and protect delivery with checks and human review."
+description: "Watch lint and tests catch real problems, then define which failures the machine should stop and which ones humans still need to judge."
 module: "m7"
 order: 3
 estimatedMins: 40
@@ -8,60 +8,91 @@ methodologyTag: "Closed-Loop Delivery"
 ---
 
 <Callout title="Method Focus" tone="warning">
-The more agents you add and the faster they generate, the more guardrails matter. Scale amplifies defects as easily as it amplifies throughput.
+The faster agents generate changes, the more important guardrails become. Without them, throughput turns into cognitive debt faster than teams expect.
 </Callout>
 
-## Step 1: Why scale magnifies the problem
+## Step 1: Scale multiplies defects as easily as output
+Suppose an agent workflow produces 20 changes per day and only 2 percent are defective.
 
-If one agent produces a few changes a day, defects may stay hidden for a while. If a system produces many changes continuously, even a low error rate quickly becomes a steady stream of bad output.
+| Metric | Number |
+|---|---|
+| Changes per day | 20 |
+| Defect rate | 2% |
+| Expected bad changes per day | 0.4 |
+| Expected bad changes in 5 days | 2 |
 
-### Scenario
+Two bad changes per week is already enough to create repeated review friction, rollback work, and trust problems.
 
-The curriculum's example is meant to make the math visible: a tiny error rate becomes a large number of defects once the workflow is producing at scale. Cognitive debt grows in the same way. Small mistakes pile up until the review cost becomes the real problem.
+<Callout title="Scenario: why low error rates still become expensive" tone="warning">
+Situation: each individual defect feels rare, so the workflow seems safe. Action: multiply the defect rate by the number of generated changes over a week or month. Why: the system cost appears at scale, not in a single happy-path run.
+</Callout>
 
-<Exercise id="ex-7.3.1.1" level="L1" title="Estimate scaled risk" description="Assume a workflow creates 20 changes per day with a 2 percent defect rate. Estimate the weekly risk and explain why it matters." />
-
-<Separator />
-
-## Step 2: Let automation catch mechanical failures
-
-Linting, tests, security scanning, and type checks belong in the machine layer. They do not replace thought, but they block large classes of repeatable failures before human review starts.
-
-### Scenario
-
-The point of guardrails is to move easy mistakes out of the human review queue:
-- lint catches style and syntax problems
-- tests catch behavior regressions
-- security scans catch avoidable risks
-
-That frees human review for the harder calls.
-
-<Exercise id="ex-7.3.2.1" level="L2" title="Define three guardrails" description="List three automated quality guardrails for your project and explain what each one protects against." />
+<Exercise id="ex-7.3.1" level="L1" title="Estimate scaled defect risk" description="Take one workflow, estimate the number of changes it produces each week, assign a plausible defect rate, and calculate why that risk matters." />
 
 <Separator />
 
-## Step 3: Decide what humans must still review
+## Step 2: Let machines catch the mechanical failures first
+Here is a minimal guardrail loop:
 
-Architecture tradeoffs, business logic, permission boundaries, user impact, and long-term maintainability often still require human judgment. Good review is not about reading everything manually. It is about reserving human attention for the things machines still judge poorly.
+```bash
+npm run lint
+npx tsc --noEmit
+npm test
+```
 
-### Scenario
+Now imagine lint returns this:
 
-The curriculum's review checklist splits work into three buckets:
-- must be machine-checked
-- must be human-reviewed
-- must never auto-merge without a person
+```text
+src/app/api/profile/route.ts
+  12:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+```
 
-That split keeps the team from over-trusting automation.
+And the fix becomes:
 
-<Exercise id="ex-7.3.3.1" level="L3" title="Build a review checklist" description="Write a checklist that separates what can be machine-approved, what must be human-reviewed, and what must never auto-merge." />
+```ts
+type ProfileInput = {
+  displayName: string;
+  bio?: string;
+};
+```
+
+| Guardrail | What it catches well | What it does not judge well |
+|---|---|---|
+| ESLint | Style, unsafe patterns, some logic smells | Product correctness |
+| Type check | Type mismatches and missing fields | UX quality |
+| Tests | Regressions in expected behavior | Architecture tradeoffs |
+
+This is the core quality-guardrail lesson: push mechanical failures into automation so human review can spend time on judgment instead.
+
+<Exercise id="ex-7.3.2" level="L2" title="Define your project's minimum machine guardrails" description="List the automated checks your project should run before review, and explain what each one is responsible for catching." />
+
+<Separator />
+
+## Step 3: Humans still review risk, meaning, and long-term cost
+Not everything should be auto-approved.
+
+| Review category | Best reviewer |
+|---|---|
+| Syntax, style, type safety | Machine |
+| Permission boundaries and business rules | Human |
+| Architecture tradeoffs and future maintenance cost | Human |
+| Secret handling and release safety | Machine plus human |
+
+```text
+Before: if lint and tests passed, I felt ready to trust the whole change.
+After: lint and tests only clear the mechanical layer; risky meaning and business impact still need a person.
+```
+
+<Exercise id="ex-7.3.3" level="L3" title="Build a real machine-vs-human review checklist" description="For one real project, create a checklist that separates machine-approved checks from human-only review items, then use it on one actual change." />
 
 ## Summary
-- Scale increases risk as well as output.
-- Automation should handle mechanical checks first.
-- Human review should be reserved for judgment calls and risk boundaries.
+- Small defect rates become meaningful system cost when workflows scale.
+- Lint, types, and tests should remove mechanical failures before human review.
+- Human attention should stay focused on risk, meaning, and long-term maintainability.
 
 ## Methodology Review
-This unit extends closed-loop delivery into agent workflows by making verification and review the guardrails that keep speed from becoming cognitive debt.
+Closed-loop delivery grows into system-level verification here: machines block repeatable failures, while humans protect the boundaries that still require judgment.
 
 ## References
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

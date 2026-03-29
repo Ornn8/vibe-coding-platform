@@ -1,84 +1,93 @@
 ---
 title: "Memory Bank and Context Management"
-description: "Persist project background, decisions, and progress in files so long-running work does not lose context."
+description: "Go beyond file names and study a real `progress.md` example so you can see how memory files help AI resume work across sessions."
 module: "m5"
 order: 3
 estimatedMins: 40
 methodologyTag: "Context Stabilization"
 ---
 
-<Callout title="Method Focus" tone="success">
-Long-running collaboration fails when memory lives only in the chat thread. Context stabilization turns fragile conversation into durable project memory.
+<Callout title="Method Focus" tone="warning">
+Context management is not mainly about sentence phrasing. It is about where project memory lives and how the assistant re-reads it.
 </Callout>
 
-## Step 1: Why AI seems to forget what you already said
+## Step 1: Why AI Forgets What Happened Yesterday
+AI chat context is like a limited whiteboard. As the thread grows, old constraints and earlier decisions get pushed off the surface. That is why long projects cannot rely on chat history alone.
 
-AI does not remember the way a human teammate does. Its working memory is limited, so older details can get pushed out as the conversation grows. That is why a project can drift even when both sides are trying to be consistent.
+<Callout title="Scenario: when forgetting is most likely" tone="warning">
+Situation: you reopen the project two days later and expect AI to continue from step six. Action: do not assume it still remembers the constraint history. Give it readable project memory files first. Why: session changes and time gaps are where forgetting shows up most often.
+</Callout>
 
-### Scenario
+| Situation | What AI is most likely to forget |
+|---|---|
+| Same-day short thread | Some early details, but the main goal may still hold |
+| New session on the next day | Constraints, current stage, and completed work |
+| Many tasks mixed in one conversation | What the current work actually is |
 
-Think of the chat like a whiteboard:
-- If only a few notes are on the board, the next step is easy to see.
-- If every step, exception, and side discussion stays on the board, important rules are harder to find.
-
-The curriculum wants you to recognize this as a system problem, not a model failure.
-
-<Exercise id="ex-5.3.1" level="L1" title="Spot context loss risk" description="Decide in which situations AI is most likely to forget earlier context." />
-
-<Separator />
-
-## Step 2: Use a memory bank to freeze project memory
-
-A memory bank gives the project a stable place to store what the conversation should not be responsible for remembering. The curriculum names three core files: `progress.md`, `decisions.md`, and `context.md`.
-
-### Scenario
-
-Compare these two workflows:
-- Chat-only workflow: every new session re-lives the same decisions
-- Memory-bank workflow: progress is written down, decisions are preserved, and the next session can resume cleanly
-
-The second workflow is slower to set up, but it avoids repeated explanations and accidental reversals.
-
-<Exercise id="ex-5.3.2" level="L2" title="Create a memory bank" description="Create a memory-bank directory for one project and write a usable progress.md file." />
+<Exercise id="ex-5.3.1" level="L1" title="Find the situations that need external memory most" description="Look at several collaboration scenarios and identify which ones are most likely to trigger context loss." />
 
 <Separator />
 
-## Step 3: Restore context across sessions with a standard prompt
+## Step 2: Look at a Real `progress.md`
+Here is a simple but genuinely useful `progress.md` example:
 
-The curriculum gives you a standard recovery prompt: read the memory-bank, read `progress.md`, understand the prior progress, then continue from the next planned step. The key instruction is that AI should not start a new step before verification.
+```md
+# Progress
 
-### Scenario
+## Done
+- Built the course module list page
+- Connected MDX rendering on the lesson page
+- `npm run lint` passes
 
-New session, same project:
-- Without a recovery prompt, the assistant repeats old setup questions.
-- With the recovery prompt, the assistant resumes the current work exactly where it left off.
+## Current State
+- Working on removing the lesson-page bottom exercise entry
+- Module-project submission flow has not been changed yet
 
-This is the practical form of context stabilization.
+## Verified
+- The `/zh/modules/m1/...` lesson page renders correctly
+- `npx tsc --noEmit` passes
 
-<Exercise id="ex-5.3.3.1" level="L2" title="Restore a project context" description="Use the recovery prompt in a new conversation and continue the project from its current state." />
-<Exercise id="ex-5.3.3.2" level="L3" title="Use the workflow for two days" description="Use a memory-bank workflow in your project for two consecutive days and record what changed." />
+## Next
+- Rewrite the Chinese M1-M2 content
+- Sync the English versions
+```
+
+| Section | Why it helps |
+|---|---|
+| Done | Prevents AI from repeating finished work |
+| Current State | Shows where the project is paused |
+| Verified | Shows what is already trustworthy |
+| Next | Gives AI a clean place to resume from |
+
+<Exercise id="ex-5.3.2" level="L2" title="Write your own `progress.md` from the template" description="Create a real `progress.md` with Done, Current State, Verified, and Next sections, and include at least two concrete lines in each one." />
 
 <Separator />
 
-## Step 4: Know when to reset the conversation
+## Step 3: `context.md` and `decisions.md` Solve Different Problems
+`progress.md` alone is not enough. You usually also need:
 
-Continuation is not always the right answer. If the thread is too long, the errors keep repeating, or you have changed to a different task entirely, reset the conversation instead of trying to rescue a polluted one.
+| File | Main question it answers |
+|---|---|
+| `context.md` | What kind of project this is and why it exists |
+| `decisions.md` | Why one approach was chosen over another |
+| `progress.md` | Where the work is now and what comes next |
 
-### Scenario
+All three together form the useful core of a memory bank. Otherwise you may know what step you are on without knowing why the project is shaped this way.
 
-The curriculum's decision rule is simple:
-- Reset when the thread is long, repetitive, or switching tasks.
-- Continue when you are still inside the same feature and the model still understands the rules.
+<Callout title="before / after: progress without decision context" tone="info">
+Wrong move: only record what step the project has reached. Better move: also record the project background and the key decisions that shaped it. One restores activity. The other restores judgment.
+</Callout>
 
-<Exercise id="ex-5.3.4" level="L3" title="Decide reset or continue" description="Review one of your past projects and analyze whether the conversation should have been reset earlier." />
+<Exercise id="ex-5.3.3" level="L3" title="Create a minimum viable memory bank" description="In a real project, create `context.md`, `decisions.md`, and `progress.md`, then use them to restore one new session by having AI read the files before continuing." />
 
 ## Summary
-- Memory-bank files carry what chat cannot reliably hold.
-- Context stabilization is a workflow, not a one-time note.
-- Reset when the thread is no longer a good container for the work.
+- Long projects cannot rely on chat memory alone.
+- `progress.md` stores state, `context.md` stores background, and `decisions.md` stores judgment.
+- A real memory bank helps AI restore both project status and the reasoning behind it.
 
 ## Methodology Review
-This unit turns context stabilization into a repeatable practice by moving important project memory into files that can survive resets and new sessions.
+This is context stabilization as a file-driven workflow: not "remember it," but "write it down and re-read it."
 
 ## References
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

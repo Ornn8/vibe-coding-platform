@@ -1,6 +1,6 @@
 ---
 title: "Continuous Iteration and Personal Knowledge System"
-description: "Turn feature plans, templates, Skills, and retrospectives into long-term assets that compound over future projects."
+description: "Study a full `feature-implementation.md` example, then turn prompts, plans, Skills, and retrospectives into a reusable personal system."
 module: "m8"
 order: 3
 estimatedMins: 35
@@ -8,57 +8,96 @@ methodologyTag: "Context Stabilization"
 ---
 
 <Callout title="Method Focus" tone="success">
-What separates strong builders is often not one great project, but whether they convert each project into reusable assets for the next one.
+Strong builders do not only finish projects. They convert each project into reusable planning, execution, and review assets for the next one.
 </Callout>
 
-## Step 1: Use feature plans to manage what comes next
+## Step 1: Look at a real `feature-implementation.md`
+Here is a concrete example:
 
-Shipping is not the end of the product lifecycle. In many ways, it is the beginning. Writing separate feature plans for future work keeps iteration structured instead of turning everything into one chaotic backlog document.
+```md
+# Feature: Review Notes on Project Submissions
 
-### Scenario
+## Goal
+Allow reviewers to attach notes to each submission so students can see actionable feedback.
 
-The curriculum wants future work to stay separate from the main plan. Instead of stuffing every new idea into one growing document, each new feature gets its own plan so iteration stays readable.
+## Scope
+- Add review-note field to reviewer workflow
+- Show the note on the student project page
+- Do not redesign the whole review dashboard
 
-<Exercise id="ex-8.3.1.1" level="L2" title="Write one feature plan" description="Write a feature plan for a project that is already shipped or close to shipping, including goal, scope, and acceptance." />
+## Acceptance
+- Reviewer can save one note
+- Student can read the latest note
+- `npm run lint` and `npx tsc --noEmit` pass
+
+## Risks
+- Notes may expose admin-only wording to students
+- Existing review flow must remain unchanged
+
+## Verification
+- Test reviewer save path
+- Test student visibility path
+- Confirm old submissions still render safely
+```
+
+| Section | Why it matters |
+|---|---|
+| Goal | Keeps the feature tied to one real outcome |
+| Scope | Prevents side quests and redesign drift |
+| Acceptance | Makes verification concrete |
+| Risks | Forces you to surface hidden failure modes |
+| Verification | Defines how the feature earns trust |
+
+<Exercise id="ex-8.3.1" level="L1" title="Explain what each section of the feature doc protects" description="Read the sample `feature-implementation.md` and explain what project risk each section is helping to control." />
 
 <Separator />
 
-## Step 2: Organize your long-term assets
+## Step 2: Turn project artifacts into a personal knowledge system
+By now you have accumulated prompts, feature docs, Skills, templates, and retrospectives.
 
-By now you have accumulated prompts, Skills, templates, retrospectives, and project structures. If they stay scattered across chats and folders, their value does not compound.
+| Asset type | Good home in your system |
+|---|---|
+| Feature docs | `/features/` or project planning folder |
+| Skills | `/skills/` or reusable workflow library |
+| Retrospectives | `/retrospectives/` or project-review archive |
+| Reusable prompts and templates | `/templates/` or playbook folder |
 
-### Scenario
+If these stay buried in chats or scattered folders, they do not compound.
 
-Before:
-- prompts are buried in old chats
-- Skills are hard to find
-- templates are copied from memory
+<Callout title="Scenario Card: when one iteration is already worth preserving as an asset" tone="info">
+Situation: you just finished a feature and still remember which prompts worked, which checks were easy to forget, and where rework happened. Action: turn that fresh knowledge into a feature doc, checklist, or Skill draft immediately. Why: iteration knowledge is easiest to capture right after the work ends and easiest to lose a few days later.
+</Callout>
 
-After:
-- the assets are grouped into a clear knowledge system
-- the next project starts faster because the good work was preserved
+```text
+Before: useful prompts and plans stayed trapped inside old conversations.
+After: the assets are stored by type, so the next project can start from reusable material instead of memory.
+```
 
-<Exercise id="ex-8.3.2.1" level="L1" title="Organize your knowledge system" description="Group your prompts, Skills, templates, and retrospectives into a clear personal knowledge structure." />
+<Exercise id="ex-8.3.2" level="L2" title="Design your own personal knowledge structure" description="Organize your feature docs, prompts, Skills, and retrospectives into a clear folder or note structure that another future project could reuse." />
 
 <Separator />
 
-## Step 3: Learn the boundaries of Vibe Coding
+## Step 3: Mature builders know where vibe coding stops fitting
+Not every project should be built with the same level of looseness.
 
-Mature builders neither worship AI nor reject it. They know which projects fit fast experimentation, prototypes, MVPs, and internal tools, and which domains need much stricter engineering and governance.
+| Project type | Vibe coding fit | Why |
+|---|---|---|
+| Landing page prototype | High | Fast iteration is low risk |
+| Internal ops dashboard | Medium | Speed helps, but data boundaries still matter |
+| Medical or financial workflow | Low | Errors carry high real-world cost |
 
-### Scenario
+That boundary is part of maturity. The question is not "Can AI generate it?" It is "Should this workflow be allowed to rely on fast, loose iteration?"
 
-The boundary is not about whether the tool can generate something. It is about whether the risk level matches the speed advantage. Some projects are good candidates for vibe coding; others require stricter control from the start.
-
-<Exercise id="ex-8.3.3.1" level="L3" title="Judge the boundary" description="Compare six scenarios and decide which ones fit Vibe Coding and which ones require stricter engineering control." />
+<Exercise id="ex-8.3.3" level="L3" title="Judge the fit of six real project scenarios" description="Take six real or plausible projects, decide which ones fit vibe coding and which ones need stricter engineering from the start, and justify the boundary with real risk reasoning." />
 
 ## Summary
-- Post-launch iteration needs independent feature plans.
-- Prompts, Skills, templates, and retrospectives are knowledge assets.
-- Vibe Coding has a boundary, and mature builders learn to recognize it.
+- A full feature document is a practical planning asset, not paperwork.
+- Knowledge compounds only when prompts, docs, Skills, and retrospectives are stored systematically.
+- Mature builders learn where vibe coding should stop and stricter engineering should begin.
 
 ## Methodology Review
-This unit combines closed-loop delivery with context stabilization by turning each iteration and each lesson learned into a reusable personal system.
+Context stabilization becomes a long-term personal system here: each project should leave behind reusable planning and review assets instead of disappearing into old chats.
 
 ## References
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

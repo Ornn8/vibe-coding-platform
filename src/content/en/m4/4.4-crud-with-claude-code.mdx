@@ -1,6 +1,6 @@
 ---
 title: "Build a Full CRUD App with Claude Code"
-description: "Connect the PRD, plan, PEV loop, and progress tracking in one realistic end-to-end workflow."
+description: "Split CRUD into data model, backend API, frontend page, and interaction validation, then run the full document-driven workflow."
 module: "m4"
 order: 4
 estimatedMins: 60
@@ -8,65 +8,98 @@ methodologyTag: "Closed-Loop Delivery"
 ---
 
 <Callout type="methodology" title="Methodology Focus">
-This unit is the full rehearsal: planning-driven thinking, context stabilization, glue coding, and closed-loop delivery all show up in one project.
+This unit is not "let AI build CRUD in one shot." It is a full rehearsal where all four core principles appear inside one realistic project loop.
 </Callout>
 
-## Step 1: Prepare the Documents First
+## Step 1: Prepare the Documents, Then Start with the Data Model
+Before the build starts, prepare at least the PRD, the implementation plan, and `CLAUDE.md`.
 
-Before building a CRUD app, prepare the core documents: PRD, Implementation Plan, and `CLAUDE.md`. These documents define the target, the execution path, and the long-running rules of the project.
+| Document | What it answers |
+|---|---|
+| PRD | What the project is supposed to deliver |
+| Plan | What order the work should follow |
+| `CLAUDE.md` | What long-running rules must stay in place |
 
-Without them, Claude Code has to make too many decisions from scratch.
+Then begin with the **data model**, not the page, because the data layer defines the CRUD skeleton.
 
-The documents also make review easier because each one has a different job.
+| Phase | What this round should achieve | How to verify it |
+|---|---|---|
+| Data model | Define fields, relationships, and the minimum storage shape | The schema makes sense and the migration runs |
 
-<Exercise id="ex-4.4.1.1" level="L3" title="Submit the kickoff documents" description="List the key content of your PRD, plan, and CLAUDE.md so each one has a different job." />
-
-<Separator />
-
-## Step 2: Execute in Small Steps
-
-A CRUD app may look simple, but it still needs step-by-step execution: set up the structure, define the data model, build the list and detail views, add create and edit flows, and then finish with delete and verification.
-
-If you try to make AI do everything at once, the output often looks complete while staying internally fragile.
-
-For example, a note-taking CRUD app might start with "create note" and "list notes" before adding edit, delete, and search. That sequence makes each verification easier.
-
-<Exercise id="ex-4.4.2.1" level="L3" title="Record the first three steps" description="For the first three execution steps, record the input prompt, the change made, and the verification action." />
+<Exercise id="ex-4.4.1.1" level="L1" title="Check whether the kickoff documents have distinct jobs" description="Review your PRD, plan, and `CLAUDE.md`, and confirm that each one serves a distinct purpose instead of repeating the same thing." />
 
 <Separator />
 
-## Step 3: Use a Memory Log
+## Step 2: Build the Backend API Before You Touch the Page
+Once the model is clear, move to the **backend API**. In a note-taking CRUD app, this phase only asks whether create, read, update, and delete can work at the data boundary.
 
-Once the project grows, both humans and AI start forgetting what was already decided. That is when a progress log or memory bank becomes useful. It stores current status, completed work, open questions, and next steps.
+| Phase | What this round should achieve | How to verify it |
+|---|---|---|
+| Backend API | Get the create, read, update, and delete flows working | Confirm responses through requests, logs, or simple checks |
 
-Think of it as external memory for the workflow.
+```text
+Before: build the whole CRUD app in one round.
+After: define the data model, make the API work, build the pages, then polish the interactions.
+```
 
-An entry might say: "Done: list view and create flow. Verified: lint and local preview. Open question: should delete require confirmation?"
+This phase matters because "data works" should be validated separately from "the UI looks right."
 
-<Exercise id="ex-4.4.3.1" level="L3" title="Write a progress entry" description="Write a progress.md entry for your CRUD project that captures what is done, what was verified, and what comes next." />
+<Exercise id="ex-4.4.2.1" level="L2" title="Write the data-model and backend stages for your CRUD" description="For a real CRUD project, define what the data-model stage should finish and what the backend API stage should finish, and write one verification action for each." />
 
 <Separator />
 
-## Step 4: Keep the Loop Visible
+## Step 3: Build the Frontend Pages, Then Add Interaction Details
+Only after the data and API layers feel stable should you move to the **frontend pages** and the **interaction layer**.
 
-The final part of the workflow is to make the loop visible: documents, execution, verification, and memory all need to stay in sync.
+| Phase | What this round should achieve | How to verify it |
+|---|---|---|
+| Frontend pages | Render list, detail, and form views | The pages display real data correctly |
+| Interaction polish | Add loading states, validation, delete confirmation, and error feedback | Real user actions produce the expected feedback |
 
-When that loop is visible, the project is much easier to continue, review, and hand off.
+That is why the content plan insists on four explicit CRUD stages. Later phases touch UI, data, and behavior at the same time, so step-skipping becomes even more expensive.
 
-The package should let another person see the plan, the work, and the state of the work without guessing.
+<Callout type="scenario" title="Why a visible page is not enough">
+Situation: the list page already looks correct, so you want to keep polishing the UI. Action: stop and verify whether the page is showing the right data first. Why: "looks right" is not the same as "the data flow is right."
+</Callout>
 
-<Exercise id="ex-4.4.4.1" level="L3" title="Complete the workflow package" description="Submit the CRUD app plus the PRD, plan, CLAUDE.md, and progress log as one coherent package." />
+<Exercise id="ex-4.4.3.1" level="L2" title="Separate your frontend phase from your interaction phase" description="For your CRUD project, define the goal, boundary, and verification action for the frontend-page phase and the interaction-polish phase separately." />
+
+<Separator />
+
+## Step 4: Use a Memory Log to Keep the Workflow Coherent
+After the project reaches its third phase, both humans and AI start forgetting what was already decided. That is when `progress.md` or a memory bank becomes essential.
+
+| Field | What it should capture |
+|---|---|
+| Done | Which of the four phases are completed |
+| Verified | What commands or manual checks have already run |
+| Current state | Where the project is stuck or paused |
+| Next step | What should happen in the next round |
+
+```text
+Done: note model, list endpoint, create endpoint
+Verified: API responses are correct, the list page renders real data
+Current state: the edit form is not connected yet
+Next step: add the edit endpoint and verify form submission
+```
+
+<Callout type="scenario" title="No memory log vs visible progress">
+Wrong move: rely on old chat messages to remember the project state. Better move: keep a progress log with done, verified, current, and next. The first loses context quickly. The second gives the workflow durable memory.
+</Callout>
+
+<Exercise id="ex-4.4.4.1" level="L3" title="Write a real CRUD progress entry" description="Write a real `progress.md` entry for your CRUD project that records the status of the data model, backend, frontend, and interaction phases, along with the next step." />
 
 ## Unit Summary
 
-- Real projects need documents before execution.
-- CRUD should still be built in small, verifiable steps.
-- A memory log gives the workflow long-term memory.
+- CRUD should still move in four phases: data model, backend, frontend, and interactions.
+- Each phase needs its own verification, instead of passing problems forward.
+- `progress.md` or a memory bank gives the project a durable collaboration memory.
 
 ## Methodology Review
 
-This unit combines the four core principles in one project-level workflow.
+This unit is the first time all four core principles are pressed into one real project workflow.
 
 ## References
 
+- `content-revision-plan.md`
 - `curriculum-v3.md`

@@ -1,67 +1,81 @@
 ---
 title: "Module Project: Iteratively Improve Your CRUD App"
-description: "Extend an existing project, sort the work by dependency, preserve checkpoints, and submit a full iteration record."
+description: "Do not restart from zero. Extend your existing CRUD app in dependency order, preserve checkpoints, and submit a full chain of evidence."
 module: "m5"
 order: 5
-estimatedMins: 45
+estimatedMins: 30
 methodologyTag: "Closed-Loop Delivery"
 ---
 
-<Callout title="Project Focus" tone="warning">
-The point of this project is to extend an existing app without losing the trail of how you got there.
+<Callout title="Method Focus" tone="warning">
+The real challenge in iterative delivery is not adding more features. It is making each new capability land in dependency order without breaking the base that already works.
 </Callout>
 
-## Step 1: Understand the project change in detail
+## Step 1: List the changes before you touch the code
+This project is not a new app. It is the M4 CRUD foundation plus another round of capability, such as authentication, data migration, permission boundaries, or interaction improvements.
 
-The curriculum says to add authentication and a database migration on top of the existing M4 project. This is an iteration, not a rewrite. The goal is to add capability to a working codebase, not to start over because the new task looks larger than the old one.
+| Change item | What it depends on | Where the risk lives |
+|---|---|---|
+| Add authentication | User model, session handling, route protection | Broken login flow or wrong access control |
+| Migrate data | Existing schema and compatibility plan | Regressions in current features |
+| Protect admin-only pages | Reliable auth state and role data | Users seeing the wrong page or getting blocked incorrectly |
 
-### Scenario
+If you skip this list, "add one feature" quickly turns into "accidentally redesign the whole app."
 
-Before:
-- A CRUD app with no login and no persistent user state
+<Callout title="Scenario: why dependency mapping comes before implementation order" tone="info">
+Situation: you want to build the login screen first because it is the most visible task. Action: check whether it depends on user data, roles, or route protection that do not exist yet. Why: visibility does not decide order. Dependency does.
+</Callout>
 
-After:
-- The same app, but now with authentication and a database change that supports user data
-
-The difference matters because the project must remain recognizable while it grows.
-
-<Exercise id="ex-5.5.1" level="L1" title="List the required changes" description="Analyze the project requirements and write the change list you need to make." />
-
-<Separator />
-
-## Step 2: Design the iteration plan by dependency order
-
-The curriculum's dependency question is explicit: should authentication come first or should the database change come first? The answer is not random. You order the work by dependency, so each step can build on a valid base.
-
-### Scenario
-
-If user records must be stored before the auth flow can be trusted, then the database migration must happen before the final auth behavior. If auth needs to be tested before the data model changes, you sequence the work differently. The point is to reason about the dependency, not the vibe.
-
-<Exercise id="ex-5.5.2" level="L3" title="Write the iteration plan" description="Write your implementation plan and order the tasks by dependency." />
+<Exercise id="ex-5.5.1" level="L1" title="Write your change list and dependencies" description="Take one existing CRUD project, list the upgrade items for this round, and identify the most direct dependency behind each one." />
 
 <Separator />
 
-## Step 3: Submit the full delivery record
+## Step 2: Write an iteration plan in dependency order
+The same goal can have very different safe sequences.
 
-The curriculum requires more than code. You must submit the repository history, the memory-bank files, at least two checkpoints, and a complete debug log. That submission proves the process was controlled, not accidental.
+| Situation | Better order |
+|---|---|
+| Auth needs new user fields | Migrate the data model first, then connect auth |
+| Route protection depends on stable login state | Finish auth flow first, then guard the pages |
+| A new form depends on permissions | Define the permission rule first, then expose the form |
 
-### Scenario
+```text
+Before: I order the work by what feels exciting.
+After: I fix the lowest-level dependency first, then build the page or interaction that relies on it.
+```
 
-A good submission lets another person understand:
-- what changed
-- why it changed
-- how the change was verified
-- where the project state is now
+This is what keeps iteration cheap. If the order is wrong, every later step becomes more fragile and more expensive to rework.
 
-<Exercise id="ex-5.5.3" level="L3" title="Complete the project submission" description="Finish the project and submit the code, checkpoints, memory-bank, and debug log." />
+<Exercise id="ex-5.5.2" level="L2" title="Write a dependency-ordered iteration plan" description="Create a five- to eight-step plan for your project, explain why each step belongs in that position, and define one verification action for each step." />
+
+<Separator />
+
+## Step 3: Submit evidence, not only a result
+The final project package should prove both the app result and the delivery method.
+
+| Delivery artifact | Why it must be included |
+|---|---|
+| Code result | Proves what changed |
+| Git history and checkpoints | Proves the iteration path is traceable |
+| Memory bank | Proves the work can resume across sessions |
+| Debug log | Proves you closed the loop when things went wrong |
+
+If you submit only code, other people can see the result. They cannot see whether the delivery process was controlled or just lucky.
+
+<Callout title="before / after: shipping code vs shipping an evidence chain" tone="warning">
+Wrong move: submit only the working repository. Better move: submit the repository, checkpoints, memory files, and structured debug record together. One shows the outcome. The other shows that you can deliver reliably more than once.
+</Callout>
+
+<Exercise id="ex-5.5.3" level="L3" title="Assemble and submit a full iteration pack" description="For your upgraded CRUD project, assemble a complete submission that includes the code result, Git checkpoints, memory-bank files, and at least one structured debug record." />
 
 ## Summary
-- Iteration is about adding capability to an existing system.
-- Dependency order should drive the plan, not intuition alone.
-- The submission should prove both the result and the process.
+- The module project is about extending an existing app, not rebuilding it.
+- Dependency order should control the iteration plan.
+- A complete submission shows both the product result and the evidence chain behind it.
 
 ## Methodology Review
-This unit combines closed-loop delivery with context stabilization: the app changes, and the record of the change stays recoverable.
+Closed-loop delivery enters a more mature phase here: not just building a feature, but proving that the feature was added in a stable, inspectable, and repeatable way.
 
 ## References
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

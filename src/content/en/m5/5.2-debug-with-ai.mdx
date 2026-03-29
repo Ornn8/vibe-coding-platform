@@ -1,6 +1,6 @@
 ---
 title: "Debug Methodology: Use AI to Fix AI"
-description: "Learn to feed errors, screenshots, and expectation gaps back into AI as a repeatable debug loop."
+description: "Walk through runtime, visual, and logic bugs as full debug loops so troubleshooting becomes repeatable instead of improvised."
 module: "m5"
 order: 2
 estimatedMins: 35
@@ -8,65 +8,72 @@ methodologyTag: "Closed-Loop Delivery"
 ---
 
 <Callout title="Method Focus" tone="warning">
-Debugging is not an argument with the model. It is a feedback loop: collect evidence, send it back, verify the fix, then continue.
+Fast debugging does not start with guessing. It starts with structuring evidence so AI can work on facts instead of on your frustration.
 </Callout>
 
-## Step 1: What to do when AI-generated code breaks
+## Step 1: Runtime Bugs Need an Error Chain, Not Emotion
+Start with the classic runtime bug loop:
 
-When a generated page fails, the best move is not to guess. Copy the error, keep the evidence, and let AI work from the actual failure rather than from your memory of it.
+| Part of the loop | Content |
+|---|---|
+| Error signal | Clicking Save returns a 500 |
+| Evidence | Console shows `Cannot read properties of undefined` |
+| Your hypothesis | A missing null guard on one form field |
+| What you send to AI | The error message, trigger action, and relevant code snippet |
+| Verification after the fix | Click Save again and confirm the 500 is gone |
 
-The curriculum's debugging pattern is simple:
-- See the error
-- Copy the exact message
-- Paste it back to AI
-- Ask for the likely cause
-- Apply the fix
-- Verify the result
+If you only say "the page is broken," AI can only guess. If you send the error, the trigger, and the expected behavior together, AI can narrow the search space immediately.
 
-### Scenario
-
-Two people hit the same red screen. One says, "It probably needs a reinstall." The other pastes the stack trace and the failing file into AI. The second person finds the bug faster because the input is real, not guessed.
-
-<Exercise id="ex-5.2.1" level="L1" title="Choose the best debug move" description="Among three debug habits, decide which one is most effective and why." />
+<Exercise id="ex-5.2.1" level="L1" title="Pick the strongest runtime-debug input" description="Compare several bug descriptions and decide which one gives AI the best chance of finding a runtime error quickly." />
 
 <Separator />
 
-## Step 2: Match the error type to the right kind of input
+## Step 2: Visual Bugs Need Screenshots and a Clear Target State
+Visual bugs are different. They usually need the current look and the intended look.
 
-The curriculum separates three common error types because the evidence you provide should match the bug. JavaScript runtime errors want logs. Visual problems want screenshots. Logic errors want a clear description of expected versus actual behavior.
+| Part of the loop | Content |
+|---|---|
+| Current state | The primary button wraps to a second line on mobile and cards are misaligned |
+| Evidence | A screenshot at the broken width |
+| Expected state | The button should stay on one line and align with the title baseline |
+| What you send to AI | Screenshot, device or width information, and the expected layout |
+| Verification after the fix | Re-open the same width and compare again |
 
-### Scenario
+```text
+Before: This page looks a little off.
+After: At iPhone width, the primary button wraps onto a second line. I want it to stay on one line and align with the card title.
+```
 
-- If the browser console shows a stack trace, give AI the console output.
-- If a button is misaligned, give AI a screenshot.
-- If a form saves the wrong value, describe what you expected and what happened instead.
+<Callout title="Scenario: why visual debugging hates abstraction" tone="warning">
+Situation: you know the page looks wrong, but you cannot describe the deviation clearly. Action: capture the screenshot first, then write which element is wrong, on which viewport, and how it should look instead. Why: without a visual reference and an explicit target, AI drifts badly on visual fixes.
+</Callout>
 
-The same fix request becomes much stronger when the evidence matches the failure.
-
-<Exercise id="ex-5.2.2" level="L2" title="Use the right evidence" description="Introduce one CSS problem and ask AI to fix it using a screenshot instead of a guess." />
+<Exercise id="ex-5.2.2" level="L2" title="Run one screenshot-driven visual debug loop" description="Create a simple layout bug, then ask AI to fix it using a screenshot, viewport information, and a clear target state, and record the before and after." />
 
 <Separator />
 
-## Step 3: Know when to restart the conversation
+## Step 3: Logic Bugs Need Expected vs Actual Behavior
+Logic bugs are often the hardest to see because the page may still render. For example, "delete succeeds but the list does not refresh" or "the completion counter increases twice."
 
-Sometimes the thread has become part of the problem. After too many turns, the context becomes polluted, repeated errors keep coming back, and the model starts losing the thread of the original goal.
+| Part of the loop | Content |
+|---|---|
+| Expected behavior | After deleting one item, the list should show one fewer item |
+| Actual behavior | The success toast appears, but the list stays unchanged |
+| What you send to AI | Expected vs actual, trigger steps, and any important state information |
+| Verification after the fix | Repeat the same interaction and compare again |
 
-### Scenario
+If you only say "the logic is wrong," AI has no way to know whether the issue is data flow, state updates, or permissions.
 
-One conversation has gone through 20 rounds of patching. Another has only two rounds and still understands the project rules. The first conversation may need a restart; the second likely does not.
-
-This step is about judgment, not superstition. Restart when the conversation is now more confusing than helpful.
-
-<Exercise id="ex-5.2.3.1" level="L2" title="Judge whether to restart" description="Decide whether three dialogue scenarios should continue or restart." />
-<Exercise id="ex-5.2.3.2" level="L3" title="Document one full debug loop" description="Complete one real debug cycle in your project and record the investigation log." />
+<Exercise id="ex-5.2.3" level="L3" title="Document one structured logic-debug loop" description="Choose one real bug, capture the evidence, write your hypothesis, record AI's repair suggestion, and verify the final result with an explicit expected-vs-actual comparison." />
 
 ## Summary
-- Effective debugging starts with evidence, not guesses.
-- Different failures require different kinds of evidence.
-- Restart the conversation when the context has become the bug.
+- Runtime bugs need the error chain.
+- Visual bugs need screenshots plus the intended state.
+- Logic bugs need an explicit expected-vs-actual comparison.
 
 ## Methodology Review
-This unit applies closed-loop delivery to debugging: collect evidence, feed it back, verify the fix, and only then move forward.
+Closed-loop delivery also applies to failure handling: locate, repair, and verify, instead of trusting a fix that merely looks plausible.
 
 ## References
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

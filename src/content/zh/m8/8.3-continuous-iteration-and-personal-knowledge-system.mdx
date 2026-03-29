@@ -1,48 +1,103 @@
 ---
 title: "持续迭代与个人知识体系"
-description: "把你的项目迭代方式和个人学习资产整理成可持续复用的系统。"
+description: "通过一份完整的 `feature-implementation.md` 示例，学会把 prompt、计划、Skill 和复盘变成会复利的长期资产。"
 module: "m8"
 order: 3
 estimatedMins: 35
 methodologyTag: "上下文固化"
 ---
 
-<Callout title="本单元方法论焦点" tone="warning">
-持续迭代不是一直改，而是把每次改动都收进可追踪、可复用的知识体系里。
+<Callout title="本单元方法论焦点" tone="success">
+真正强的构建者，不只是做完一个项目，而是会把每个项目沉淀成下一次还能复用的规划、执行和复盘资产。
 </Callout>
 
-## Step 1: 为什么要用 feature-implementation.md
-增量开发模式的关键，是每个新功能都单独有一份计划文件，而不是把所有变化混在一个大 plan 里。  
-这样做的好处是：你能清楚知道这次迭代只改什么、为什么改、验证标准是什么。
-场景对比：如果每次都修改同一份总计划，后面很难看清这次改动的边界；单独一份 feature 计划则能把每次迭代拆清楚。
+## Step 1: 先看一份真实的 `feature-implementation.md`
+下面是一份具体示例：
 
-<Exercise id="ex-8.3.1" level="L2" title="写一份增量功能计划" description="为你当前项目中的一个新功能写出 feature-implementation.md 风格的计划。" />
+```md
+# Feature: Review Notes on Project Submissions
+
+## Goal
+Allow reviewers to attach notes to each submission so students can see actionable feedback.
+
+## Scope
+- Add review-note field to reviewer workflow
+- Show the note on the student project page
+- Do not redesign the whole review dashboard
+
+## Acceptance
+- Reviewer can save one note
+- Student can read the latest note
+- `npm run lint` and `npx tsc --noEmit` pass
+
+## Risks
+- Notes may expose admin-only wording to students
+- Existing review flow must remain unchanged
+
+## Verification
+- Test reviewer save path
+- Test student visibility path
+- Confirm old submissions still render safely
+```
+
+| 部分 | 为什么重要 |
+|---|---|
+| Goal | 让功能始终绑定一个真实结果 |
+| Scope | 防止顺手扩展和需求漂移 |
+| Acceptance | 让验证变具体 |
+| Risks | 强迫你把隐藏失败模式写出来 |
+| Verification | 定义这个功能怎么才算可信 |
+
+<Exercise id="ex-8.3.1" level="L1" title="解释这份 feature 文档每一段在保护什么" description="阅读示例 `feature-implementation.md`，说明每个部分分别在控制什么项目风险。" />
 
 <Separator />
 
-## Step 2: vibe coding 的边界在哪里
-不是所有场景都适合 vibe coding。适合的通常是个人工具、原型、内部效率工具或 MVP；不适合的往往是高安全性、高并发、核心支付逻辑这类高风险场景。  
-判断标准不是“能不能做”，而是“值不值得把风险交给 AI 来放大”。
-场景对比：做一个个人内部脚本时可以更自由；做支付、权限或高并发核心逻辑时，就不能把关键风险交给 vibe coding。
+## Step 2: 把项目资产组织成个人知识体系
+到这里为止，你已经积累了 prompts、feature 文档、Skill、模板和复盘。
 
-<Exercise id="ex-8.3.2" level="L1" title="判断哪些场景适合" description="给出 6 个场景，判断哪些适合 vibe coding，哪些不适合，并说明理由。" />
+| 资产类型 | 更适合放在哪里 |
+|---|---|
+| Feature 文档 | `/features/` 或项目 planning 目录 |
+| Skill | `/skills/` 或可复用工作流库 |
+| 复盘 | `/retrospectives/` 或项目回顾归档 |
+| Prompt / 模板 | `/templates/` 或个人 playbook |
+
+如果这些内容继续埋在旧对话或散落文件夹里，它们就不会真正复利。
+
+<Callout title="场景卡片：什么时候一次迭代已经值得沉淀成资产" tone="info">
+情境：你刚完成一个功能，脑子里还记得哪些 prompt 最有效、哪些检查最容易漏。做法：立刻把它整理成 feature 文档、Checklist 或 Skill 草稿。原因：经验最容易在迭代刚结束时被抓住，也最容易在几天后彻底散掉。
+</Callout>
+
+```text
+Before：有用的 prompt 和计划都被埋在旧对话里。
+After：这些资产按类型归档，所以下一个项目能从可复用材料开始，而不是从记忆开始。
+```
+
+<Exercise id="ex-8.3.2" level="L2" title="设计你自己的个人知识结构" description="把你的 feature 文档、prompt、Skill 和复盘整理成一个清晰的目录或笔记结构，让下一个项目也能直接复用。" />
 
 <Separator />
 
-## Step 3: 个人知识体系应该沉淀什么
-你积累的不只是代码，还有 prompt 资产、自建 Skill、项目模板、复盘笔记和常用检查清单。  
-这些东西会随着项目数量增加而增值，因为它们让你下一次启动项目时少走弯路。
-场景对比：如果每次都从零开始，你会反复写同样的 prompt 和流程；把知识资产沉淀下来，下一次就能直接复用。
+## Step 3: 成熟构建者知道 Vibe Coding 的边界在哪里
+不是所有项目都适合同样程度的松弛开发。
 
-<Exercise id="ex-8.3.3" level="L3" title="整理你的知识资产" description="把你目前积累的 prompt、Skill、模板和复盘资料整理成一个个人知识体系目录。" />
+| 项目类型 | Vibe coding 适配度 | 为什么 |
+|---|---|---|
+| Landing page 原型 | 高 | 迭代快、风险低 |
+| 内部运营后台 | 中 | 速度有价值，但数据边界仍然重要 |
+| 医疗或金融流程 | 低 | 错误的现实代价太高 |
+
+真正成熟的判断，不是“AI 能不能生成”，而是“这类工作是否适合依赖快速、偏松的迭代方式”。
+
+<Exercise id="ex-8.3.3" level="L3" title="判断六类真实项目的边界" description="选 6 个真实或合理的项目场景，判断哪些适合 vibe coding，哪些必须从一开始就采用更严格的工程方式，并说明风险理由。" />
 
 ## 本单元小结
-- 增量功能适合单独计划、单独验证。
-- vibe coding 也有边界，不是所有场景都适合。
-- 个人知识体系的价值会随着项目数量增加而放大。
+- 完整 feature 文档是实用规划资产，不是形式主义。
+- prompt、文档、Skill 和复盘只有被系统化保存，才会真正复利。
+- 成熟构建者会判断 Vibe Coding 何时该停、严格工程何时该上场。
 
 ## 方法论回顾
-持续迭代的本质，是把每次学习都变成下一次协作的资产。
+上下文固化在这里变成长期个人系统：每个项目都应该留下能复用的规划和复盘资产，而不是消失在旧对话里。
 
 ## 参考来源
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

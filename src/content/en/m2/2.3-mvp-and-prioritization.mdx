@@ -1,63 +1,99 @@
 ---
 title: "MVP and Feature Prioritization"
-description: "Use MVP and P0/P1/P2 thinking to keep scope under control and focus AI on the core problem first."
+description: "Use MVP and P0/P1/P2 to compress scope into the smallest version that can validate the idea without letting AI scatter the project."
 module: "m2"
 order: 3
-estimatedMins: 35
-methodologyTag: "Glue Coding"
 ---
 
 <Callout type="methodology" title="Methodology Focus">
-Glue coding is not about random shortcuts. It is about connecting mature building blocks around a well-defined core.
+An MVP is not a shrunken product. It is the shortest path to validating the core assumption.
 </Callout>
 
-## Step 1: MVP Is the Shortest Path to Validation
+## Step 1: An MVP validates a core assumption
 
-An MVP is not a smaller version of everything. It is the shortest path to proving or disproving the core hypothesis. If the first release cannot validate anything, it is not really an MVP.
+If your product is an expense app, the assumption may be "users will open the tool every day to record one expense quickly." If your product is a blog system, the assumption may be "authors want a lightweight writing and publishing flow." The MVP should validate that assumption, not attempt to complete the whole product universe.
 
-This is where the planning habit changes from "what could we build?" to "what do we need to learn first?"
+<Callout type="scenario" title="Scenario: Two products, two different MVPs">
+Expense app: The first version only needs fast entry and a same-day list review.
 
-One practical test: if removing a feature does not affect your ability to learn whether the idea works, that feature is probably not part of the MVP.
+Blog system: The first version only needs writing, publishing, and reading a post.
 
-<Exercise id="ex-2.3.1.1" level="L1" title="Define the MVP" description="Take one product idea and write the smallest version that can validate the main hypothesis." />
+Why: The product types are different, so the shortest validation path is different too.
+</Callout>
 
-<Separator />
+| Product type | Core assumption | MVP-like first version | Easy feature trap |
+|---|---|---|---|
+| Expense app | Users will record spending quickly | Add a record and review today's list | Charts, points, themes |
+| Blog system | Authors want a smooth publish flow | Write, publish, and read a post | Comments, tag clouds, analytics |
 
-## Step 2: Use P0, P1, and P2
-
-A useful prioritization system keeps the first release honest. P0 means the product cannot function without it. P1 means the experience gets better but the product can still ship without it. P2 means it is nice to have, but not necessary yet.
-
-If you have too many P0 items, the scope is probably too big. If everything is P2, the project probably has no real core yet.
-
-<Exercise id="ex-2.3.2.1" level="L1" title="Sort a feature list" description="List 10 features for a product idea and sort them into P0, P1, and P2." />
-
-<Exercise id="ex-2.3.2.2" level="L2" title="Prioritize your own project" description="Use the same method to sort the features of your own project and explain each decision." />
+<Exercise id="ex-2.3.1.1" level="L1" title="Write the core assumption" description="Write one sentence that defines what your project's first version really needs to validate." />
 
 <Separator />
 
-## Step 3: Keep AI Focused on the Core
+## Step 2: Use P0, P1, and P2 to cut scope
 
-The biggest enemy of Vibe Coding is a giant pile of features. If you ask AI to do too many things at once, the result often becomes shallow or unstable. The fix is not a better model. The fix is to define what must exist first.
+P0 means the feature is required to validate the assumption. P1 improves the experience but can wait. P2 is optional polish.
 
-That is why prioritization is part of engineering, not an afterthought.
+| Priority | Expense app example | Blog system example |
+|---|---|---|
+| P0 | Add expense, review today's entries | Write a post, publish it, read it |
+| P1 | Category stats, monthly summary | Drafts, cover image, filtered article list |
+| P2 | Theme switcher, points, share card | Comments, likes, ranking panels |
 
-The glue-coding mindset helps here: pick mature building blocks only after the core has been narrowed down. Do not ask AI to invent every part of the stack if an existing module already solves the hard part.
+<Callout type="warning" title="Before / After: Stuff everything in vs only build P0">
+Wrong: The first version includes charts, points, sharing, and achievements.
 
-For example, a simple habit tracker might start with "add task," "mark done," and "view today" before it ever touches streaks, sharing, or analytics.
+Right: The first version only supports adding one record and reviewing today's list.
 
-<Exercise id="ex-2.3.3.1" level="L2" title="Write a scope-limiting prompt" description="Turn your P0 list into a prompt that tells AI exactly what to build first and what to delay." />
+Difference: The wrong path blurs the validation target. The right path makes the result testable.
+</Callout>
+
+<Exercise id="ex-2.3.2.1" level="L1" title="Classify example features" description="Use the two example products to decide whether several features belong in P0, P1, or P2." />
+
+<Exercise id="ex-2.3.2.2" level="L2" title="Create your own P0/P1/P2 list" description="List 6 to 10 features for your project, classify them into P0/P1/P2, and mark the features that absolutely cannot be removed from the first version." />
+
+<Separator />
+
+## Step 3: Turn P0 into an AI-executable first-version prompt
+
+When you write the first-version prompt, specify both what to build and what not to build.
+
+```text
+Build the first version of an expense tracking tool.
+Target user: a general user who wants to log daily expenses quickly.
+This round only includes: add one record and review today's list.
+Do not build: charts, sharing, points, or theme switching.
+```
+
+<Callout type="scenario" title="Scenario: Actually compressing the scope">
+Situation: You have many ideas and do not want to lose them.
+
+Action: Put P1 and P2 into the "do not build this round" section instead of leaving them implied.
+
+Why: AI is very good at filling in imagined product worlds. Boundaries must be explicit.
+</Callout>
+
+| Prompt style | What AI is more likely to do |
+|---|---|
+| Build a complete expense app | Expand the feature set automatically |
+| Build only add-record plus today's list, and exclude charts and sharing | Stay closer to the validation target |
+
+<Exercise id="ex-2.3.3.1" level="L3" title="Build only the P0 first version in a real tool" description="Turn your P0/P1/P2 list into a first-version prompt, run it in a real tool, and record whether AI respected the boundary and what it tried to add by itself." />
+
+<Separator />
 
 ## Unit Summary
 
-- MVP means the shortest path to validating the core hypothesis.
-- P0/P1/P2 helps keep scope honest.
-- Prioritization is how glue coding stays focused instead of chaotic.
+- An MVP validates a core assumption, not feature count.
+- P0/P1/P2 is the most practical language for scope control.
+- A good prompt says both what to build and what not to build.
 
-## Methodology Review
+**Methodology Review**: Glue coding starts with identifying the smallest set of modules that actually need to be connected.
 
-This unit applies the glue-coding mindset: choose mature components, but only after the core has been clearly defined.
+**Next Unit Preview**: The next unit turns feature lists into user-journey maps and executable requirement text.
 
-## References
+---
 
+**References**
+- `content-revision-plan.md`
 - `curriculum-v3.md`
-- `content-authoring-plan.md`

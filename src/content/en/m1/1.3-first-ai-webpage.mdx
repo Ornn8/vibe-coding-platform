@@ -1,82 +1,107 @@
 ---
 title: "Hands-On: Your First AI-Generated Web Page"
-description: "Build a simple page, iterate with prompts, and learn to read the structure of what AI generates."
+description: "Use one full generate-iterate-observe loop to build the habit of thinking first, prompting second, and verifying third."
 module: "m1"
 order: 3
-estimatedMins: 35
+estimatedMins: 30
 methodologyTag: "Planning-Driven"
 ---
 
 <Callout type="methodology" title="Methodology Focus">
-Even a tiny page should start with a clear target. If you know what "done" looks like, your prompts stop becoming guesswork.
+Even a tiny page deserves a tiny plan. Write the target, the structure, and the style before you ask for the first draft.
 </Callout>
 
-## Step 1: Make the First Version Small
-
-Your first target should be tiny. A personal intro page with a title, a short bio, a skill section, an avatar, and a contact button is enough. The point is not to impress anyone; the point is to practice coordinating with AI.
-
-Your first prompt should aim for completeness, not polish. Tell the tool what the page needs to contain, what mood it should have, and who it is for. That is already far better than saying "make me a website."
+## Step 1: Generate a First Draft You Can Actually Show
+Open your chosen browser-based AI tool, but do not type immediately. First write a three-line mini plan:
 
 ```text
-Please generate a personal intro page.
-Include: name, short introduction, three skill tags, an avatar area, and a contact button.
-Style: clean, bright, portfolio-like.
-Goal: produce a usable first draft.
+Audience: future employers and collaborators
+Core information: who I am, what I can do, what I recently built
+Structure: Hero, skills section, project showcase, contact section
 ```
 
-<Exercise id="ex-1.3.1.1" level="L2" title="Generate your first page" description="Use a browser-based AI tool to generate a personal intro page and save the first prompt you used." />
+Then turn that into a prompt:
+
+```text
+Please generate a personal introduction page.
+Audience: future employers and collaborators.
+Core information: intro, skills, recent projects, contact details.
+Style: clean, modern, mobile-first, plenty of whitespace.
+Structure: Hero, skill cards, project showcase, contact section.
+```
+
+You usually see a loading state first, then a real page in the preview. The key check is not whether it looks impressive. The key check is whether it follows the three-line plan you wrote first.
+
+<Callout type="scenario" title="What matters in round one">
+Situation: the first page already looks decent. Action: inspect whether the audience, core information, and section structure actually match your plan. Why: if the direction is off in round one, later iterations get more expensive.
+</Callout>
+
+```text
+Before: Build me a nice homepage.
+After: Build a personal page for future employers with a Hero, skill cards, project showcase, and a contact section. Keep it mobile-first.
+```
+
+<Exercise id="ex-1.3.1.1" level="L1" title="Check your three-line plan" description="Before you send the prompt, write the audience, core information, and structure for your page, then check whether the three parts support the same goal." />
 
 <Separator />
 
-## Step 2: Make Changes Specific
+## Step 2: Replace "Make It Better" with Two Clear Iterations
+Most beginners do not fail in round one. They fail in round two, when they say things like "make it more premium" or "make it nicer." AI can only guess from that. A stronger method is to change one dimension per round.
 
-One of the core habits in Vibe Coding is translating vague feelings into concrete edits. "Make it better" is not a helpful request. "Change the main color to deep blue, reduce top whitespace, turn the skill tags into cards, and rewrite the CTA" is.
-
-Try to change one dimension at a time. First layout, then visual style, then copy. If you document each prompt and result, you will very quickly learn which kinds of instructions actually work.
-
-**Before**
+For example, use the second round only for visual changes:
 
 ```text
-Make this page better.
+Change the main color to a calmer dark blue, tighten the card radius slightly,
+and turn the CTA into a solid primary button.
 ```
 
-**After**
+Use the third round only for information structure:
 
 ```text
-Keep the current structure, but adjust the visual style: change the primary color to deep blue, use a stronger CTA button, convert the skill tags into cards, and add 16px more whitespace around the layout.
+Turn the project section into three project cards, each with a title,
+a 30-word summary, and one view button.
 ```
 
-<Exercise id="ex-1.3.2.1" level="L2" title="Run three explainable iterations" description="Make three rounds of changes to the same page. Each round should change only one dimension, and you should record the prompt, the result, and your observation." />
+| Iteration style | What AI can understand | Likely result |
+|---|---|---|
+| Make it more premium | Mostly guesses | Drift and rework |
+| Change color and button style | Clear visual target | More stable visual refinement |
+| Change project-section structure | Clear layout target | Better information hierarchy |
+
+<Callout type="scenario" title="Vague feedback vs precise feedback">
+Wrong move: say "make it nicer." Better move: say "change the palette to dark blue, add a clear Contact Me button, and reduce how much scrolling the first mobile screen needs." The difference is that the second request names the object and the success condition.
+</Callout>
+
+<Exercise id="ex-1.3.2.1" level="L2" title="Run two explainable iterations" description="Use one real tool and complete two iterations: one that only changes visual style and one that only changes information structure. Record the issue, the instruction, and the visible result for each round." />
 
 <Separator />
 
-## Step 3: Learn to Read the Output
+## Step 3: Start Reading the File Structure AI Produced
+After the page is generated, open the file tree. You do not need to understand every file yet. You only need to start saying, "this file probably controls page structure" or "this folder probably holds reusable pieces." You might see files such as `page.tsx`, `components`, `globals.css`, or `public`.
 
-Once the page exists, do not rush into more features. First, inspect what AI actually produced. Even if you do not understand every line of code yet, you can still learn to read file names, directory names, and component names.
+The point is not framework mastery. The point is observation. Later, when you use IDE or CLI tools, you will need to judge what AI changed, where it changed it, and whether the change belongs there.
 
-This is the point where AI output stops feeling like magic and starts feeling like a project you can continue to maintain. That structural awareness will pay off later when you move into IDE and CLI workflows.
+| File or folder you may see | Typical responsibility | What to inspect first |
+|---|---|---|
+| `page.tsx` / `index` | Page structure and section order | Whether the page follows your plan |
+| `components` | Reusable cards, buttons, sections | Whether AI separated repeated blocks |
+| `styles.css` / `globals.css` | Colors, spacing, typography | Where visual tweaks landed |
+| `public` | Images, icons, static assets | Whether the asset set is sensible |
 
-When you inspect the output, look for the kinds of files that usually appear in a generated project:
-
-- `src/` or `app/` for route and page code
-- `components/` for reusable UI blocks
-- `assets/` or `public/` for images and static resources
-- `README` or prompt logs for the generator's own notes
-
-<Exercise id="ex-1.3.3.1" level="L3" title="Describe the file structure you see" description="Inspect the generated page project and write down three to five files or folders you found, plus your best guess about what each one does." />
+<Exercise id="ex-1.3.3.1" level="L3" title="Inspect the generated file structure for real" description="Open the generated project's file tree, record at least four files or folders, and explain what you think each one is responsible for. If one part confuses you, record that too." />
 
 ## Unit Summary
 
-- The first version should be complete and usable, not perfect.
-- Good iteration prompts tell AI exactly what to change and what to leave alone.
-- Reading the output structure is the first step toward real project collaboration.
+- Write a three-line plan before the first prompt.
+- Use clear, single-dimension iteration rounds instead of vague aesthetic requests.
+- Reading file structure is the first step from "I can generate" to "I can control."
 
 ## Methodology Review
 
-This unit continues planning-driven practice: you set a clear first-version goal and a narrow change scope before you start.
+This unit turns planning-driven work into a repeatable habit: define the target, iterate intentionally, then inspect the result.
 
 ## References
 
+- `content-revision-plan.md`
 - `curriculum-v3.md`
-- `content-authoring-plan.md`
-- Existing MDX and page structure conventions in this repository
+- Intro workflows from common AI page-generation tools

@@ -1,6 +1,6 @@
 ---
-title: "Prompt Anti-Patterns and Your Personal Prompt Library"
-description: "Spot common prompt anti-patterns and turn working prompts into reusable personal assets."
+title: "Prompt Anti-Patterns and Your Personal Prompt Portfolio"
+description: "Do not just list common problems. Walk through full failure chains, then turn the good prompts into reusable portfolio assets."
 module: "m3"
 order: 5
 estimatedMins: 35
@@ -8,62 +8,95 @@ methodologyTag: "Closed-Loop Delivery"
 ---
 
 <Callout type="methodology" title="Methodology Focus">
-Prompts get better when you review them like real artifacts. The goal is not to write one perfect prompt; it is to build a library you can reuse and improve.
+A prompt only becomes an asset when it can be reviewed, repaired, and reused. One lucky success is not a method.
 </Callout>
 
-## Step 1: Recognize the Common Anti-Patterns
+## Step 1: Anti-Pattern 1, Vague Prompts Force AI to Guess
+Look at one full failure chain:
 
-Three common prompt problems show up again and again: vagueness, over-assumption, and no verification. A vague prompt gives AI too little to work with. An over-assuming prompt lets AI decide too much for you. A prompt with no verification trusts the output without checking it.
+| Stage | Content |
+|---|---|
+| Original prompt | Improve this lesson page |
+| AI output | Changed the hero, added marketing language, rewrote button copy |
+| Real issue | You never said what "improve" meant or where the scope ended |
+| Better rewrite | Only review the hero title, summary, and CTA so beginners understand the unit in 10 seconds. Do not change any other section |
+| Result after the fix | The scope narrows and the output becomes more reviewable |
 
-Most prompt failures are some combination of those three.
+The problem is not that the prompt is short. The problem is that it lacks a goal, a scope, and a finish line.
 
-Compare the patterns:
-
-- Weak: "Improve this"
-- Better: "Improve this lesson page by tightening the introduction and keeping the route structure unchanged"
-
-<Exercise id="ex-3.5.1.1" level="L1" title="Diagnose a failed prompt" description="Take one failed prompt and identify which anti-patterns it used." />
-
-<Exercise id="ex-3.5.1.2" level="L2" title="Rewrite three bad prompts" description="Rewrite three prompts that suffer from vagueness, over-assumption, or missing verification." />
-
-<Separator />
-
-## Step 2: Build Your Prompt Library
-
-Once you find prompts that actually work, keep them. Group them by task type, project, or result. A small prompt library turns ad hoc effort into a reusable asset.
-
-This is where prompt writing starts to look like engineering rather than improvisation.
-
-Prompt library entries are most useful when they include a stable use case, a known result, and the context they depend on.
-
-For example, you might keep one prompt for "rewrite lesson intros," one for "generate PRD outlines," and one for "review route-safe edits."
-
-Two higher-level anti-patterns to watch for are context pollution and hallucination bait. A prompt like "use everything we have discussed so far and make it amazing" often mixes too much noise into the context, while "guess the missing requirement" invites the model to invent details.
-
-<Exercise id="ex-3.5.2.1" level="L2" title="Capture a reusable template" description="Turn one repeated request into a prompt template and note when you should use it." />
-
-<Exercise id="ex-3.5.2.2" level="L2" title="Describe a second recurring prompt" description="Pick another repeated task and turn it into a second reusable prompt template." />
+<Exercise id="ex-3.5.1.1" level="L1" title="Identify the dominant prompt failure" description="Read three failed prompts and decide whether each one is mainly vague, greedy, or missing verification." />
 
 <Separator />
 
-## Step 3: Make the Library Reviewable
+## Step 2: Anti-Pattern 2, Greedy Prompts Spread Attention Too Thin
+Now look at another chain:
 
-Good prompt assets should include context, the prompt itself, the result, and any lessons learned. That way the prompt is not just saved, but actually explainable and improvable.
+| Stage | Content |
+|---|---|
+| Original prompt | Build the homepage, login, comments, payments, and memberships |
+| AI output | Touched every area a little, but nothing felt stable |
+| Real issue | You tried to collapse multiple product stages into one round |
+| Better rewrite | This round only builds login and the product-detail flow before payment. Do not build comments or memberships yet |
+| Result after the fix | AI can focus on one closed loop instead of five half-loops |
 
-If a prompt cannot be reviewed later, it is not really an asset yet.
+```text
+Before: Put every idea into one prompt.
+After: Drive one closed loop at a time and write explicit exclusions.
+```
 
-<Exercise id="ex-3.5.3.1" level="L3" title="Build your Prompt Portfolio" description="Pick five prompts worth keeping and write a short note about what each one solves and when to reuse it." />
+<Callout type="scenario" title="Why greedy prompts are easy to misread as progress">
+Situation: AI generates many features in one round, and the output feels impressive. Action: ask whether one meaningful closed loop is actually stable. Why: feature count is not the same as delivery quality.
+</Callout>
+
+<Exercise id="ex-3.5.2.1" level="L2" title="Shrink a greedy prompt into a first closed loop" description="Take one greedy prompt you wrote or saw, rewrite it so it targets one closed loop, and add at least two explicit exclusions." />
+
+<Separator />
+
+## Step 3: Anti-Pattern 3, No Verification Means No Closure
+Here is the third chain:
+
+| Stage | Content |
+|---|---|
+| Original prompt | Fix this bug |
+| AI output | Produced code that looks like a fix |
+| Real issue | You never asked how the fix should be verified |
+| Better rewrite | Fix this bug and explain how you would verify the change, including at least one command, manual check, or comparison |
+| Result after the fix | The work no longer stops at "looks fixed" |
+
+Without verification, it is too easy to confuse "the model produced output" with "the problem is solved."
+
+<Exercise id="ex-3.5.3.1" level="L2" title="Add verification to weak prompts" description="Take three prompts that lack verification and rewrite them so each one includes at least one concrete validation method." />
+
+<Separator />
+
+## Step 4: Turn Good Prompts into a Portfolio
+Once you start storing the task type, the prompt, the result, the fit conditions, the common failure modes, and the verification method, you are no longer saving chat history. You are building a Prompt Portfolio.
+
+| Portfolio field | What it should capture |
+|---|---|
+| Task type | Content review, requirement breakdown, bug fix, and so on |
+| Prompt body | The version that actually works |
+| Fit conditions | When to use it |
+| Common drift | Where it tends to go wrong |
+| Verification | How to decide whether the result is good enough |
+
+<Callout type="scenario" title="Chat memory vs portfolio asset">
+Wrong move: think "I kind of remember that this prompt worked before." Better move: store the prompt together with the scenario, the risks, and the verification method. One depends on memory. The other becomes a usable asset.
+</Callout>
+
+<Exercise id="ex-3.5.4.1" level="L3" title="Build a small Prompt Portfolio" description="Choose five prompts you really use, organize them by task type, and add fit conditions, common failure modes, and verification notes to each one." />
 
 ## Unit Summary
 
-- Common prompt failures are usually about vagueness, over-assumption, or missing verification.
-- A prompt library turns repeated effort into reusable assets.
-- A good prompt record includes context, prompt, result, and lesson learned.
+- Vagueness, greed, and missing verification are three of the most common prompt anti-patterns.
+- Anti-patterns become teachable when you trace the whole failure chain.
+- A portfolio turns prompts from one-off chat into reusable work assets.
 
 ## Methodology Review
 
-This unit closes the loop by turning prompt work into a reusable portfolio instead of one-off improvisation.
+This unit extends closed-loop delivery into prompt work: not just output, but review, repair, and reuse.
 
 ## References
 
+- `content-revision-plan.md`
 - `curriculum-v3.md`

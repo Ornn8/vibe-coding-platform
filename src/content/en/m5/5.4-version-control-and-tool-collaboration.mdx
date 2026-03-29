@@ -1,6 +1,6 @@
 ---
 title: "Version Control and Tool Collaboration"
-description: "Use commits, checkpoints, and tool specialization so iteration stays recoverable, comparable, and collaborative."
+description: "Start from the classic 'AI broke the page' story, then use Git checkpoints and tool specialization to keep work reversible and easier to debug."
 module: "m5"
 order: 4
 estimatedMins: 35
@@ -8,63 +8,82 @@ methodologyTag: "Closed-Loop Delivery"
 ---
 
 <Callout title="Method Focus" tone="warning">
-Version control is not optional when AI is making changes quickly. It is the safety net that keeps iteration reversible.
+Version control is not a bonus skill around AI coding. It is the minimum safety system that makes fast iteration recoverable, comparable, and reviewable.
 </Callout>
 
-## Step 1: Use Git and checkpoints before AI can break the page
+## Step 1: Start with a real "AI broke my code" story
+Imagine a course homepage that already works. You ask AI for three quick rounds of edits:
 
-The curriculum's scenario is blunt: AI changes one feature, the page turns white, and without version history you have nothing to fall back on. Git commit history and checkpoints let you compare versions instead of starting over.
+1. Update the hero copy.
+2. Clean up the navigation.
+3. Make the layout feel more spacious.
 
-### Scenario
+After the third round, the page turns white. You know something broke, but you do not know whether the bug came from the first, second, or third edit.
 
-Before:
-- You accept a change, the page breaks, and you cannot tell what caused it.
+| State | What you have in your hands | What happens next |
+|---|---|---|
+| No checkpoints | A vague memory of what changed | You guess, retrace, and lose time |
+| One commit after every verified step | A clean version history | You can compare and isolate the exact bad change |
 
-After:
-- You commit before each meaningful change, so one bad step can be rolled back cleanly.
+```text
+Before: I let AI make three rounds of edits without saving a stable point.
+After: I commit after every meaningful, verified step before asking for the next round.
+```
 
-<Exercise id="ex-5.4.1" level="L2" title="Create safe checkpoints" description="Make three commits in your project, each tied to one functional change." />
+Git matters here because it turns "I think it broke later" into "this specific commit introduced the break."
 
-<Separator />
+<Callout title="Scenario: when you should commit before continuing" tone="warning">
+Situation: the current feature passes the page check and your terminal validation, and you are about to ask AI for the next edit. Action: commit the stable state first. Why: once AI starts the next round, you need a clean recovery point instead of relying on memory.
+</Callout>
 
-## Step 2: Understand Codex as asynchronous code generation
-
-The curriculum contrasts Claude Code and Codex on purpose. Claude Code is interactive and conversational. Codex is asynchronous and better suited to a clean spec that can run in the background while you do something else.
-
-### Scenario
-
-Two different jobs:
-- When you need live back-and-forth and debugging, use the interactive tool.
-- When you need a contained task from a clear spec, use the asynchronous tool.
-
-That difference is why tool choice is a planning question, not just a preference question.
-
-<Exercise id="ex-5.4.2" level="L2" title="Use Codex on an isolated task" description="Use Codex to generate one standalone feature module and review the result." />
+<Exercise id="ex-5.4.1" level="L1" title="Decide when a checkpoint is required" description="Review several real change scenarios and identify which ones should create a Git checkpoint before AI continues." />
 
 <Separator />
 
-## Step 3: Match the tool to the work
+## Step 2: Choose tools by workflow, not by habit
+Claude Code, Codex, and GUI tools are not enemies. They are better at different rhythms of work.
 
-The curriculum gives a practical decision table:
-- exploratory development or debugging -> Claude Code
-- clear spec with batch tasks -> Codex
-- rapid prototyping -> GUI tools
-- everyday editing -> Cursor
+| Tool | Startup cost | Best project stage | Typical job | Example command or action |
+|---|---|---|---|---|
+| Claude Code | Low if you are already in the repo | Live implementation and debugging | Read code, change code, verify, iterate | `npm run lint`, inspect files, patch a bug |
+| Codex | Medium because the task must be scoped clearly | Well-bounded async execution | Rewrite a contained module or produce a spec-driven change | Hand off a clean task with file scope and expected output |
+| GUI prototyping tools | Low for visual exploration | Earliest concept or layout stage | Try interface directions quickly | Prompt a landing page or dashboard mock |
 
-### Scenario
+The wrong question is "Which tool do I like most?" The better question is "What rhythm does this task need right now?"
 
-The same task can feel very different depending on the tool. A debug session may be easier in an interactive shell, while a well-scoped batch task may be safer in a background run.
+<Callout title="Scenario: one task, three different tool fits" tone="info">
+Situation: you need to redesign a lesson page, debug a broken form, and bulk-rewrite several structured docs. Action: use a GUI tool to explore the page direction, use Claude Code for the broken form, and use Codex for the contained document rewrite. Why: the tasks have different feedback loops, so the safest tool also changes.
+</Callout>
 
-<Exercise id="ex-5.4.3.1" level="L1" title="Choose the right tool" description="Pick the best tool for five different scenarios and explain why." />
-<Exercise id="ex-5.4.3.2" level="L3" title="Compare two tools on one task" description="Complete the same task with two different tools and record the difference in experience and output." />
+<Exercise id="ex-5.4.2" level="L2" title="Match six tasks to the right tool" description="Assign the best tool to six tasks such as debugging, first-draft prototyping, isolated module generation, structured batch rewriting, real-repo fixes, and documentation cleanup." />
+
+<Separator />
+
+## Step 3: The real goal is a smoother closed loop
+Good collaboration is not "use more tools." It is "reduce handoff friction while keeping the work reversible."
+
+| Scenario | Smoother sequence |
+|---|---|
+| Try a visual direction fast | GUI tool -> confirm direction -> move into repo |
+| Make a real repo change safely | Claude Code -> verify -> Git checkpoint |
+| Ship a bounded background task | Write the spec -> Codex executes -> human review -> checkpoint |
+
+If you send a live debugging task to an async tool, the loop slows down. If you keep a large, well-scoped batch rewrite inside an overly chatty loop, the context gets noisy. Tool choice is part of delivery design.
+
+<Callout title="before / after: choosing by preference vs choosing by workflow" tone="info">
+Wrong move: use the same favorite tool for every job. Better move: decide whether the current work is exploratory, interactive, or asynchronous, then choose the tool that matches that pace. Preference optimizes comfort. Workflow fit optimizes delivery.
+</Callout>
+
+<Exercise id="ex-5.4.3" level="L3" title="Run the same task with two tools and review the difference" description="Pick one real task, complete it with two different tools, then compare speed, controllability, rework cost, and how easy it was to keep clean checkpoints." />
 
 ## Summary
-- Commit history and checkpoints keep AI changes reversible.
-- Tool choice should follow the kind of work you are doing.
-- Collaboration works better when each tool has a clear job.
+- Git checkpoints are the safety net that makes AI collaboration reversible.
+- Claude Code, Codex, and GUI tools each fit different work rhythms.
+- Tool choice is part of closed-loop delivery because it changes how easy the next verification step becomes.
 
 ## Methodology Review
-This unit extends closed-loop delivery with recovery points and deliberate tool choice, so progress stays inspectable and reversible.
+Closed-loop delivery adds one more discipline here: not just "can we move fast," but "can we recover, compare, and continue safely after every fast step?"
 
 ## References
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

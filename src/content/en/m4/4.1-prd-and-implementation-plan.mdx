@@ -1,6 +1,6 @@
 ---
 title: "Planning Is Everything: PRDs and Implementation Plans"
-description: "See why planning is not overhead but the first safeguard against AI-driven chaos."
+description: "Use a tomato-timer example to fill out a PRD and a plan step by step, and understand what each document is really preventing."
 module: "m4"
 order: 1
 estimatedMins: 45
@@ -8,71 +8,97 @@ methodologyTag: "Planning-Driven"
 ---
 
 <Callout type="methodology" title="Methodology Focus">
-This unit is the most concentrated version of planning-driven work. The PRD defines the goal, and the implementation plan defines the order of execution.
+PRDs are not paperwork for other people, and plans are not ceremony. Both are forward decisions that reduce later rework.
 </Callout>
 
-## Step 1: A Failure Case Shows Why Planning Comes First
+## Step 1: Feel What a PRD Is Solving Through One Tomato-Timer Example
+Imagine you want to build a tomato-timer page for students. A PRD does not begin by filling many pages. It begins by making five things explicit:
 
-Imagine a learner asking, "help me build a blog." The first draft looks fine, then the scope expands, the prompt changes again and again, and after 15 rounds the project is still unstable. The failure is not a single bad prompt. The failure is that nobody defined the target well enough at the start.
+| PRD section | Why it exists | Tomato-timer example |
+|---|---|---|
+| Background | Explains why the project matters | Students want 25-minute focus sessions but get distracted easily |
+| User | Prevents you from designing for "everyone" | Students who need short focus blocks |
+| Core flow | Defines the page and feature spine | Start timer -> focus -> break reminder -> review completions |
+| Scope | Prevents first-version sprawl | v1 only includes solo timing and completion tracking |
+| Acceptance criteria | Defines what done means | A new user can start a focus session within 10 seconds |
 
-That is why planning-driven work starts with failure analysis. The point is to feel the cost of weak planning before learning the fix.
+The real job of the PRD is simple: decide what this round will deliver and what it will not.
 
-<Exercise id="ex-4.1.1.1" level="L1" title="Mark the missing decisions" description="Read a failing project story and mark where the learner should have paused to plan." />
+<Callout type="scenario" title="Why PRDs start with user and flow">
+Situation: you want to jump straight into stack discussions. Action: write the user, the flow, and the scope first. Why: if the target is still unstable, technical discussion is only orbiting uncertainty.
+</Callout>
 
-<Separator />
-
-## Step 2: PRDs Answer What to Build
-
-A PRD defines the user, the problem, the core flow, the scope, and the acceptance criteria. It does not explain every implementation detail. Its job is to make sure humans and AI agree on what the delivery should be.
-
-Good PRDs do not need to be long. They need to answer why this exists, who it is for, what the first version includes, and how success will be judged.
-
-Use a simple template:
-
-- Background
-- User
-- Core flow
-- Scope
-- Acceptance criteria
-
-For example, a tomato timer PRD might say the user is a student who wants short focus sessions, the core flow is start timer -> break reminder -> history, and the scope excludes login and social sharing.
-
-<Exercise id="ex-4.1.2.1" level="L2" title="Write a one-page PRD" description="For a new project, write the background, user, core flow, scope, and acceptance criteria." />
+<Exercise id="ex-4.1.1.1" level="L1" title="Recognize what a PRD item is preventing" description="Look at a set of PRD entries and decide whether each one mainly prevents target drift, scope drift, or acceptance confusion." />
 
 <Separator />
 
-## Step 3: Implementation Plans Answer How to Build
+## Step 2: Fill a One-Page PRD and Explain Each Part
+Once you compress the tomato-timer example into a one-page PRD, each line is visibly saving future rework:
 
-Once the PRD is clear, the next step is to turn it into a sequence of executable steps. The value of an implementation plan is that it breaks a big goal into smaller pieces and pairs each piece with a verification action.
+```text
+Project: student tomato timer page
+Target user: students who need short focus sessions
+Core flow: start a 25-minute timer -> finish -> record one completion
+P0 scope: start / pause / reset timer, completion count
+Exclusions: login, social features, leaderboards, multi-device sync
+Acceptance criteria: a new user can start a timer within 10 seconds
+```
 
-Planning is not about predicting everything. It is about reducing chaos and making change manageable.
+```text
+Before: I want to build a productivity tool.
+After: I want to build a tomato-timer page for students, and v1 only validates timing and completion tracking, not login or social features.
+```
 
-For the same tomato timer example, the plan might split into data model, timer UI, reminder flow, history page, and final verification. Each step should be small enough to complete and check.
+That is the value of the PRD: it turns "I think I want to build something" into "this is the exact small thing this round is building."
 
-<Exercise id="ex-4.1.3.1" level="L2" title="Break the plan into 5 to 8 steps" description="Take your PRD and split it into 5 to 8 implementation steps, each with a short verification note." />
+<Exercise id="ex-4.1.2.1" level="L2" title="Write a one-page PRD for a real project" description="Choose a real project and write a one-page PRD that includes background, target user, core flow, P0 scope, exclusions, and acceptance criteria." />
 
 <Separator />
 
-## Step 4: Choose Mature Building Blocks
+## Step 3: The Implementation Plan Solves a Different Problem
+Once the PRD answers what to build, the plan answers how to move through the build in a safe order. Use the same tomato-timer project:
 
-Planning is also where glue coding starts. Once the target is clear, you can choose stable libraries, frameworks, and patterns instead of asking AI to invent everything from scratch.
+| Plan step | Why it comes first | How to verify it |
+|---|---|---|
+| Define the page structure | The core flow needs a visible shell | The page shows the timer area and start control |
+| Build timer logic | The main capability must work first | Countdown starts and finishes correctly |
+| Add completion tracking | The core loop becomes meaningful | One completion appears after one finished session |
+| Add interaction polish | Details should come after the core loop | Button states and helper text behave correctly |
 
-The goal is not to use the most novel stack. The goal is to reduce risk by connecting dependable pieces around a well-defined core.
+The plan's job is to answer: what comes first, and how do we avoid making each step too large?
 
-For example, you might reuse Next.js, Prisma, and shadcn/ui instead of asking AI to invent your own routing system, database layer, or component library.
+<Callout type="scenario" title="PRD without a plan vs PRD plus a plan">
+Wrong move: know what the project is and jump straight into building. Better move: split the page shell, timer logic, completion tracking, and polish into separate steps. One path creates a blob. The other creates checkpoints.
+</Callout>
 
-<Exercise id="ex-4.1.4.1" level="L3" title="List mature building blocks" description="For your project, list the mature libraries or frameworks you would prefer to reuse and explain why." />
+<Exercise id="ex-4.1.3.1" level="L2" title="Break your PRD into 5 to 8 implementation steps" description="Take your one-page PRD and split it into 5 to 8 steps, adding one verification action to each step." />
+
+<Separator />
+
+## Step 4: Glue Coding Starts Here, Not Later
+Writing the plan also means choosing mature building blocks instead of defaulting to invention.
+
+| Project area | Lower-risk move | Higher-risk move |
+|---|---|---|
+| UI | Reuse established components | Hand-build every component from scratch |
+| Data layer | Use the existing ORM or storage pattern | Invent a temporary data shape |
+| Verification | Reuse lint and typecheck | Rely only on visual judgment |
+
+The tomato-timer app is small, but the principle is the same: choose reliable parts first, then let AI connect them. That is where glue coding really begins.
+
+<Exercise id="ex-4.1.4.1" level="L3" title="List the mature building blocks for your project" description="For your project, list at least three mature libraries, components, or services you plan to reuse, and explain what risk each one reduces." />
 
 ## Unit Summary
 
-- PRDs define goals and boundaries; plans define sequence and actions.
-- Good plans are broken into small, verifiable steps.
-- Separating requirements and plans makes later collaboration easier.
+- PRDs answer what to build, what not to build, and what success looks like.
+- Plans answer what order to build in and how to verify each step.
+- Planning is also where you reduce risk by choosing mature building blocks.
 
 ## Methodology Review
 
-This unit turns planning-driven thinking into two concrete documents and prepares you for glue coding.
+This unit makes planning-driven work and glue coding concrete before any execution begins.
 
 ## References
 
+- `content-revision-plan.md`
 - `curriculum-v3.md`

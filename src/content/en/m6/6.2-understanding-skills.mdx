@@ -1,82 +1,74 @@
 ---
 title: "Skills: Give AI an Operating Manual"
-description: "Understand what Skills do, how they are structured, and why raw capability still needs operating guidance."
+description: "Compare AI behavior before and after loading a Skill so you can see that Skills do not add knowledge alone. They stabilize workflow and boundaries."
 module: "m6"
 order: 2
 estimatedMins: 40
 methodologyTag: "Glue Coding"
 ---
 
-<Callout title="Method Focus" tone="warning">
-The value of a Skill is not that it makes AI smarter. It is that it makes AI more consistent, more constrained, and easier to trust for a specific kind of work.
+<Callout title="Method Focus" tone="success">
+The main job of a Skill is not to make AI "know more." It is to make AI behave more consistently on one class of work by packaging triggers, boundaries, workflow, and examples.
 </Callout>
 
-## Step 1: What problem a Skill solves
+## Step 1: Compare behavior before and after a Skill is loaded
+Imagine the task is "rewrite an MDX lesson into the platform's standard teaching structure."
 
-Even when AI can access a codebase, database, or docs, it may still not know how your project expects the work to be done. A Skill fills that gap by packaging proven workflow, constraints, and examples into reusable operating guidance.
+| State | What AI usually does |
+|---|---|
+| No Skill loaded | It may improve the lesson, but miss the exercise levels, forget the before/after block, or skip the scenario card |
+| Content-revision Skill loaded | It is much more likely to check method focus, three steps, scenario cards, before/after, and L1/L2/L3 exercises systematically |
 
-### Scenario
+```text
+Before: Please improve this lesson.
+After: Load the content-revision Skill, then rewrite the lesson using method focus, three steps, scenario cards, before/after, and L1/L2/L3 exercises.
+```
 
-Two assistants have the same connection to a database:
-- Assistant A gets only access and guesses the workflow.
-- Assistant B gets access plus a Skill that explains how to query, format, and verify safely.
+The difference is not magic. The Skill turns "how this task should usually be done" into reusable operating guidance.
 
-Both can reach the database. Only one is likely to use it well.
-
-<Exercise id="ex-6.2.1.1" level="L1" title="Separate capability from guidance" description="Give one example where AI already has the capability to act, but still needs a Skill to act well." />
-
-<Separator />
-
-## Step 2: What belongs inside a Skill
-
-A useful Skill usually includes triggers, task guidance, constraints, workflow, and examples. Each part does a different job:
-
-- Triggers define when the Skill should activate
-- Constraints define what must not happen
-- Workflow explains the steps to follow
-- Examples show what good output looks like
-
-### Scenario
-
-The curriculum's `SKILL.md` breakdown is meant to show that a Skill is a structured operating manual, not a loose note. Trigger, constraint, pattern, and example each carry a different kind of instruction.
-
-<Exercise id="ex-6.2.2.1" level="L2" title="Dissect one Skill" description="Choose one existing Skill and explain what its triggers, constraints, workflow, and examples each contribute." />
+<Exercise id="ex-6.2.1" level="L1" title="Describe the behavior gap before and after a Skill" description="Pick one familiar task and write two likely behavior differences between AI with no Skill and AI with a well-targeted Skill." />
 
 <Separator />
 
-## Step 3: What makes a Skill good
+## Step 2: A good Skill is structured, not merely long
+A useful Skill usually has four core parts:
 
-A good Skill is not necessarily long. It is clear about when to use it, what it allows, and what it forbids. A weak Skill is broad, vague, and unable to guide anything reliably.
+| Part | What it does |
+|---|---|
+| Trigger | Tells AI when the Skill should activate |
+| Boundaries | Tells AI what must not happen |
+| Workflow | Tells AI what order to follow |
+| Example | Tells AI what good output looks like |
 
-### Scenario
+If a Skill is only a background paragraph, AI still has to guess when to apply it and how strict it should be.
 
-Compare these two fragments:
-- Weak: "Use best practices and be careful."
-- Strong: "When editing SQL, never change production data without a rollback plan, and always show the expected result before execution."
-
-The second version is more usable because it tells AI what good looks like and what failure looks like.
-
-<Exercise id="ex-6.2.3.1" level="L2" title="Compare two Skill fragments" description="Compare two short Skill fragments and decide which one offers clearer triggers and more actionable constraints." />
+<Exercise id="ex-6.2.2" level="L2" title="Dissect one existing Skill structure" description="Take one real Skill and identify what its trigger, boundaries, workflow, and examples are each solving." />
 
 <Separator />
 
-## Step 4: Observe Skill behavior in real tasks
+## Step 3: Skills become valuable when they reduce repeated explanations
+If you keep telling AI the same rules across multiple tasks, such as "read the project constraints first," "do not touch the database schema," or "list findings before suggesting fixes," you are already looking at the shape of a future Skill.
 
-The real test of a Skill is not whether it exists, but whether it changes behavior in live work. Watch for more stable output, fewer re-explanations, and less rework.
+<Callout title="Scenario: when repeated instructions should become a Skill" tone="info">
+Situation: you have restated the same collaboration rules in three or more different tasks. Action: promote those rules into a Skill. Why: once a workflow is repeated, it should stop living only in chat and start living in reusable operating guidance.
+</Callout>
 
-### Scenario
+| Repeated instruction | Better place to store it |
+|---|---|
+| Read constraints before editing | Workflow step |
+| Do not change the schema | Boundary |
+| Present findings before fixes | Output example or workflow rule |
 
-If the same task goes from "please remind me again" to "the assistant already knows the pattern," the Skill is working. If nothing changes, the draft still needs sharpening.
-
-<Exercise id="ex-6.2.4.1" level="L3" title="Observe a real Skill run" description="Use one Skill on a real task, then record what changed in the AI's behavior and what still needs improvement." />
+<Exercise id="ex-6.2.3" level="L3" title="Turn repeated instructions into a first Skill draft" description="Choose one set of instructions you have repeated many times and turn it into a small Skill draft with at least a trigger, two boundaries, and a workflow." />
 
 ## Summary
-- A Skill packages repeatable operating guidance, not raw capability.
-- Strong Skills have clear triggers, constraints, workflow, and examples.
-- The only real test is whether they improve behavior in live work.
+- Skills improve repeatability more than raw knowledge.
+- Strong Skills are clear about trigger, boundaries, workflow, and examples.
+- Repeated explanations are often a sign that a reusable Skill should exist.
 
 ## Methodology Review
-This unit demonstrates glue coding by packaging proven operating guidance into reusable instructions instead of re-explaining best practice every time.
+Glue coding levels up here by turning repeated operating advice into reusable assets instead of making you re-teach the same workflow every time.
 
 ## References
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

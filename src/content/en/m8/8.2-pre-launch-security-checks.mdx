@@ -1,6 +1,6 @@
 ---
 title: "Pre-Launch Security Checks"
-description: "Identify common risks in AI-generated code and build a minimum viable security checklist before launch."
+description: "Use vulnerable-code versus fixed-code examples to turn abstract security reminders into a real pre-launch review workflow."
 module: "m8"
 order: 2
 estimatedMins: 40
@@ -8,56 +8,118 @@ methodologyTag: "Closed-Loop Delivery"
 ---
 
 <Callout title="Method Focus" tone="warning">
-AI can help you ship faster, but it can also help you replicate risk faster. A release checklist is part of responsible delivery.
+AI can help you ship risk faster as easily as it helps you ship features faster. Security checks are part of responsible delivery, not optional polish.
 </Callout>
 
-## Step 1: The most common AI-era security mistakes
+## Step 1: Compare vulnerable code with fixed code
+Here is a hardcoded-secret mistake:
 
-Hardcoded secrets, weak input validation, unclear permission boundaries, overexposed errors, and risky query or integration patterns are all common. The danger is that these issues often still "work" until they are deployed.
+```ts
+const stripe = new Stripe("sk_live_123");
+```
 
-### Scenario
+And the safer version:
 
-The curriculum's warning is simple: code that appears functional can still be unsafe. A hardcoded API key, an unvalidated form, or a wide-open permission boundary may not break the app right away, but it can still break the release.
+```ts
+const stripeKey = process.env.STRIPE_SECRET_KEY;
 
-<Exercise id="ex-8.2.1.1" level="L1" title="Find security weak points" description="Identify three security risks in your own project and explain why each one matters." />
+if (!stripeKey) {
+  throw new Error("Missing STRIPE_SECRET_KEY");
+}
+
+const stripe = new Stripe(stripeKey);
+```
+
+Here is an unsafe permission boundary:
+
+```ts
+export async function GET() {
+  return Response.json(await prisma.review.findMany());
+}
+```
+
+And the safer version:
+
+```ts
+export async function GET() {
+  const session = await auth();
+
+  if (!session?.user || session.user.role !== "ADMIN") {
+    return Response.json({ error: "Forbidden" }, { status: 403 });
+  }
+
+  return Response.json(await prisma.review.findMany());
+}
+```
+
+| Risk type | Vulnerable pattern | Fixed pattern |
+|---|---|---|
+| Secrets | Hardcoded key in source | Read from env and fail safely |
+| Permissions | Open access to sensitive data | Explicit auth and role check |
+
+<Exercise id="ex-8.2.1" level="L1" title="Identify what the fixed version protects" description="Review vulnerable and fixed code pairs, then explain exactly what risk the safer version is reducing." />
 
 <Separator />
 
-## Step 2: Treat environment and credential management seriously
+## Step 2: Treat credential and input handling as first-class release work
+Another common AI-era mistake is trusting input too early.
 
-`.env` should never be committed. Deployment environments need the right variables in the right place. Many developers can build features. Far fewer can handle credentials safely enough to launch.
+```ts
+await prisma.post.create({ data: req.body });
+```
 
-### Scenario
+Safer:
 
-Before:
-- secrets live in source files or in ad hoc notes
+```ts
+const parsed = postSchema.safeParse(await req.json());
 
-After:
-- secrets live in environment variables
-- `.env.example` shows only safe placeholders
-- deployment settings match the runtime environment
+if (!parsed.success) {
+  return Response.json({ error: "Invalid input" }, { status: 400 });
+}
 
-<Exercise id="ex-8.2.2.1" level="L2" title="Run a config audit" description="Check whether `.env` is correctly ignored, whether any secrets are hardcoded, and document the result." />
+await prisma.post.create({ data: parsed.data });
+```
+
+| Review item | What to verify before launch |
+|---|---|
+| Secrets | No real secret is committed or hardcoded |
+| `.env` handling | `.env` is ignored and `.env.example` contains placeholders only |
+| Input validation | External input is parsed before use |
+| Error handling | Sensitive implementation details are not leaked to users |
+
+<Callout title="Scenario: why working code can still be release-unsafe" tone="info">
+Situation: the form submits successfully in local development. Action: check how the app handles malformed input, missing secrets, and unauthorized access before shipping. Why: many unsafe paths never show up in the happy-path demo.
+</Callout>
+
+<Exercise id="ex-8.2.2" level="L2" title="Run a real security configuration audit" description="Audit one project for hardcoded secrets, `.env` handling, permission checks, and input validation, then record what passed and what failed." />
 
 <Separator />
 
-## Step 3: Build a repeatable release checklist
+## Step 3: Turn security into a repeatable launch checklist
+The point is not enterprise perfection on day one. The point is to make the same minimum safety review repeatable.
 
-You do not need enterprise-grade security on day one, but you do need a repeatable minimum: HTTPS, auth, input validation, error handling, access control, logs, and rollback thinking.
+| Checklist item | Why it belongs before launch |
+|---|---|
+| Secrets are externalized | Prevents credential leakage |
+| Sensitive routes have auth boundaries | Prevents accidental data exposure |
+| Inputs are validated | Prevents unsafe writes and crashes |
+| Logs and error messages are reviewed | Prevents overexposed internals |
 
-### Scenario
+```text
+Before: before launch, I only checked whether the page opened and the feature seemed to work.
+After: I also inspect secrets, input validation, permission boundaries, and error exposure before deciding the release is actually safe enough.
+```
 
-A release checklist matters because it is reusable. The curriculum wants the same safety check to work before every launch, not just when a problem is already visible.
-
-<Exercise id="ex-8.2.3.1" level="L3" title="Run one pre-launch audit" description="Use your launch checklist on a real project and record the issues, risk level, and planned fixes." />
+<Exercise id="ex-8.2.3" level="L3" title="Run one pre-launch audit on a real project" description="Take a real project, run a launch-security checklist against it, and record the issues you found, their risk level, and which ones must be fixed before release." />
 
 ## Summary
-- The biggest release risk is often the issue that still seems to work.
-- Credentials and permissions are easy to neglect and expensive to neglect.
-- Security checklists are valuable because they are repeatable, not because they are long.
+- Security becomes easier to learn when you compare vulnerable code directly with the safer version.
+- Secret handling, auth boundaries, and input validation should be checked before launch, not after.
+- A short repeatable checklist is more valuable than a long security lecture.
 
 ## Methodology Review
-This unit applies closed-loop delivery to release safety by turning security checks into explicit, repeatable gates before launch.
+Closed-loop delivery now includes release safety gates: not just "does it work," but "is it safe enough to put in front of real users?"
 
 ## References
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

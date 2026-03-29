@@ -1,6 +1,6 @@
 ---
 title: "From Vibe Coding to Agentic Engineering"
-description: "Understand why complex work outgrows single-agent collaboration and why role and workflow design become necessary."
+description: "Use real 'it runs, but I do not trust it' examples to see why larger projects need workflow design, not just stronger prompts."
 module: "m7"
 order: 1
 estimatedMins: 35
@@ -8,61 +8,82 @@ methodologyTag: "Planning-Driven"
 ---
 
 <Callout title="Method Focus" tone="warning">
-The real upgrade is not asking AI to do more. It is shifting from "person who writes prompts" to "person who designs the collaboration system."
+The real upgrade is not asking AI to do more in one thread. It is designing a collaboration system where roles, checks, and handoffs make the output more trustworthy.
 </Callout>
 
-## Step 1: The ceiling of single-agent collaboration
+## Step 1: Start with code that runs but is still dangerous
+Here are two examples of AI slop. Both can run. Neither should be trusted yet.
 
-Vibe Coding works well for small personal projects and short tasks. But when scope grows, changes multiply, and quality expectations rise, single-agent work begins to show limits: context congestion, amplified rework, weak review boundaries, AI slop, and cognitive debt.
+```ts
+export async function GET() {
+  const users = await prisma.user.findMany();
+  return Response.json(users);
+}
+```
 
-### Scenario
+```ts
+export async function updateUser(id: string, input: any) {
+  return prisma.user.update({ where: { id }, data: input });
+}
+```
 
-In a small task, one assistant can stay on track. In a larger project, the same assistant starts carrying too many responsibilities: design, implementation, review, and recovery all happen in one thread. That is when the ceiling shows up.
+| Code sample | Why it looks fine at first | Why it is actually risky |
+|---|---|---|
+| Open user endpoint | It returns real data fast | No auth or access boundary |
+| Direct update helper | It is short and flexible | `any` input, no validation, no permission check |
 
-If you look back at your M6 project, you already built shared assets like `CLAUDE.md`, Skills, MCP workflows, and a memory-bank. M7 does not replace those. It uses them as the foundation for multi-role collaboration.
+That is the problem M7 solves. The issue is no longer "Can AI generate code?" The issue is "How do we stop plausible-looking code from becoming hidden debt?"
 
-<Exercise id="ex-7.1.1.1" level="L1" title="Spot the need to level up" description="Review one complex task and explain what signs showed it had outgrown single-agent collaboration, including which M6 assets would still be reused." />
+<Callout title="Scenario: when 'it works' is no longer a good enough standard" tone="warning">
+Situation: the page renders and the endpoint responds, so the task feels done. Action: ask what review boundary has not been crossed yet, such as auth, validation, or maintainability. Why: in larger projects, hidden defects matter more than surface success.
+</Callout>
+
+<Exercise id="ex-7.1.1" level="L1" title="Spot the hidden problems in running code" description="Read two short code examples that technically run, then identify what makes them unreliable, unsafe, or hard to maintain." />
 
 <Separator />
 
-## Step 2: Shift from executor to orchestrator
+## Step 2: The role shift is from executor to system designer
+In vibe coding, you mainly issue requests and react to outputs. In agentic engineering, you define roles, inputs, outputs, and review boundaries before the system starts moving.
 
-In Agentic Engineering, you do not start by staring at every implementation detail. You design roles, inputs, outputs, and verification boundaries first. You are managing a workflow, not just a response.
+| Working style | Main question |
+|---|---|
+| Vibe coding | "What should I ask AI to build next?" |
+| Agentic engineering | "What role should handle this, what should it output, and who verifies it?" |
 
-### Scenario
+The difference is not status or jargon. It is where you spend design effort.
 
-The difference is visible in how the work begins:
-- Vibe coder: describes a request and accepts the result
-- Agentic engineer: defines the system, assigns roles, and reviews the output chain
+```text
+Before: I asked one assistant to plan, code, debug, and review in the same thread.
+After: I separated planning, implementation, and verification into different responsibilities before the work started.
+```
 
-The core move is from execution to orchestration.
-
-<Exercise id="ex-7.1.2.1" level="L2" title="Describe the role shift" description="Explain in your own words how the work style of a vibe coder differs from the work style of an agentic engineer." />
+<Exercise id="ex-7.1.2" level="L2" title="Rewrite one task from request mode into system mode" description="Take one real development task and rewrite it as a role-based workflow with explicit inputs, outputs, and verification boundaries." />
 
 <Separator />
 
-## Step 3: Upgrade PEV into a role-based system
+## Step 3: PEV still matters, but now it can be distributed
+The PEV loop did not disappear. It became a multi-role workflow.
 
-You already learned Plan, Execute, Verify in M4. In M7, that loop can be distributed: a planning agent breaks down work, an execution agent implements it, and a verification agent checks it.
+| PEV step | Possible role | Concrete output |
+|---|---|---|
+| Plan | Planning agent | Task breakdown, scope, acceptance checks |
+| Execute | Coding agent | Code changes or content changes |
+| Verify | Review or test agent | Findings, failed checks, approval or rejection |
 
-### Scenario
+<Callout title="Scenario: a real role-based handoff" tone="info">
+Situation: you want to add review notes to a project submission page. Action: one agent writes the implementation plan, one agent updates the code, and one agent checks lint, types, and user-facing regressions. Why: the point is not more activity. The point is cleaner handoffs and a more inspectable loop.
+</Callout>
 
-The method stays the same, but the carrier changes:
-- Plan can be handled by a planning role
-- Execute can be handled by a coding role
-- Verify can be handled by a testing or review role
-
-That is how a personal habit becomes a system design.
-
-<Exercise id="ex-7.1.3.1" level="L2" title="Assign roles to PEV" description="Choose one real task and define who handles Plan, Execute, and Verify, plus what each role takes in and produces." />
+<Exercise id="ex-7.1.3" level="L3" title="Design a real PEV workflow with separate roles" description="Choose one real feature or lesson rewrite, define who handles Plan, Execute, and Verify, and then run at least one of those roles in a real tool or repository workflow." />
 
 ## Summary
-- Single-agent collaboration has a real ceiling.
-- Agentic Engineering is about role and workflow design.
-- PEV still matters, but now it can be distributed across roles.
+- AI slop is often code that runs but carries hidden risk.
+- Agentic engineering shifts the focus from prompting to role and boundary design.
+- PEV becomes stronger when planning, execution, and verification are explicitly separated.
 
 ## Methodology Review
-This unit scales planning-driven work from a personal habit into a system design problem where roles, handoffs, and verification must be intentional.
+Planning-driven work scales here from "write a plan first" into "design the whole collaboration system first, then let execution happen inside it."
 
 ## References
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`

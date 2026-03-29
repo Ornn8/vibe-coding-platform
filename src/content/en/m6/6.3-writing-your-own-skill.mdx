@@ -1,69 +1,102 @@
 ---
 title: "Write Your Own Skill"
-description: "Start from repeated work and build a Skill that is testable, reusable, and able to change AI behavior consistently."
+description: "Use a real topic like Tailwind CSS to draft a complete `SKILL.md`, then test it in real work instead of treating it like static documentation."
 module: "m6"
 order: 3
 estimatedMins: 45
 methodologyTag: "Glue Coding"
 ---
 
-<Callout title="Method Focus" tone="warning">
-Writing a Skill is not mainly a documentation exercise. It is the act of turning a repeated, verified way of working into an asset.
+<Callout title="Method Focus" tone="success">
+Writing a Skill is not a trick. It is the act of compressing a verified way of working into a reusable workflow that AI can execute again later.
 </Callout>
 
-## Step 1: Pick a repeated task
+## Step 1: Start with one concrete, repeated theme
+We will use `Tailwind CSS` as the example topic because it creates the right kind of repeated guidance:
 
-The best Skill topics are usually not the biggest tasks. They are the repeated tasks that force you to restate the same rules over and over, such as UI patterns, database migrations, or PR review habits.
+| Repeated instruction | Why it belongs in a Skill |
+|---|---|
+| Reuse existing utility patterns first | It is a stable rule, not a one-off note |
+| Do not add large custom CSS casually | It is a clear boundary |
+| Check mobile layout after spacing edits | It is a repeatable verification action |
 
-### Scenario
+That is the signal you want. The problem is no longer "How do I phrase this once?" It is "How do I make this workflow reusable?"
 
-If you keep telling AI the same rules every time you touch a design system, that repeated explanation is a signal. It may be better as a Skill than as repeated chat instructions.
-
-<Exercise id="ex-6.3.1.1" level="L2" title="Choose one repeated task" description="Identify one recurring task in your work and explain why it is a good candidate for a Skill." />
-
-<Separator />
-
-## Step 2: Write the trigger and guardrails
-
-The trigger tells AI when this Skill applies. The guardrails tell AI what not to do. If those two parts are vague, the Skill will feel broad but guide nothing well.
-
-### Scenario
-
-The curriculum wants you to move from "maybe this Skill should help" to "this Skill should activate in these exact cases and never cross these lines."
-
-<Exercise id="ex-6.3.2.1" level="L1" title="Write triggers and guardrails" description="Draft clear activation conditions and non-negotiable boundaries for your Skill." />
+<Exercise id="ex-6.3.1" level="L1" title="Find a repeated task that deserves a Skill" description="List three rules you repeat in the same type of task and decide whether they are stable enough to package into a Skill." />
 
 <Separator />
 
-## Step 3: Draft with AI, then tighten the result
+## Step 2: Draft a minimum viable `SKILL.md`
+Here is a minimal but usable skeleton:
 
-You do not need to hand-write every sentence from zero. A practical workflow is to give AI a technical reference, ask it to extract the structure of `SKILL.md`, and then tighten the draft by hand.
+```md
+# Tailwind Layout Editing
 
-### Scenario
+## Trigger
+- When editing existing Tailwind-based UI
 
-The draft should start broad enough to capture the workflow, then be sharpened until the instructions become executable. That is the same "generate, verify, refine" loop used elsewhere in the curriculum.
+## Boundaries
+- Reuse the current utility style first
+- Avoid custom CSS unless necessary
+- Keep mobile-first responsive behavior
 
-<Exercise id="ex-6.3.3.1" level="L3" title="Add one strong example" description="Write one example input/output pair for your Skill so another person can understand how it should work." />
+## Workflow
+1. Read the current component structure
+2. Identify the layout or spacing issue
+3. Prefer utility-class edits
+4. Check mobile and desktop behavior
+
+## Example
+- Fix uneven card spacing without rewriting the component tree
+```
+
+This draft is not perfect yet, but it already answers three practical questions: when should the Skill run, what should it avoid, and what sequence should it follow?
+
+<Exercise id="ex-6.3.2" level="L2" title="Write your own minimum Skill skeleton" description="Choose one real topic and draft a `SKILL.md` skeleton with Trigger, Boundaries, Workflow, and Example sections." />
 
 <Separator />
 
-## Step 4: Test the Skill like you would test code
+## Step 3: Strengthen the draft with examples and prohibitions
+The draft becomes much more executable when you add trigger examples and explicit forbidden moves.
 
-Finishing the draft is not the end. You need to use it on a real task, observe whether it reduces rework or confusion, and then improve it. A Skill is itself a product that needs iteration.
+```text
+Before: When editing UI, try to use Tailwind.
+After: When the task involves layout, spacing, or responsive issues in an existing Tailwind component, activate this Skill. Do not create a new CSS file or restructure the component tree unless the request explicitly requires it.
+```
 
-### Scenario
+<Callout title="Scenario: why boundaries cannot stay vague" tone="warning">
+Situation: AI only needed to adjust utility classes, but it also rewrote the component structure and added custom CSS. Action: write those forbidden moves directly into the Skill. Why: if the boundary stays fuzzy, AI treats "helpful" as permission to keep expanding scope.
+</Callout>
 
-If the Skill works, the assistant should behave differently in a measurable way. If it does not, the revision loop should continue until it does.
+| Extra section to add | What it improves |
+|---|---|
+| Trigger examples | Helps AI recognize the right situation faster |
+| Explicit prohibitions | Prevents scope creep and over-editing |
+| Good-output example | Makes the expected result easier to imitate |
 
-<Exercise id="ex-6.3.4.1" level="L3" title="Test and refine the Skill" description="Use your Skill on a real task, record the result, and update the Skill based on what still felt unclear." />
+<Exercise id="ex-6.3.3" level="L2" title="Expand your Skill draft into a stronger working version" description="Take your first draft and add at least two trigger examples and two explicit prohibitions so the Skill becomes more executable." />
+
+<Separator />
+
+## Step 4: A Skill only becomes real after testing
+Skills should be tested like code.
+
+| Test question | What to observe |
+|---|---|
+| Does AI drift less? | It stops changing unrelated parts |
+| Do you repeat yourself less? | The old explanation burden goes down |
+| Is the output more stable? | The result follows the same workflow more consistently |
+
+<Exercise id="ex-6.3.4" level="L3" title="Use your Skill on a real task and iterate once" description="Apply your Skill to one real task, record what mistakes disappeared and what ambiguity remains, then revise the Skill one more time." />
 
 ## Summary
-- The best Skill topics are repeated tasks with repeated mistakes.
-- Triggers and guardrails make a Skill usable.
-- Skills should be drafted, tested, and improved like code.
+- The best Skill topics are repeated, rule-heavy tasks.
+- A minimal `SKILL.md` needs Trigger, Boundaries, Workflow, and Example.
+- Testing is what turns a draft into a real reusable asset.
 
 ## Methodology Review
-This unit continues glue coding by turning your own working patterns into reusable assets that future tasks can inherit.
+Glue coding becomes "productizing experience" here: not retelling the same rules, but turning them into something future tasks can actually inherit.
 
 ## References
+- `content-revision-plan.md`
 - `curriculum-m5-m8.md`
