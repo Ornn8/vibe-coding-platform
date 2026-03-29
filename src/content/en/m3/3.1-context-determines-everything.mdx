@@ -1,0 +1,77 @@
+---
+title: "Context Determines Everything"
+description: "Understand that AI output quality is largely determined by the task, background, and guardrails you provide."
+module: "m3"
+order: 1
+estimatedMins: 40
+methodologyTag: "Context Stabilization"
+---
+
+<Callout type="methodology" title="Methodology Focus">
+Context stabilization is the foundation of reliable collaboration. A prompt is not magic; the result depends on what information the model actually receives.
+</Callout>
+
+## Step 1: Why the Same Request Produces Different Results
+
+If you say "help me make a course page" without context, AI has to guess the stack, the style, the layout, and the audience. If you add project background, technical constraints, and a clear purpose, the result becomes much more focused.
+
+Prompt quality is not just about wording. It is about whether the context is complete enough for the model to make the right decisions.
+
+Compare the two requests:
+
+**Weak**
+
+```text
+Help me make a course page.
+```
+
+**Strong**
+
+```text
+Help me make a course page for a Next.js learning platform.
+The page should match the existing component style, support English and Chinese, and stay consistent with the current course navigation.
+```
+
+<Exercise id="ex-3.1.1.1" level="L1" title="Identify missing context" description="Look at a vague request and list at least five context details that would change the result." />
+
+<Separator />
+
+## Step 2: Context Has Layers
+
+A practical way to think about context is to split it into three layers. The task layer says what you want to do right now. The project layer covers the codebase, the user, and the goal. The system layer sets stable rules such as stack, conventions, and style boundaries.
+
+Once you see those layers, you know what belongs in a single prompt and what should be stored in something like `CLAUDE.md` or `AGENTS.md`.
+
+| Layer | What it contains | Example |
+|------|------------------|---------|
+| Task | The current request | "Refactor this lesson page" |
+| Project | The codebase and product goal | "This is a bilingual Next.js learning platform" |
+| System | Stable rules and conventions | "Use MDX, preserve route structure, avoid `any`" |
+
+<Exercise id="ex-3.1.2.1" level="L2" title="Sort the context layers" description="Take nine project facts and group them into task, project, or system layers." />
+
+<Separator />
+
+## Step 3: Compare Weak and Strong Context
+
+One of the fastest ways to learn prompt engineering is to compare. Run the same task twice: once with almost no context and once with a richer context packet. The difference in structure, stability, and rework will be obvious.
+
+When AI output looks unstable, the first question should not be "Which model should I switch to?" It should be "What context did I forget to give it?"
+
+The goal of the comparison is not to prove that one model is better. It is to prove that context changes the result.
+
+<Exercise id="ex-3.1.3.1" level="L3" title="Run a context comparison" description="Execute the same task with weak and strong context, then summarize the difference in results and why it happened." />
+
+## Unit Summary
+
+- Output differences usually come from context differences.
+- Context can be divided into task, project, and system layers.
+- Add information first; then adjust the prompt.
+
+## Methodology Review
+
+This unit introduces context stabilization: move stable information into a reusable place so you do not restart the collaboration from scratch every time.
+
+## References
+
+- `curriculum-v3.md`

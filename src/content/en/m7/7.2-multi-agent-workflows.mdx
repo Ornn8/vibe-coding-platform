@@ -1,0 +1,62 @@
+---
+title: "Multi-Agent Workflows"
+description: "Split planning, coding, testing, and review across roles and learn when parallel agent work actually helps."
+module: "m7"
+order: 2
+estimatedMins: 40
+methodologyTag: "Planning-Driven"
+---
+
+<Callout title="Method Focus" tone="warning">
+The value of multiple agents is not "more windows." It is lower cognitive load through clear role design and bounded parallel work.
+</Callout>
+
+## Step 1: Separate responsibility before you parallelize
+
+Not every task should be split across agents. Parallel work is only useful when subtasks have clear boundaries, controlled write scope, and outputs that can be integrated cleanly.
+
+### Scenario
+
+If one agent is asked to plan, code, test, and review at once, you do not get a coordinated workflow. You get faster confusion. If the roles are separated, the handoff becomes inspectable and the overlap becomes smaller.
+
+<Exercise id="ex-7.2.1.1" level="L1" title="Decide what can run in parallel" description="Compare three tasks and decide which ones are good candidates for multi-agent parallel work and which are not." />
+
+<Separator />
+
+## Step 2: Common multi-agent role patterns
+
+A typical workflow may include a planning agent, an implementation agent, a testing agent, and a review agent. Those roles do not need to appear every time, but you should know when each one adds value.
+
+### Scenario
+
+The curriculum compares multi-agent work to a software team:
+- product thinking maps the work
+- development builds it
+- QA checks it
+- a tech lead reviews the release
+
+The only difference is that the team members are AI roles.
+
+<Exercise id="ex-7.2.2.1" level="L2" title="Design a three-agent workflow" description="Design a workflow for one real task with at least three agents, including responsibilities, handoff inputs, and validation points." />
+
+<Separator />
+
+## Step 3: Move from workflow to automation
+
+Once the role model becomes stable, you can ask whether certain tasks should flow automatically from issue to plan, implementation, test, and PR. The goal is not blind automation. The goal is to be explicit about what can be automated and what still needs human approval.
+
+### Scenario
+
+The issue-to-PR path becomes useful only when every step is clear enough to be delegated and every risky boundary is clear enough to hold back for human review.
+
+<Exercise id="ex-7.2.3.1" level="L3" title="Sketch one automated workflow" description="Write or diagram a workflow from task trigger to review outcome, and mark exactly where human intervention is required." />
+
+## Summary
+- Clear boundaries matter more than raw parallelism.
+- Multi-agent workflows are primarily a role-design problem.
+
+## Methodology Review
+This unit combines planning-driven work with glue coding by making delegation rules, agent roles, and handoff structure explicit.
+
+## References
+- `curriculum-m5-m8.md`

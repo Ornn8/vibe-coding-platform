@@ -1,0 +1,74 @@
+---
+title: "System Prompts: CLAUDE.md"
+description: "Learn project-level prompting through CLAUDE.md and decide what must be explicit for long-running collaboration."
+module: "m3"
+order: 4
+estimatedMins: 40
+methodologyTag: "Context Stabilization"
+---
+
+<Callout type="methodology" title="Methodology Focus">
+System prompts are the project manual for AI. They capture the stable rules that should not need to be repeated every time.
+</Callout>
+
+## Step 1: What a System Prompt Is
+
+A system prompt is not just a fancy instruction. It is the project-level agreement that tells AI how to behave over time: what its role is, what principles matter, and what should remain consistent.
+
+That is why files like `CLAUDE.md`, `AGENTS.md`, or similar project instructions matter so much. They reduce repetition and help collaboration stay stable.
+
+<Exercise id="ex-3.4.1.1" level="L1" title="Describe the purpose of a system prompt" description="Write a short explanation of what a project-level system prompt is and why it matters." />
+
+<Separator />
+
+## Step 2: What Belongs in CLAUDE.md
+
+Useful system prompts usually define role, principles, guardrails, and delivery expectations. They may also list stack choices, communication habits, verification rules, or project-specific constraints.
+
+The goal is to turn invisible team knowledge into something that AI can actually use.
+
+Use a structure like this:
+
+- Role: who AI should be in the project
+- Principles: the stable habits it should follow
+- Boundaries: what it should not change without asking
+- Delivery rules: how work should be verified and handed off
+
+For example, a small CLAUDE.md might say: "You are a careful pair-programming assistant for this repository. Keep the current route structure intact, do not change file names without permission, run lint before finalizing, and summarize the change in one short paragraph."
+
+<Exercise id="ex-3.4.2.1" level="L2" title="Draft a project-level prompt" description="Write a first draft of CLAUDE.md for a real project, including role, principles, boundaries, and delivery style." />
+
+<Separator />
+
+## Step 3: Keep It Maintainable
+
+A good system prompt is not overloaded with every possible detail. It should stay readable and stable. If it becomes too long or too specific, people stop using it.
+
+The best version is the one that actually helps you start work faster and stay aligned longer.
+
+<Exercise id="ex-3.4.3.1" level="L3" title="Trim a noisy system prompt" description="Take a bloated system prompt and rewrite it so only the stable, reusable parts remain." />
+
+<Separator />
+
+## Step 4: Apply Construction Principles
+
+System prompt construction should follow a few simple principles: keep it clear, keep it consistent, and keep the boundaries explicit. That is how a reusable project manual stays useful over time.
+
+When a system prompt is well built, it becomes a shared memory layer instead of a pile of reminders.
+
+<Exercise id="ex-3.4.4.1" level="L3" title="Improve your CLAUDE.md" description="Review your CLAUDE.md against the construction principles and revise at least three sections." />
+
+## Unit Summary
+
+- System prompts capture long-running collaboration rules.
+- CLAUDE.md is where a project turns hidden knowledge into reusable guidance.
+- Good system prompts are concise enough to stay maintainable.
+
+## Methodology Review
+
+This unit strengthens context stabilization by moving stable project knowledge into a reusable system-level prompt.
+
+## References
+
+- `curriculum-v3.md`
+- `AGENTS.md`

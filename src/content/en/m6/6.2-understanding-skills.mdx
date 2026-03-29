@@ -1,0 +1,82 @@
+---
+title: "Skills: Give AI an Operating Manual"
+description: "Understand what Skills do, how they are structured, and why raw capability still needs operating guidance."
+module: "m6"
+order: 2
+estimatedMins: 40
+methodologyTag: "Glue Coding"
+---
+
+<Callout title="Method Focus" tone="warning">
+The value of a Skill is not that it makes AI smarter. It is that it makes AI more consistent, more constrained, and easier to trust for a specific kind of work.
+</Callout>
+
+## Step 1: What problem a Skill solves
+
+Even when AI can access a codebase, database, or docs, it may still not know how your project expects the work to be done. A Skill fills that gap by packaging proven workflow, constraints, and examples into reusable operating guidance.
+
+### Scenario
+
+Two assistants have the same connection to a database:
+- Assistant A gets only access and guesses the workflow.
+- Assistant B gets access plus a Skill that explains how to query, format, and verify safely.
+
+Both can reach the database. Only one is likely to use it well.
+
+<Exercise id="ex-6.2.1.1" level="L1" title="Separate capability from guidance" description="Give one example where AI already has the capability to act, but still needs a Skill to act well." />
+
+<Separator />
+
+## Step 2: What belongs inside a Skill
+
+A useful Skill usually includes triggers, task guidance, constraints, workflow, and examples. Each part does a different job:
+
+- Triggers define when the Skill should activate
+- Constraints define what must not happen
+- Workflow explains the steps to follow
+- Examples show what good output looks like
+
+### Scenario
+
+The curriculum's `SKILL.md` breakdown is meant to show that a Skill is a structured operating manual, not a loose note. Trigger, constraint, pattern, and example each carry a different kind of instruction.
+
+<Exercise id="ex-6.2.2.1" level="L2" title="Dissect one Skill" description="Choose one existing Skill and explain what its triggers, constraints, workflow, and examples each contribute." />
+
+<Separator />
+
+## Step 3: What makes a Skill good
+
+A good Skill is not necessarily long. It is clear about when to use it, what it allows, and what it forbids. A weak Skill is broad, vague, and unable to guide anything reliably.
+
+### Scenario
+
+Compare these two fragments:
+- Weak: "Use best practices and be careful."
+- Strong: "When editing SQL, never change production data without a rollback plan, and always show the expected result before execution."
+
+The second version is more usable because it tells AI what good looks like and what failure looks like.
+
+<Exercise id="ex-6.2.3.1" level="L2" title="Compare two Skill fragments" description="Compare two short Skill fragments and decide which one offers clearer triggers and more actionable constraints." />
+
+<Separator />
+
+## Step 4: Observe Skill behavior in real tasks
+
+The real test of a Skill is not whether it exists, but whether it changes behavior in live work. Watch for more stable output, fewer re-explanations, and less rework.
+
+### Scenario
+
+If the same task goes from "please remind me again" to "the assistant already knows the pattern," the Skill is working. If nothing changes, the draft still needs sharpening.
+
+<Exercise id="ex-6.2.4.1" level="L3" title="Observe a real Skill run" description="Use one Skill on a real task, then record what changed in the AI's behavior and what still needs improvement." />
+
+## Summary
+- A Skill packages repeatable operating guidance, not raw capability.
+- Strong Skills have clear triggers, constraints, workflow, and examples.
+- The only real test is whether they improve behavior in live work.
+
+## Methodology Review
+This unit demonstrates glue coding by packaging proven operating guidance into reusable instructions instead of re-explaining best practice every time.
+
+## References
+- `curriculum-m5-m8.md`

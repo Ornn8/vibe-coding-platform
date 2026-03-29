@@ -1,0 +1,72 @@
+---
+title: "Debug Methodology: Use AI to Fix AI"
+description: "Learn to feed errors, screenshots, and expectation gaps back into AI as a repeatable debug loop."
+module: "m5"
+order: 2
+estimatedMins: 35
+methodologyTag: "Closed-Loop Delivery"
+---
+
+<Callout title="Method Focus" tone="warning">
+Debugging is not an argument with the model. It is a feedback loop: collect evidence, send it back, verify the fix, then continue.
+</Callout>
+
+## Step 1: What to do when AI-generated code breaks
+
+When a generated page fails, the best move is not to guess. Copy the error, keep the evidence, and let AI work from the actual failure rather than from your memory of it.
+
+The curriculum's debugging pattern is simple:
+- See the error
+- Copy the exact message
+- Paste it back to AI
+- Ask for the likely cause
+- Apply the fix
+- Verify the result
+
+### Scenario
+
+Two people hit the same red screen. One says, "It probably needs a reinstall." The other pastes the stack trace and the failing file into AI. The second person finds the bug faster because the input is real, not guessed.
+
+<Exercise id="ex-5.2.1" level="L1" title="Choose the best debug move" description="Among three debug habits, decide which one is most effective and why." />
+
+<Separator />
+
+## Step 2: Match the error type to the right kind of input
+
+The curriculum separates three common error types because the evidence you provide should match the bug. JavaScript runtime errors want logs. Visual problems want screenshots. Logic errors want a clear description of expected versus actual behavior.
+
+### Scenario
+
+- If the browser console shows a stack trace, give AI the console output.
+- If a button is misaligned, give AI a screenshot.
+- If a form saves the wrong value, describe what you expected and what happened instead.
+
+The same fix request becomes much stronger when the evidence matches the failure.
+
+<Exercise id="ex-5.2.2" level="L2" title="Use the right evidence" description="Introduce one CSS problem and ask AI to fix it using a screenshot instead of a guess." />
+
+<Separator />
+
+## Step 3: Know when to restart the conversation
+
+Sometimes the thread has become part of the problem. After too many turns, the context becomes polluted, repeated errors keep coming back, and the model starts losing the thread of the original goal.
+
+### Scenario
+
+One conversation has gone through 20 rounds of patching. Another has only two rounds and still understands the project rules. The first conversation may need a restart; the second likely does not.
+
+This step is about judgment, not superstition. Restart when the conversation is now more confusing than helpful.
+
+<Exercise id="ex-5.2.3.1" level="L2" title="Judge whether to restart" description="Decide whether three dialogue scenarios should continue or restart." />
+<Exercise id="ex-5.2.3.2" level="L3" title="Document one full debug loop" description="Complete one real debug cycle in your project and record the investigation log." />
+
+## Summary
+- Effective debugging starts with evidence, not guesses.
+- Different failures require different kinds of evidence.
+- Restart the conversation when the context has become the bug.
+
+## Methodology Review
+This unit applies closed-loop delivery to debugging: collect evidence, feed it back, verify the fix, and only then move forward.
+
+## References
+- `curriculum-m5-m8.md`

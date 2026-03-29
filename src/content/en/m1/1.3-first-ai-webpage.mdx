@@ -1,0 +1,82 @@
+---
+title: "Hands-On: Your First AI-Generated Web Page"
+description: "Build a simple page, iterate with prompts, and learn to read the structure of what AI generates."
+module: "m1"
+order: 3
+estimatedMins: 35
+methodologyTag: "Planning-Driven"
+---
+
+<Callout type="methodology" title="Methodology Focus">
+Even a tiny page should start with a clear target. If you know what "done" looks like, your prompts stop becoming guesswork.
+</Callout>
+
+## Step 1: Make the First Version Small
+
+Your first target should be tiny. A personal intro page with a title, a short bio, a skill section, an avatar, and a contact button is enough. The point is not to impress anyone; the point is to practice coordinating with AI.
+
+Your first prompt should aim for completeness, not polish. Tell the tool what the page needs to contain, what mood it should have, and who it is for. That is already far better than saying "make me a website."
+
+```text
+Please generate a personal intro page.
+Include: name, short introduction, three skill tags, an avatar area, and a contact button.
+Style: clean, bright, portfolio-like.
+Goal: produce a usable first draft.
+```
+
+<Exercise id="ex-1.3.1.1" level="L2" title="Generate your first page" description="Use a browser-based AI tool to generate a personal intro page and save the first prompt you used." />
+
+<Separator />
+
+## Step 2: Make Changes Specific
+
+One of the core habits in Vibe Coding is translating vague feelings into concrete edits. "Make it better" is not a helpful request. "Change the main color to deep blue, reduce top whitespace, turn the skill tags into cards, and rewrite the CTA" is.
+
+Try to change one dimension at a time. First layout, then visual style, then copy. If you document each prompt and result, you will very quickly learn which kinds of instructions actually work.
+
+**Before**
+
+```text
+Make this page better.
+```
+
+**After**
+
+```text
+Keep the current structure, but adjust the visual style: change the primary color to deep blue, use a stronger CTA button, convert the skill tags into cards, and add 16px more whitespace around the layout.
+```
+
+<Exercise id="ex-1.3.2.1" level="L2" title="Run three explainable iterations" description="Make three rounds of changes to the same page. Each round should change only one dimension, and you should record the prompt, the result, and your observation." />
+
+<Separator />
+
+## Step 3: Learn to Read the Output
+
+Once the page exists, do not rush into more features. First, inspect what AI actually produced. Even if you do not understand every line of code yet, you can still learn to read file names, directory names, and component names.
+
+This is the point where AI output stops feeling like magic and starts feeling like a project you can continue to maintain. That structural awareness will pay off later when you move into IDE and CLI workflows.
+
+When you inspect the output, look for the kinds of files that usually appear in a generated project:
+
+- `src/` or `app/` for route and page code
+- `components/` for reusable UI blocks
+- `assets/` or `public/` for images and static resources
+- `README` or prompt logs for the generator's own notes
+
+<Exercise id="ex-1.3.3.1" level="L3" title="Describe the file structure you see" description="Inspect the generated page project and write down three to five files or folders you found, plus your best guess about what each one does." />
+
+## Unit Summary
+
+- The first version should be complete and usable, not perfect.
+- Good iteration prompts tell AI exactly what to change and what to leave alone.
+- Reading the output structure is the first step toward real project collaboration.
+
+## Methodology Review
+
+This unit continues planning-driven practice: you set a clear first-version goal and a narrow change scope before you start.
+
+## References
+
+- `curriculum-v3.md`
+- `content-authoring-plan.md`
+- Existing MDX and page structure conventions in this repository

@@ -1,0 +1,63 @@
+---
+title: "Pre-Launch Security Checks"
+description: "Identify common risks in AI-generated code and build a minimum viable security checklist before launch."
+module: "m8"
+order: 2
+estimatedMins: 40
+methodologyTag: "Closed-Loop Delivery"
+---
+
+<Callout title="Method Focus" tone="warning">
+AI can help you ship faster, but it can also help you replicate risk faster. A release checklist is part of responsible delivery.
+</Callout>
+
+## Step 1: The most common AI-era security mistakes
+
+Hardcoded secrets, weak input validation, unclear permission boundaries, overexposed errors, and risky query or integration patterns are all common. The danger is that these issues often still "work" until they are deployed.
+
+### Scenario
+
+The curriculum's warning is simple: code that appears functional can still be unsafe. A hardcoded API key, an unvalidated form, or a wide-open permission boundary may not break the app right away, but it can still break the release.
+
+<Exercise id="ex-8.2.1.1" level="L1" title="Find security weak points" description="Identify three security risks in your own project and explain why each one matters." />
+
+<Separator />
+
+## Step 2: Treat environment and credential management seriously
+
+`.env` should never be committed. Deployment environments need the right variables in the right place. Many developers can build features. Far fewer can handle credentials safely enough to launch.
+
+### Scenario
+
+Before:
+- secrets live in source files or in ad hoc notes
+
+After:
+- secrets live in environment variables
+- `.env.example` shows only safe placeholders
+- deployment settings match the runtime environment
+
+<Exercise id="ex-8.2.2.1" level="L2" title="Run a config audit" description="Check whether `.env` is correctly ignored, whether any secrets are hardcoded, and document the result." />
+
+<Separator />
+
+## Step 3: Build a repeatable release checklist
+
+You do not need enterprise-grade security on day one, but you do need a repeatable minimum: HTTPS, auth, input validation, error handling, access control, logs, and rollback thinking.
+
+### Scenario
+
+A release checklist matters because it is reusable. The curriculum wants the same safety check to work before every launch, not just when a problem is already visible.
+
+<Exercise id="ex-8.2.3.1" level="L3" title="Run one pre-launch audit" description="Use your launch checklist on a real project and record the issues, risk level, and planned fixes." />
+
+## Summary
+- The biggest release risk is often the issue that still seems to work.
+- Credentials and permissions are easy to neglect and expensive to neglect.
+- Security checklists are valuable because they are repeatable, not because they are long.
+
+## Methodology Review
+This unit applies closed-loop delivery to release safety by turning security checks into explicit, repeatable gates before launch.
+
+## References
+- `curriculum-m5-m8.md`

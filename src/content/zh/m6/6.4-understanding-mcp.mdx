@@ -1,0 +1,48 @@
+---
+title: "MCP 协议：让 AI 连接外部世界"
+description: "理解标准化工具连接协议，以及它如何和 Skill 一起组成稳定的能力层。"
+module: "m6"
+order: 4
+estimatedMins: 40
+methodologyTag: "胶水编程"
+---
+
+<Callout title="本单元方法论焦点" tone="success">
+MCP 解决的是“接什么”，Skill 解决的是“怎么接得稳”。两者配合，AI 才能真正接入外部世界。
+</Callout>
+
+## Step 1: MCP 到底是什么
+MCP 可以理解为标准化的工具连接协议。以前每个工具都要单独适配，像每个国家都要换不同插头；MCP 则尽量把连接方式统一起来。  
+这解决的是最底层的问题：AI 不只是会回答，还要能调用外部能力。
+场景对比：没有标准协议时，每接一个工具都要定制接口；有 MCP 时，连接方式更统一，工具切换成本更低。
+
+<Exercise id="ex-6.4.1" level="L1" title="说出 MCP 解决的核心问题" description="用自己的话说明 MCP 解决了什么问题，以及为什么它不是普通的插件。" />
+
+<Separator />
+
+## Step 2: 在 Claude Code 里使用 MCP
+真正理解 MCP，不是背概念，而是把一个 MCP 服务接进来、看见 AI 的行为变化。  
+当 AI 能访问外部数据、仓库或其他服务时，你会发现它的回答不再只依赖聊天记录，而是可以基于实时能力做决定。
+场景对比：接入仓库类 MCP 后，AI 不再只是“猜仓库里有什么”，而是能读取真实内容再行动。
+
+<Exercise id="ex-6.4.2" level="L2" title="配置一个 MCP 服务并使用" description="选择一个你有账号的 MCP 服务，把它接入 Claude Code 并完成一次实际调用。" />
+
+<Separator />
+
+## Step 3: MCP 和 Skill 怎么一起用
+单有 MCP，AI 可能会“会连不会用”；单有 Skill，AI 可能会“会说不会连”。最稳的做法是把两者组合：MCP 提供能力，Skill 规定流程。  
+这就是胶水编程最有价值的地方：把外部世界的接口和内部操作手册绑成一个闭环。
+场景对比：MCP 是入口，Skill 是操作规程。入口打开了，不代表每次都能正确使用，必须两者一起设计。
+
+<Exercise id="ex-6.4.3" level="L3" title="为一个 MCP 配一份 Skill" description="为你在 Step 2 接入的 MCP 服务编写一份配套 Skill，并验证它们能一起工作。" />
+
+## 本单元小结
+- MCP 是标准化的连接协议，不是单纯的功能列表。
+- 先连上能力，再规定怎么用能力，效果最稳定。
+- Skill 和 MCP 结合后，AI 才真正具备可控的外部操作能力。
+
+## 方法论回顾
+从这里开始，胶水编程正式进入“连接能力 + 规范流程”的双层结构。
+
+## 参考来源
+- `curriculum-m5-m8.md`

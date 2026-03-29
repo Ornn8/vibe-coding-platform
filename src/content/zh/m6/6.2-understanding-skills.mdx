@@ -1,0 +1,57 @@
+---
+title: "Skill 系统：给 AI 装操作手册"
+description: "理解 MCP 和 Skill 的分工，并学会读取、使用和分析现成 Skill。"
+module: "m6"
+order: 2
+estimatedMins: 40
+methodologyTag: "胶水编程"
+---
+
+<Callout title="本单元方法论焦点" tone="success">
+MCP 解决“连得上”，Skill 解决“会不会用”。连接能力和操作说明，缺一个都不稳。
+</Callout>
+
+## Step 1: MCP 和 Skill 分别解决什么问题
+可以把 MCP 理解成 AI 的“手”，把 Skill 理解成“操作手册”。前者让它能接触外部能力，后者让它知道这些能力应该怎么正确使用。  
+只会连工具，不代表会把工具用好；只会写提示，也不代表能把成熟流程稳定复用。
+场景对比：MCP 像接上水管，Skill 像告诉你水龙头该怎么开、开多大、什么时候关。
+
+<Exercise id="ex-6.2.1" level="L1" title="区分两者的职责" description="说明 MCP 和 Skill 分别适合解决什么问题，并给出一个最典型的例子。" />
+
+<Separator />
+
+## Step 2: SKILL.md 应该长什么样
+一个可用的 Skill 通常包含触发条件、边界、步骤、约束和示例。它不是散乱笔记，而是让 AI 能稳定复现某类操作的说明书。  
+你可以把一个现成 Skill 拆开看：为什么它会被触发、它要求 AI 先做什么、它禁止什么、它在什么场景下最有效。
+场景对比：同样叫“写一个 Skill”，有触发条件和边界的文档能被稳定复用；没有这些元素的，AI 每次都要重新猜。
+
+<Exercise id="ex-6.2.2" level="L2" title="分析一个真实 Skill" description="找一个现成 Skill，逐段说明它的触发条件、边界和执行步骤分别在做什么。" />
+
+<Separator />
+
+## Step 3: 在 Claude Code 里使用现成 Skill
+会看 Skill 不等于会用 Skill。真正的练习是把一个现成 Skill 加载进来，然后观察 AI 在它的约束下如何改变行为。  
+你会发现，有了 Skill 之后，AI 不只是回答问题，而是更像在执行一个被定义好的流程。
+场景对比：不加载 Skill 时，AI 只是“知道一些建议”；加载后，它会按步骤执行，并更少偏离流程。
+
+<Exercise id="ex-6.2.3" level="L2" title="加载一个现成 Skill 并观察变化" description="在 Claude Code 中加载一个现成 Skill，记录它如何改变 AI 的回答方式和输出顺序。" />
+
+<Separator />
+
+## Step 4: Skill 是胶水编程的高级形态
+Skill 的高级价值，不是发明新知识，而是把已经验证过的最佳实践封装成可复用流程。它像胶水，把工具、流程和约束粘成一个稳定工作单元。  
+当你面对一个技术库或工作流时，可以反过来思考：如果要让 AI 稳定使用它，最需要补哪三五条操作说明？
+场景对比：如果一个库经常被误用，通常不是库本身有问题，而是缺少能让 AI 正确执行的 Skill 包装。
+
+<Exercise id="ex-6.2.4" level="L3" title="推导一个库需要什么 Skill" description="选择一个你常用的技术库，写出它最需要被封装成 Skill 的 3-5 条最佳实践。" />
+
+## 本单元小结
+- MCP 负责连接外部能力，Skill 负责指导如何使用能力。
+- 好的 Skill 不是说明越长越好，而是结构越清楚越好。
+- Skill 本质上是把验证过的流程封装成可复用的操作手册。
+
+## 方法论回顾
+胶水编程在这里进入新阶段：不只是连工具，而是把工具的使用方式产品化。
+
+## 参考来源
+- `curriculum-m5-m8.md`

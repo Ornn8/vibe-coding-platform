@@ -1,0 +1,78 @@
+---
+title: "Planning Is Everything: PRDs and Implementation Plans"
+description: "See why planning is not overhead but the first safeguard against AI-driven chaos."
+module: "m4"
+order: 1
+estimatedMins: 45
+methodologyTag: "Planning-Driven"
+---
+
+<Callout type="methodology" title="Methodology Focus">
+This unit is the most concentrated version of planning-driven work. The PRD defines the goal, and the implementation plan defines the order of execution.
+</Callout>
+
+## Step 1: A Failure Case Shows Why Planning Comes First
+
+Imagine a learner asking, "help me build a blog." The first draft looks fine, then the scope expands, the prompt changes again and again, and after 15 rounds the project is still unstable. The failure is not a single bad prompt. The failure is that nobody defined the target well enough at the start.
+
+That is why planning-driven work starts with failure analysis. The point is to feel the cost of weak planning before learning the fix.
+
+<Exercise id="ex-4.1.1.1" level="L1" title="Mark the missing decisions" description="Read a failing project story and mark where the learner should have paused to plan." />
+
+<Separator />
+
+## Step 2: PRDs Answer What to Build
+
+A PRD defines the user, the problem, the core flow, the scope, and the acceptance criteria. It does not explain every implementation detail. Its job is to make sure humans and AI agree on what the delivery should be.
+
+Good PRDs do not need to be long. They need to answer why this exists, who it is for, what the first version includes, and how success will be judged.
+
+Use a simple template:
+
+- Background
+- User
+- Core flow
+- Scope
+- Acceptance criteria
+
+For example, a tomato timer PRD might say the user is a student who wants short focus sessions, the core flow is start timer -> break reminder -> history, and the scope excludes login and social sharing.
+
+<Exercise id="ex-4.1.2.1" level="L2" title="Write a one-page PRD" description="For a new project, write the background, user, core flow, scope, and acceptance criteria." />
+
+<Separator />
+
+## Step 3: Implementation Plans Answer How to Build
+
+Once the PRD is clear, the next step is to turn it into a sequence of executable steps. The value of an implementation plan is that it breaks a big goal into smaller pieces and pairs each piece with a verification action.
+
+Planning is not about predicting everything. It is about reducing chaos and making change manageable.
+
+For the same tomato timer example, the plan might split into data model, timer UI, reminder flow, history page, and final verification. Each step should be small enough to complete and check.
+
+<Exercise id="ex-4.1.3.1" level="L2" title="Break the plan into 5 to 8 steps" description="Take your PRD and split it into 5 to 8 implementation steps, each with a short verification note." />
+
+<Separator />
+
+## Step 4: Choose Mature Building Blocks
+
+Planning is also where glue coding starts. Once the target is clear, you can choose stable libraries, frameworks, and patterns instead of asking AI to invent everything from scratch.
+
+The goal is not to use the most novel stack. The goal is to reduce risk by connecting dependable pieces around a well-defined core.
+
+For example, you might reuse Next.js, Prisma, and shadcn/ui instead of asking AI to invent your own routing system, database layer, or component library.
+
+<Exercise id="ex-4.1.4.1" level="L3" title="List mature building blocks" description="For your project, list the mature libraries or frameworks you would prefer to reuse and explain why." />
+
+## Unit Summary
+
+- PRDs define goals and boundaries; plans define sequence and actions.
+- Good plans are broken into small, verifiable steps.
+- Separating requirements and plans makes later collaboration easier.
+
+## Methodology Review
+
+This unit turns planning-driven thinking into two concrete documents and prepares you for glue coding.
+
+## References
+
+- `curriculum-v3.md`

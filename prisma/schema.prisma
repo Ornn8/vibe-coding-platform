@@ -1,0 +1,279 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  STUDENT
+  ADMIN
+}
+
+enum ModuleTier {
+  CORE
+  ADVANCED
+}
+
+enum ExerciseType {
+  LESSON_EXERCISE
+  MODULE_PROJECT
+}
+
+enum SubmissionStatus {
+  DRAFT
+  SUBMITTED
+  REVIEWED
+  COMPLETED
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  role          UserRole  @default(STUDENT)
+  locale        String    @default("zh")
+
+  accounts        Account[]
+  sessions        Session[]
+  lessonProgress  LessonProgress[]
+  submissions     Submission[]
+  promptTemplates PromptTemplate[]
+  dailyActiveLogs DailyActiveLog[]
+
+  streakDays     Int       @default(0)
+  lastActiveAt   DateTime?
+  totalStudyMins Int       @default(0)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+model Module {
+  id            String       @id @default(cuid())
+  slug          String       @unique
+  order         Int          @unique
+  tier          ModuleTier   @default(CORE)
+  title         Json
+  description   Json
+  durationWeeks Float        @default(1.5)
+
+  lessons Lesson[]
+  project ModuleProject?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("modules")
+}
+
+model Lesson {
+  id          String @id @default(cuid())
+  moduleId    String
+  slug        String
+  order       Int
+  title       Json
+  description Json?
+
+  module    Module           @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  exercises Exercise[]
+  progress  LessonProgress[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@unique([moduleId, slug])
+  @@unique([moduleId, order])
+  @@map("lessons")
+}
+
+model Exercise {
+  id          String       @id @default(cuid())
+  lessonId    String?
+  type        ExerciseType @default(LESSON_EXERCISE)
+  order       Int          @default(0)
+  title       Json
+  description Json
+
+  lesson         Lesson?                 @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  moduleProject  ModuleProject?
+  checklistItems ChecklistItem[]
+  submissions    Submission[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([lessonId, type])
+  @@map("exercises")
+}
+
+model ChecklistItem {
+  id         String @id @default(cuid())
+  exerciseId String
+  order      Int    @default(0)
+  label      Json
+
+  exercise          Exercise                @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  submissionChecks  SubmissionCheckStatus[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@unique([exerciseId, order])
+  @@map("checklist_items")
+}
+
+model ModuleProject {
+  id          String @id @default(cuid())
+  moduleId    String @unique
+  exerciseId  String @unique
+  title       Json
+  description Json
+
+  module   Module   @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  exercise Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("module_projects")
+}
+
+model LessonProgress {
+  id          String @id @default(cuid())
+  userId      String
+  lessonId    String
+  completed   Boolean   @default(false)
+  completedAt DateTime?
+  studyMins   Int       @default(0)
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, lessonId])
+  @@map("lesson_progress")
+}
+
+model Submission {
+  id         String           @id @default(cuid())
+  userId     String
+  exerciseId String
+  status     SubmissionStatus @default(DRAFT)
+  content    Json
+  reviewNote String?
+  reviewedAt DateTime?
+
+  user              User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exercise          Exercise                @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  checklistStatuses SubmissionCheckStatus[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@unique([userId, exerciseId])
+  @@index([status])
+  @@map("submissions")
+}
+
+model SubmissionCheckStatus {
+  id              String @id @default(cuid())
+  submissionId    String
+  checklistItemId String
+  checked         Boolean @default(false)
+
+  submission    Submission    @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  checklistItem ChecklistItem @relation(fields: [checklistItemId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([submissionId, checklistItemId])
+  @@map("submission_check_statuses")
+}
+
+model PromptTemplate {
+  id       String @id @default(cuid())
+  userId   String
+  title    String
+  content  String   @db.Text
+  category String?
+  tags     String[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("prompt_templates")
+}
+
+model DailyActiveLog {
+  id     String   @id @default(cuid())
+  userId String
+  date   DateTime @db.Date
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, date])
+  @@map("daily_active_logs")
+}

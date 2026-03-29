@@ -1,0 +1,58 @@
+---
+title: "Why Your Vibe Coding Keeps Going Off the Rails"
+description: "Use failure cases to see that many AI build failures begin with weak problem definition, not weak tools."
+module: "m2"
+order: 1
+estimatedMins: 25
+methodologyTag: "Planning-Driven"
+---
+
+<Callout type="methodology" title="Methodology Focus">
+The easiest place to understand planning-driven work is in failure cases. Most breakdowns happen because uncertainty is passed straight to AI.
+</Callout>
+
+## Step 1: Failures Usually Start Early
+
+Many AI projects do not collapse because one prompt was bad. They drift because nobody clearly defined the user, the scope, or the success criteria at the beginning. AI can only work with the information you give it, and vague input usually produces vague output.
+
+The real issue is not a mistyped prompt. It is the absence of boundaries. Unclear requirements, too many features, and missing verification usually appear together.
+
+One common pattern looks like this:
+
+1. Someone says, "Build me a blog."
+2. AI chooses a style and stack without enough context.
+3. More features are added because the first version feels incomplete.
+4. The project is still not useful after many rounds of revision.
+
+<Exercise id="ex-2.1.1.1" level="L1" title="Spot the warning signs" description="Recall a project that failed or nearly failed and write down three early warning signs that showed up first." />
+
+<Separator />
+
+## Step 2: The Root Cause Is Usually the Requirement Stage
+
+If you ask an AI to "build a vocabulary app," it will silently make a lot of assumptions: who the user is, which feature matters most, whether it is mobile or web, how the data is stored, and what counts as success. Those assumptions may be wrong.
+
+That is why M2 is not about writing longer prompts. It is about defining the problem well enough that the later PRD, plan, and coding work have a real foundation.
+
+Before AI starts building, ask:
+
+- Who is the user?
+- What pain are we solving?
+- Why this solution instead of an obvious alternative?
+
+<Exercise id="ex-2.1.2.1" level="L2" title="Review the root cause" description="For a failing project, write the three questions that should have been answered before work started." />
+
+## Unit Summary
+
+- Failures are usually cumulative, not sudden.
+- Vague requirements will be amplified by AI, not fixed by it.
+- Requirement definition is the starting point of all later collaboration quality.
+
+## Methodology Review
+
+This unit turns planning-driven thinking into a felt experience: if you do not plan, every later step gets more expensive.
+
+## References
+
+- `curriculum-v3.md`
+- Common AI collaboration failure patterns

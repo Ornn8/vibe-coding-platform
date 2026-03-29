@@ -1,0 +1,48 @@
+---
+title: "从 Vibe Coding 到 Agentic Engineering"
+description: "理解为什么单 Agent 协作开始碰壁，以及为什么需要把工作拆成多个角色。"
+module: "m7"
+order: 1
+estimatedMins: 35
+methodologyTag: "规划驱动"
+---
+
+<Callout title="本单元方法论焦点" tone="warning">
+进阶的关键不是让 AI 做更多，而是让你从“直接写提示词的人”变成“设计协作系统的人”。
+</Callout>
+
+## Step 1: 为什么 Vibe Coding 需要升级
+Karpathy 让我们看到“和 AI 一起快速做出来”这件事，但当项目进入生产级复杂度时，新的问题就出现了：AI Slop、边界不清、认知负债、以及安全风险。  
+对比一下：小项目里，快比稳更重要；大项目里，缺少规划和审查会把速度变成风险放大器。
+场景对比：做一个个人小工具时，Vibe Coding 很顺手；做一个会被多人持续使用的系统时，只靠快速生成就很容易堆出一层又一层债务。
+
+<Exercise id="ex-7.1.1.1" level="L1" title="识别 AI Slop" description="回看一段代码或输出，判断哪些部分属于表面正确、实际不可持续的 AI Slop。" />
+
+<Separator />
+
+## Step 2: Agentic Engineering 到底在做什么
+Agentic Engineering 的重点不是让 AI 写更长的代码，而是让你学会编排多个 Agent 的职责。  
+对比一下：Vibe Coder 更像“我说一句，它做一句”；Agentic Engineer 更像“我设计目标、流程和审查点，让不同角色分别完成不同工作”。
+场景对比：一个人负责到底时容易混在一起；把规划、实现和验证拆开后，复杂任务更容易被稳定推进。
+
+<Exercise id="ex-7.1.2.1" level="L2" title="描述角色转变" description="用自己的话说明 Vibe Coder 和 Agentic Engineer 的本质区别，以及为什么后者更适合复杂项目。" />
+
+<Separator />
+
+## Step 3: PEV 如何升级成系统流程
+在 M4 里你学过 Plan、Execute、Verify。到了 M7，这个循环不再只发生在你和一个 AI 之间，而是可以分给不同角色：规划 Agent 负责拆解，执行 Agent 负责实现，验证 Agent 负责检查。  
+这就是从单人操作走向系统化协作的关键一步。
+场景对比：以前是你自己来回切换思路，现在可以让不同 Agent 分别承担计划、实现和审查，减少上下文切换成本。
+
+<Exercise id="ex-7.1.3.1" level="L2" title="为一个任务分配 PEV 角色" description="选一个真实任务，为 Plan、Execute、Verify 分别指定谁来负责，并说明输入输出是什么。" />
+
+## 本单元小结
+- Vibe Coding 升级不是因为它无用，而是因为任务规模变复杂了。
+- Agentic Engineering 的核心是编排角色，而不是单纯增加输出。
+- PEV 在进阶阶段会变成多角色协作流程。
+
+## 方法论回顾
+当你开始设计协作系统，而不是只写提示词时，Agentic Engineering 才真正开始。
+
+## 参考来源
+- `curriculum-m5-m8.md`

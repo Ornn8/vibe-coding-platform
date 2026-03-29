@@ -1,0 +1,69 @@
+---
+title: "Write Your Own Skill"
+description: "Start from repeated work and build a Skill that is testable, reusable, and able to change AI behavior consistently."
+module: "m6"
+order: 3
+estimatedMins: 45
+methodologyTag: "Glue Coding"
+---
+
+<Callout title="Method Focus" tone="warning">
+Writing a Skill is not mainly a documentation exercise. It is the act of turning a repeated, verified way of working into an asset.
+</Callout>
+
+## Step 1: Pick a repeated task
+
+The best Skill topics are usually not the biggest tasks. They are the repeated tasks that force you to restate the same rules over and over, such as UI patterns, database migrations, or PR review habits.
+
+### Scenario
+
+If you keep telling AI the same rules every time you touch a design system, that repeated explanation is a signal. It may be better as a Skill than as repeated chat instructions.
+
+<Exercise id="ex-6.3.1.1" level="L2" title="Choose one repeated task" description="Identify one recurring task in your work and explain why it is a good candidate for a Skill." />
+
+<Separator />
+
+## Step 2: Write the trigger and guardrails
+
+The trigger tells AI when this Skill applies. The guardrails tell AI what not to do. If those two parts are vague, the Skill will feel broad but guide nothing well.
+
+### Scenario
+
+The curriculum wants you to move from "maybe this Skill should help" to "this Skill should activate in these exact cases and never cross these lines."
+
+<Exercise id="ex-6.3.2.1" level="L1" title="Write triggers and guardrails" description="Draft clear activation conditions and non-negotiable boundaries for your Skill." />
+
+<Separator />
+
+## Step 3: Draft with AI, then tighten the result
+
+You do not need to hand-write every sentence from zero. A practical workflow is to give AI a technical reference, ask it to extract the structure of `SKILL.md`, and then tighten the draft by hand.
+
+### Scenario
+
+The draft should start broad enough to capture the workflow, then be sharpened until the instructions become executable. That is the same "generate, verify, refine" loop used elsewhere in the curriculum.
+
+<Exercise id="ex-6.3.3.1" level="L3" title="Add one strong example" description="Write one example input/output pair for your Skill so another person can understand how it should work." />
+
+<Separator />
+
+## Step 4: Test the Skill like you would test code
+
+Finishing the draft is not the end. You need to use it on a real task, observe whether it reduces rework or confusion, and then improve it. A Skill is itself a product that needs iteration.
+
+### Scenario
+
+If the Skill works, the assistant should behave differently in a measurable way. If it does not, the revision loop should continue until it does.
+
+<Exercise id="ex-6.3.4.1" level="L3" title="Test and refine the Skill" description="Use your Skill on a real task, record the result, and update the Skill based on what still felt unclear." />
+
+## Summary
+- The best Skill topics are repeated tasks with repeated mistakes.
+- Triggers and guardrails make a Skill usable.
+- Skills should be drafted, tested, and improved like code.
+
+## Methodology Review
+This unit continues glue coding by turning your own working patterns into reusable assets that future tasks can inherit.
+
+## References
+- `curriculum-m5-m8.md`

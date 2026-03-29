@@ -1,0 +1,77 @@
+---
+title: "Four Prompt Elements II: Constraints and Format"
+description: "Draw clear boundaries and specify output formats so prompts become truly executable instructions."
+module: "m3"
+order: 3
+estimatedMins: 40
+methodologyTag: "Planning-Driven"
+---
+
+<Callout type="methodology" title="Methodology Focus">
+Constraints and output format turn a request into an instruction. Without them, AI often gives you something plausible but not actually usable.
+</Callout>
+
+## Step 1: Set the Boundaries
+
+Constraints can be technical, stylistic, or behavioral. They tell AI what not to do, what to prioritize, and where the limits are. A prompt without constraints often produces output that is broad but not useful.
+
+The point is not to make the prompt longer. The point is to make it harder for the model to drift.
+
+Examples of useful constraints:
+
+- Technical: "Use the existing MDX structure and do not change route names"
+- Style: "Keep the tone calm and instructional"
+- Behavioral: "Ask for clarification before editing if the requirement is ambiguous"
+- Negative: "Do not introduce new libraries"
+
+<Exercise id="ex-3.3.1.1" level="L1" title="Add missing constraints" description="Take three prompts and add the technical, style, or behavioral constraints they were missing." />
+
+<Separator />
+
+## Step 2: Specify the Output Format
+
+Tell AI exactly what the result should look like. Do you want code, a checklist, a short note, a table, or a markdown brief? Format matters because it shapes how the information can be used next.
+
+If you do not define the format, you may still get a good answer, but not necessarily the answer you can actually use.
+
+| Request | Better format |
+|--------|---------------|
+| "Summarize the project" | A short markdown brief with headings |
+| "Show me the next steps" | A numbered checklist |
+| "Refactor this" | Code blocks plus a short change log |
+
+<Exercise id="ex-3.3.2.1" level="L2" title="Define the output format" description="Write three prompts that each ask for a different output shape: code, document, and checklist." />
+
+<Separator />
+
+## Step 3: Combine the Four Elements
+
+When role, task, constraints, and format work together, the prompt becomes much more reliable. This is where you stop merely describing intent and start producing instructions that AI can follow with far less ambiguity.
+
+That combination is the full four-element structure.
+
+<Exercise id="ex-3.3.3.1" level="L3" title="Build a full prompt" description="Write one complete prompt that uses all four elements and then test it with AI." />
+
+<Separator />
+
+## Step 4: Check the Prompt Before You Send It
+
+A useful prompt still benefits from a final review. Check whether the role is specific, the task is measurable, the constraints are real, and the format is explicit.
+
+If one of the four parts is missing, the prompt is probably still too loose.
+
+<Exercise id="ex-3.3.4.1" level="L3" title="Use the four-element checklist" description="Review one of your own prompts with the four-element checklist and improve at least three parts." />
+
+## Unit Summary
+
+- Constraints keep the model inside the boundaries you care about.
+- Output format determines whether the result is actually usable.
+- The four elements turn intention into instruction.
+
+## Methodology Review
+
+This unit continues the context-stabilization practice and adds stronger planning behavior through constraints and structure.
+
+## References
+
+- `curriculum-v3.md`

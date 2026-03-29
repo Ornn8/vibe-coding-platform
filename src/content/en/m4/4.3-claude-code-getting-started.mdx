@@ -1,0 +1,64 @@
+---
+title: "Getting Started with Claude Code"
+description: "Install Claude Code, enter a project, read context, inspect a plan, and build your first terminal-agent workflow."
+module: "m4"
+order: 3
+estimatedMins: 35
+methodologyTag: "Context Stabilization"
+---
+
+<Callout type="methodology" title="Methodology Focus">
+Claude Code works best when the repository context is explicit. The more clearly you frame the task, the more useful the agent becomes.
+</Callout>
+
+## Step 1: Install and Enter a Real Repo
+
+Claude Code is different from a chat-only workflow because it works inside an actual repository. That means it can read structure, follow conventions, and make changes that need to fit the existing codebase.
+
+The first goal is simply to get in the project and learn to orient yourself there.
+
+<Exercise id="ex-4.3.1.1" level="L2" title="Complete first setup" description="Install Claude Code and open it inside a real project, then confirm that it can see the repository structure." />
+
+<Separator />
+
+## Step 2: Let It Analyze Before It Acts
+
+A good first-run prompt gives the agent context before asking for edits. Explain what the project is, what files matter, and what kind of change you want. Then let it think before it changes anything.
+
+That habit prevents a lot of blind guessing.
+
+<Exercise id="ex-4.3.2.1" level="L2" title="Write a kickoff prompt" description="Draft a prompt that includes the goal, constraints, file scope, and verification method for one small task." />
+
+<Separator />
+
+## Step 3: Verify as Part of the Work
+
+Lint, typecheck, and route checks are not extras. They are the thing that turns a change into something trustworthy. If you skip verification, you only know that the model produced something, not that the project is actually healthy.
+
+In agent workflows, verification is part of the request, not an afterthought.
+
+<Exercise id="ex-4.3.3.1" level="L3" title="Run a small agent-assisted task" description="Use Claude Code to complete one small task and record what it changed plus how you verified it." />
+
+<Separator />
+
+## Step 4: Compare Claude Code and GUI Tools
+
+Claude Code is strongest when the task needs repository context, explicit steps, and reproducible verification. GUI tools still have value for quick visual exploration.
+
+The important lesson is not that one tool is universally better. It is that different phases of the work favor different tools.
+
+<Exercise id="ex-4.3.4.1" level="L3" title="Compare two workflows" description="Use the same task in Claude Code and in a GUI tool, then write down the differences in speed, clarity, and confidence." />
+
+## Unit Summary
+
+- Claude Code is strongest inside a real repository.
+- A good kickoff prompt gives context before execution.
+- Verification is part of delivery, not a bonus step.
+
+## Methodology Review
+
+This unit turns context stabilization into a real terminal-agent workflow.
+
+## References
+
+- `curriculum-v3.md`

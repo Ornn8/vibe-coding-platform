@@ -1,0 +1,71 @@
+---
+title: "PEV 循环与 Ask / Plan 模式"
+description: "掌握 Plan-Execute-Verify 节奏，以及什么时候该先问清、先计划、再执行。"
+module: "m4"
+order: 2
+---
+
+<Callout title="本单元方法论焦点" tone="success">
+闭环交付在执行层的体现就是 PEV: 先计划，再执行，再验证。Ask / Plan 模式帮助你在动手前踩下刹车。
+</Callout>
+
+## Step 1: PEV 为什么比一把梭更稳
+很多 AI 协作失败不是因为不会生成，而是因为没有 Verify。你看到了一个“差不多”的结果，就继续往下叠，最终把小错误积成大返工。PEV 的价值是把节奏切成三步，要求你每轮都停下来检查。
+
+这三个动作不复杂，但只要长期坚持，交付稳定性就会明显提高。
+
+| 做法 | 后果 |
+|---|---|
+| 直接一路执行 | 容易把错误带到后面 |
+| 每步都验证 | 能及时止损 |
+
+<Exercise id="ex-4.2.1.1" level="L1" title="识别缺失的 Verify" description="回忆一个项目，指出你在哪个阶段缺少验证，后来造成了什么后果。" />
+<Exercise id="ex-4.2.1.2" level="L2" title="写出 PEV 三步" description="为一个任务写出 Plan、Execute、Verify 三步，并说明每一步做什么。" />
+
+<Separator />
+
+## Step 2: 什么时候要 Ask，什么时候要 Plan
+Ask 模式适合需求还不够清楚、存在多种方案且成本差异明显的任务。Plan 模式适合已经知道目标，但不希望 AI 直接动手的任务。直接执行只适合边界清楚、范围很小、风险很低的修改。
+
+如果你把高风险任务直接交给 Execute，等于把判断成本提前省掉，后面再用返工补回来。
+
+| 模式 | 适用场景 |
+|---|---|
+| Ask | 先确认方向 |
+| Plan | 先看方案 |
+| Execute | 小范围低风险修改 |
+
+<Exercise id="ex-4.2.2.1" level="L2" title="给任务选模式" description="为三个不同复杂度的任务选择 Ask、Plan 或直接执行，并说明理由。" />
+
+<Separator />
+
+## Step 3: 把 PEV 套进每一个子任务
+大任务可以有总的 PEV，小任务内部也可以继续做 PEV。比如“搭好数据库”这一步，也可以先计划 schema，再执行迁移，再验证查询是否正常。嵌套的 PEV 会让复杂任务变得可控。
+
+这也是为什么工程化工作流看起来更慢，但实际更少返工。
+
+比如一个更细的子任务可以写成:
+
+1. Plan：先定字段
+2. Execute：再建表
+3. Verify：最后跑查询
+
+<Exercise id="ex-4.2.3.1" level="L3" title="展开一个嵌套 PEV" description="从你的实现计划里挑一步，把它进一步展开成更细的 Plan、Execute、Verify。" />
+
+## 本单元小结
+
+- PEV 的核心是强制保留 Verify。
+- Ask 解决理解问题，Plan 解决路径问题。
+- 大任务和小任务都可以嵌套使用 PEV。
+
+## 方法论回顾
+
+本单元把“闭环交付”落到执行节奏，并让 Ask / Plan 成为日常习惯。
+
+## 下一单元预告
+
+下一单元会真正进入 Claude Code，上手安装、分析项目、再做小改动。
+
+## 参考来源
+
+- `curriculum-v3.md`

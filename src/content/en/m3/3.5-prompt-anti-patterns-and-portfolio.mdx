@@ -1,0 +1,69 @@
+---
+title: "Prompt Anti-Patterns and Your Personal Prompt Library"
+description: "Spot common prompt anti-patterns and turn working prompts into reusable personal assets."
+module: "m3"
+order: 5
+estimatedMins: 35
+methodologyTag: "Closed-Loop Delivery"
+---
+
+<Callout type="methodology" title="Methodology Focus">
+Prompts get better when you review them like real artifacts. The goal is not to write one perfect prompt; it is to build a library you can reuse and improve.
+</Callout>
+
+## Step 1: Recognize the Common Anti-Patterns
+
+Three common prompt problems show up again and again: vagueness, over-assumption, and no verification. A vague prompt gives AI too little to work with. An over-assuming prompt lets AI decide too much for you. A prompt with no verification trusts the output without checking it.
+
+Most prompt failures are some combination of those three.
+
+Compare the patterns:
+
+- Weak: "Improve this"
+- Better: "Improve this lesson page by tightening the introduction and keeping the route structure unchanged"
+
+<Exercise id="ex-3.5.1.1" level="L1" title="Diagnose a failed prompt" description="Take one failed prompt and identify which anti-patterns it used." />
+
+<Exercise id="ex-3.5.1.2" level="L2" title="Rewrite three bad prompts" description="Rewrite three prompts that suffer from vagueness, over-assumption, or missing verification." />
+
+<Separator />
+
+## Step 2: Build Your Prompt Library
+
+Once you find prompts that actually work, keep them. Group them by task type, project, or result. A small prompt library turns ad hoc effort into a reusable asset.
+
+This is where prompt writing starts to look like engineering rather than improvisation.
+
+Prompt library entries are most useful when they include a stable use case, a known result, and the context they depend on.
+
+For example, you might keep one prompt for "rewrite lesson intros," one for "generate PRD outlines," and one for "review route-safe edits."
+
+Two higher-level anti-patterns to watch for are context pollution and hallucination bait. A prompt like "use everything we have discussed so far and make it amazing" often mixes too much noise into the context, while "guess the missing requirement" invites the model to invent details.
+
+<Exercise id="ex-3.5.2.1" level="L2" title="Capture a reusable template" description="Turn one repeated request into a prompt template and note when you should use it." />
+
+<Exercise id="ex-3.5.2.2" level="L2" title="Describe a second recurring prompt" description="Pick another repeated task and turn it into a second reusable prompt template." />
+
+<Separator />
+
+## Step 3: Make the Library Reviewable
+
+Good prompt assets should include context, the prompt itself, the result, and any lessons learned. That way the prompt is not just saved, but actually explainable and improvable.
+
+If a prompt cannot be reviewed later, it is not really an asset yet.
+
+<Exercise id="ex-3.5.3.1" level="L3" title="Build your Prompt Portfolio" description="Pick five prompts worth keeping and write a short note about what each one solves and when to reuse it." />
+
+## Unit Summary
+
+- Common prompt failures are usually about vagueness, over-assumption, or missing verification.
+- A prompt library turns repeated effort into reusable assets.
+- A good prompt record includes context, prompt, result, and lesson learned.
+
+## Methodology Review
+
+This unit closes the loop by turning prompt work into a reusable portfolio instead of one-off improvisation.
+
+## References
+
+- `curriculum-v3.md`

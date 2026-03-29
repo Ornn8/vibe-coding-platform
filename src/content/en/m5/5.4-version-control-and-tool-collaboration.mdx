@@ -1,0 +1,70 @@
+---
+title: "Version Control and Tool Collaboration"
+description: "Use commits, checkpoints, and tool specialization so iteration stays recoverable, comparable, and collaborative."
+module: "m5"
+order: 4
+estimatedMins: 35
+methodologyTag: "Closed-Loop Delivery"
+---
+
+<Callout title="Method Focus" tone="warning">
+Version control is not optional when AI is making changes quickly. It is the safety net that keeps iteration reversible.
+</Callout>
+
+## Step 1: Use Git and checkpoints before AI can break the page
+
+The curriculum's scenario is blunt: AI changes one feature, the page turns white, and without version history you have nothing to fall back on. Git commit history and checkpoints let you compare versions instead of starting over.
+
+### Scenario
+
+Before:
+- You accept a change, the page breaks, and you cannot tell what caused it.
+
+After:
+- You commit before each meaningful change, so one bad step can be rolled back cleanly.
+
+<Exercise id="ex-5.4.1" level="L2" title="Create safe checkpoints" description="Make three commits in your project, each tied to one functional change." />
+
+<Separator />
+
+## Step 2: Understand Codex as asynchronous code generation
+
+The curriculum contrasts Claude Code and Codex on purpose. Claude Code is interactive and conversational. Codex is asynchronous and better suited to a clean spec that can run in the background while you do something else.
+
+### Scenario
+
+Two different jobs:
+- When you need live back-and-forth and debugging, use the interactive tool.
+- When you need a contained task from a clear spec, use the asynchronous tool.
+
+That difference is why tool choice is a planning question, not just a preference question.
+
+<Exercise id="ex-5.4.2" level="L2" title="Use Codex on an isolated task" description="Use Codex to generate one standalone feature module and review the result." />
+
+<Separator />
+
+## Step 3: Match the tool to the work
+
+The curriculum gives a practical decision table:
+- exploratory development or debugging -> Claude Code
+- clear spec with batch tasks -> Codex
+- rapid prototyping -> GUI tools
+- everyday editing -> Cursor
+
+### Scenario
+
+The same task can feel very different depending on the tool. A debug session may be easier in an interactive shell, while a well-scoped batch task may be safer in a background run.
+
+<Exercise id="ex-5.4.3.1" level="L1" title="Choose the right tool" description="Pick the best tool for five different scenarios and explain why." />
+<Exercise id="ex-5.4.3.2" level="L3" title="Compare two tools on one task" description="Complete the same task with two different tools and record the difference in experience and output." />
+
+## Summary
+- Commit history and checkpoints keep AI changes reversible.
+- Tool choice should follow the kind of work you are doing.
+- Collaboration works better when each tool has a clear job.
+
+## Methodology Review
+This unit extends closed-loop delivery with recovery points and deliberate tool choice, so progress stays inspectable and reversible.
+
+## References
+- `curriculum-m5-m8.md`

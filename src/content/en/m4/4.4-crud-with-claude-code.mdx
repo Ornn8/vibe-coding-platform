@@ -1,0 +1,72 @@
+---
+title: "Build a Full CRUD App with Claude Code"
+description: "Connect the PRD, plan, PEV loop, and progress tracking in one realistic end-to-end workflow."
+module: "m4"
+order: 4
+estimatedMins: 60
+methodologyTag: "Closed-Loop Delivery"
+---
+
+<Callout type="methodology" title="Methodology Focus">
+This unit is the full rehearsal: planning-driven thinking, context stabilization, glue coding, and closed-loop delivery all show up in one project.
+</Callout>
+
+## Step 1: Prepare the Documents First
+
+Before building a CRUD app, prepare the core documents: PRD, Implementation Plan, and `CLAUDE.md`. These documents define the target, the execution path, and the long-running rules of the project.
+
+Without them, Claude Code has to make too many decisions from scratch.
+
+The documents also make review easier because each one has a different job.
+
+<Exercise id="ex-4.4.1.1" level="L3" title="Submit the kickoff documents" description="List the key content of your PRD, plan, and CLAUDE.md so each one has a different job." />
+
+<Separator />
+
+## Step 2: Execute in Small Steps
+
+A CRUD app may look simple, but it still needs step-by-step execution: set up the structure, define the data model, build the list and detail views, add create and edit flows, and then finish with delete and verification.
+
+If you try to make AI do everything at once, the output often looks complete while staying internally fragile.
+
+For example, a note-taking CRUD app might start with "create note" and "list notes" before adding edit, delete, and search. That sequence makes each verification easier.
+
+<Exercise id="ex-4.4.2.1" level="L3" title="Record the first three steps" description="For the first three execution steps, record the input prompt, the change made, and the verification action." />
+
+<Separator />
+
+## Step 3: Use a Memory Log
+
+Once the project grows, both humans and AI start forgetting what was already decided. That is when a progress log or memory bank becomes useful. It stores current status, completed work, open questions, and next steps.
+
+Think of it as external memory for the workflow.
+
+An entry might say: "Done: list view and create flow. Verified: lint and local preview. Open question: should delete require confirmation?"
+
+<Exercise id="ex-4.4.3.1" level="L3" title="Write a progress entry" description="Write a progress.md entry for your CRUD project that captures what is done, what was verified, and what comes next." />
+
+<Separator />
+
+## Step 4: Keep the Loop Visible
+
+The final part of the workflow is to make the loop visible: documents, execution, verification, and memory all need to stay in sync.
+
+When that loop is visible, the project is much easier to continue, review, and hand off.
+
+The package should let another person see the plan, the work, and the state of the work without guessing.
+
+<Exercise id="ex-4.4.4.1" level="L3" title="Complete the workflow package" description="Submit the CRUD app plus the PRD, plan, CLAUDE.md, and progress log as one coherent package." />
+
+## Unit Summary
+
+- Real projects need documents before execution.
+- CRUD should still be built in small, verifiable steps.
+- A memory log gives the workflow long-term memory.
+
+## Methodology Review
+
+This unit combines the four core principles in one project-level workflow.
+
+## References
+
+- `curriculum-v3.md`

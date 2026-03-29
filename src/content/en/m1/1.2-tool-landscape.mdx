@@ -1,0 +1,71 @@
+---
+title: "Tool Map: Choose the Right First Tool"
+description: "Understand the differences between browser, IDE, and CLI tools so you can choose a sensible starting point."
+module: "m1"
+order: 2
+estimatedMins: 30
+methodologyTag: "Planning-Driven"
+---
+
+<Callout type="methodology" title="Methodology Focus">
+Choosing a tool is part of planning. The best tool is not the most powerful one, but the one that helps you make progress with the least friction.
+</Callout>
+
+## Step 1: Browser Tools Are Great for Starting
+
+Browser-based tools have the lowest barrier to entry. You do not need a local environment, you do not need to understand a repository, and you can usually start generating pages or prototypes right away.
+
+They are especially useful when you are validating an idea, do not yet know whether the project is worth continuing, or simply need a first successful result to build confidence. Their weakness shows up when the project becomes more complex and you need tighter control over files, dependencies, and verification.
+
+| Tool | Best fit | Typical strength | Tradeoff |
+|------|----------|------------------|----------|
+| Bolt.new | Fast web prototypes | Very quick first draft | Less control over the repo |
+| Lovable | Product-style landing pages | Smooth visual iteration | Can hide file-level details |
+| Replit | Small runnable apps | Easy to run and share | Not ideal for large existing codebases |
+
+<Exercise id="ex-1.2.1.1" level="L1" title="Spot the right browser-tool scenarios" description="List three projects you might build and decide which ones are good candidates for browser-based tools and which ones are not." />
+
+<Separator />
+
+## Step 2: When to Move to IDE or CLI
+
+IDE tools become useful when you need to read files, edit files, and work within an existing codebase. CLI tools go a step further and are strongest when the task needs precise context, explicit scope, and a clear verification process.
+
+The upgrade signal is not "can I use it?" but "does the work now require stable context, step-by-step execution, and better traceability?" When the answer becomes yes, it is time to level up.
+
+| Tool | Best fit | Why you would upgrade |
+|------|----------|-----------------------|
+| Cursor | You need file-aware editing inside a codebase | The project now needs repo context |
+| Windsurf | You want a more IDE-like AI workflow | The task needs stable file navigation |
+| Claude Code / Codex | You need explicit steps, review, and traceability | The task is ready for terminal-driven execution |
+
+<Exercise id="ex-1.2.2.1" level="L2" title="Decide whether you should upgrade tools" description="Pick one project you want to build, explain whether browser, IDE, or CLI is the best fit right now, and say when you would upgrade." />
+
+<Separator />
+
+## Step 3: Build a Small Starting Stack
+
+Most effective builders do not use only one tool. They build a starting stack: maybe a browser tool for the first draft, an IDE for refinement, and a CLI agent for structured repository work.
+
+You do not need a complicated stack at the beginning. A practical starter setup is often one browser tool for generation and one place to capture prompts and decisions. If you already have code experience, you can add an IDE to the mix.
+
+What matters is not having the most complete toolchain. What matters is having a stack you are willing to open repeatedly and learn from.
+
+For example, a beginner might start with Bolt.new for generation, then move to Cursor for file-aware editing, and later try Claude Code for repository work.
+
+<Exercise id="ex-1.2.3.1" level="L2" title="Write down your starter stack" description="Choose one or two AI tools you will use first and explain what each tool is responsible for." />
+
+## Unit Summary
+
+- Browser tools are ideal for low-friction starts and quick validation.
+- IDE and CLI tools add stronger context control and more engineering discipline.
+- The right first stack is the one you can use consistently, not the one with the most features.
+
+## Methodology Review
+
+This unit keeps practicing planning-driven behavior: tool choice is a way of reducing risk before execution even begins.
+
+## References
+
+- `curriculum-v3.md`
+- Product documentation from major AI coding tools

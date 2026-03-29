@@ -1,0 +1,84 @@
+---
+title: "Memory Bank and Context Management"
+description: "Persist project background, decisions, and progress in files so long-running work does not lose context."
+module: "m5"
+order: 3
+estimatedMins: 40
+methodologyTag: "Context Stabilization"
+---
+
+<Callout title="Method Focus" tone="success">
+Long-running collaboration fails when memory lives only in the chat thread. Context stabilization turns fragile conversation into durable project memory.
+</Callout>
+
+## Step 1: Why AI seems to forget what you already said
+
+AI does not remember the way a human teammate does. Its working memory is limited, so older details can get pushed out as the conversation grows. That is why a project can drift even when both sides are trying to be consistent.
+
+### Scenario
+
+Think of the chat like a whiteboard:
+- If only a few notes are on the board, the next step is easy to see.
+- If every step, exception, and side discussion stays on the board, important rules are harder to find.
+
+The curriculum wants you to recognize this as a system problem, not a model failure.
+
+<Exercise id="ex-5.3.1" level="L1" title="Spot context loss risk" description="Decide in which situations AI is most likely to forget earlier context." />
+
+<Separator />
+
+## Step 2: Use a memory bank to freeze project memory
+
+A memory bank gives the project a stable place to store what the conversation should not be responsible for remembering. The curriculum names three core files: `progress.md`, `decisions.md`, and `context.md`.
+
+### Scenario
+
+Compare these two workflows:
+- Chat-only workflow: every new session re-lives the same decisions
+- Memory-bank workflow: progress is written down, decisions are preserved, and the next session can resume cleanly
+
+The second workflow is slower to set up, but it avoids repeated explanations and accidental reversals.
+
+<Exercise id="ex-5.3.2" level="L2" title="Create a memory bank" description="Create a memory-bank directory for one project and write a usable progress.md file." />
+
+<Separator />
+
+## Step 3: Restore context across sessions with a standard prompt
+
+The curriculum gives you a standard recovery prompt: read the memory-bank, read `progress.md`, understand the prior progress, then continue from the next planned step. The key instruction is that AI should not start a new step before verification.
+
+### Scenario
+
+New session, same project:
+- Without a recovery prompt, the assistant repeats old setup questions.
+- With the recovery prompt, the assistant resumes the current work exactly where it left off.
+
+This is the practical form of context stabilization.
+
+<Exercise id="ex-5.3.3.1" level="L2" title="Restore a project context" description="Use the recovery prompt in a new conversation and continue the project from its current state." />
+<Exercise id="ex-5.3.3.2" level="L3" title="Use the workflow for two days" description="Use a memory-bank workflow in your project for two consecutive days and record what changed." />
+
+<Separator />
+
+## Step 4: Know when to reset the conversation
+
+Continuation is not always the right answer. If the thread is too long, the errors keep repeating, or you have changed to a different task entirely, reset the conversation instead of trying to rescue a polluted one.
+
+### Scenario
+
+The curriculum's decision rule is simple:
+- Reset when the thread is long, repetitive, or switching tasks.
+- Continue when you are still inside the same feature and the model still understands the rules.
+
+<Exercise id="ex-5.3.4" level="L3" title="Decide reset or continue" description="Review one of your past projects and analyze whether the conversation should have been reset earlier." />
+
+## Summary
+- Memory-bank files carry what chat cannot reliably hold.
+- Context stabilization is a workflow, not a one-time note.
+- Reset when the thread is no longer a good container for the work.
+
+## Methodology Review
+This unit turns context stabilization into a repeatable practice by moving important project memory into files that can survive resets and new sessions.
+
+## References
+- `curriculum-m5-m8.md`

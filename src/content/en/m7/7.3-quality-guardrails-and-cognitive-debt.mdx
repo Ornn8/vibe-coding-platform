@@ -1,0 +1,67 @@
+---
+title: "Quality Guardrails and Cognitive Debt"
+description: "Understand how multi-agent systems amplify both output and defects, and protect delivery with checks and human review."
+module: "m7"
+order: 3
+estimatedMins: 40
+methodologyTag: "Closed-Loop Delivery"
+---
+
+<Callout title="Method Focus" tone="warning">
+The more agents you add and the faster they generate, the more guardrails matter. Scale amplifies defects as easily as it amplifies throughput.
+</Callout>
+
+## Step 1: Why scale magnifies the problem
+
+If one agent produces a few changes a day, defects may stay hidden for a while. If a system produces many changes continuously, even a low error rate quickly becomes a steady stream of bad output.
+
+### Scenario
+
+The curriculum's example is meant to make the math visible: a tiny error rate becomes a large number of defects once the workflow is producing at scale. Cognitive debt grows in the same way. Small mistakes pile up until the review cost becomes the real problem.
+
+<Exercise id="ex-7.3.1.1" level="L1" title="Estimate scaled risk" description="Assume a workflow creates 20 changes per day with a 2 percent defect rate. Estimate the weekly risk and explain why it matters." />
+
+<Separator />
+
+## Step 2: Let automation catch mechanical failures
+
+Linting, tests, security scanning, and type checks belong in the machine layer. They do not replace thought, but they block large classes of repeatable failures before human review starts.
+
+### Scenario
+
+The point of guardrails is to move easy mistakes out of the human review queue:
+- lint catches style and syntax problems
+- tests catch behavior regressions
+- security scans catch avoidable risks
+
+That frees human review for the harder calls.
+
+<Exercise id="ex-7.3.2.1" level="L2" title="Define three guardrails" description="List three automated quality guardrails for your project and explain what each one protects against." />
+
+<Separator />
+
+## Step 3: Decide what humans must still review
+
+Architecture tradeoffs, business logic, permission boundaries, user impact, and long-term maintainability often still require human judgment. Good review is not about reading everything manually. It is about reserving human attention for the things machines still judge poorly.
+
+### Scenario
+
+The curriculum's review checklist splits work into three buckets:
+- must be machine-checked
+- must be human-reviewed
+- must never auto-merge without a person
+
+That split keeps the team from over-trusting automation.
+
+<Exercise id="ex-7.3.3.1" level="L3" title="Build a review checklist" description="Write a checklist that separates what can be machine-approved, what must be human-reviewed, and what must never auto-merge." />
+
+## Summary
+- Scale increases risk as well as output.
+- Automation should handle mechanical checks first.
+- Human review should be reserved for judgment calls and risk boundaries.
+
+## Methodology Review
+This unit extends closed-loop delivery into agent workflows by making verification and review the guardrails that keep speed from becoming cognitive debt.
+
+## References
+- `curriculum-m5-m8.md`

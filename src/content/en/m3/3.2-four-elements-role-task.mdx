@@ -1,0 +1,76 @@
+---
+title: "Four Prompt Elements I: Role and Task"
+description: "Clarify the role AI should play and the job it must do so the output actually lines up with your intent."
+module: "m3"
+order: 2
+estimatedMins: 40
+methodologyTag: "Context Stabilization"
+---
+
+<Callout type="methodology" title="Methodology Focus">
+Before AI can do good work, it needs a role and a task. If those are vague, the output usually looks right while still being wrong.
+</Callout>
+
+## Step 1: Define the Role
+
+The role tells AI what kind of behavior to adopt: planner, editor, reviewer, teacher, or builder. A good role is concrete enough to influence tone and decision-making, but not so dramatic that it becomes useless.
+
+Role definition is one of the simplest ways to improve prompt quality.
+
+Examples:
+
+- Weak: "You are an expert."
+- Strong: "You are a product reviewer who checks scope, usability, and clarity."
+- Stronger: "You are a curriculum editor who rewrites lesson drafts for clarity without changing the lesson goal."
+
+<Exercise id="ex-3.2.1.1" level="L1" title="Choose the better role" description="Pick the stronger role from three pairs of role statements." />
+
+<Exercise id="ex-3.2.1.2" level="L2" title="Write role statements for real tasks" description="For three tasks, write a role statement that matches the work and avoid vague labels like 'expert'." />
+
+<Separator />
+
+## Step 2: Define the Task
+
+The task tells AI what it must actually accomplish. "Help me with this" is too weak. A strong task says what the output should do, where it will be used, and what success looks like.
+
+When the task is precise, the model spends less time guessing and more time producing useful output.
+
+<Exercise id="ex-3.2.2.1" level="L2" title="Rewrite the task" description="Write a stronger task description for three different requests and explain why each version is better." />
+
+<Separator />
+
+## Step 3: Combine Role and Task
+
+Role and task work best together. If the role is "product reviewer" but the task is "fix the CSS," the prompt is already confused. A strong prompt makes the role and task reinforce each other.
+
+That is the first half of the four-element frame.
+
+<Exercise id="ex-3.2.3.1" level="L1" title="Spot the mismatch" description="Look at three prompts and identify whether the role and task support each other." />
+
+<Exercise id="ex-3.2.3.2" level="L2" title="Write a combined prompt" description="Choose one project request and write a prompt that clearly includes both role and task." />
+
+<Separator />
+
+## Step 4: Make the Combination Clear Enough to Use
+
+When role and task are both strong, the prompt becomes easier to review, easier to improve, and easier to reuse later. That is the point of this frame: the prompt should say who AI is being, what it is doing, and why that combination makes sense.
+
+If you can read the prompt out loud and immediately understand the job, you are probably close.
+
+For example, "You are a product reviewer. Review this onboarding flow and point out where users may get confused" is much clearer than "You are an expert. Help me improve this."
+
+<Exercise id="ex-3.2.4.1" level="L3" title="Write a full role-task prompt" description="Write one complete prompt for your project that includes role and task, then test whether the output matches your intent." />
+
+## Unit Summary
+
+- Role tells AI how to behave.
+- Task tells AI what to accomplish.
+- Good prompts align both pieces instead of mixing them loosely.
+
+## Methodology Review
+
+This unit starts the four-element prompt frame and continues context stabilization.
+
+## References
+
+- `curriculum-v3.md`

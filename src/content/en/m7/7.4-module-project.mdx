@@ -1,0 +1,45 @@
+---
+title: "Module Project: Automated Workflow and Methodology Review"
+description: "Configure an automation flow on top of your M6 project and review the methodology progression from M1 to M7."
+module: "m7"
+order: 4
+estimatedMins: 180
+methodologyTag: "Closed-Loop Delivery"
+---
+
+<Callout title="Project Focus" tone="success">
+This advanced module is not only about automation output. It is also about knowing exactly where human review still belongs.
+</Callout>
+
+## Step 1: Add one automation flow to an existing project
+
+You can choose a chain from issue to planning, planning to implementation, implementation to testing, or testing to PR. The point is not maximal complexity. The point is whether the chain is clear, bounded, and stable.
+
+### Scenario
+
+The curriculum does not ask for a giant orchestration system. It asks for a clear, bounded automation path that actually helps a project move forward without hiding the risky parts.
+
+<Exercise id="ex-7.4.1.1" level="L3" title="Define the automation flow" description="Describe the flow you want to automate, including trigger conditions, roles, expected outputs, and boundaries." />
+
+<Separator />
+
+## Step 2: Add guardrails and human checkpoints
+
+Every automation flow should state where lint, tests, or type checks apply and where a human still has to approve the result. If you cannot explain the risk boundary, the flow is not ready for real use.
+
+### Scenario
+
+Automation is only useful when it is not allowed to cross every boundary. The flow should clearly say what the machine can finish and where a person must re-enter the loop.
+
+<Exercise id="ex-7.4.2.1" level="L3" title="Complete the review design" description="Add quality guardrails and human review points to your workflow, then explain what each one is protecting." />
+
+## Methodology Review
+This module is the advanced review of M1-M7: planning-driven work becomes role design, context stabilization becomes shared workflow memory, glue coding becomes tool orchestration, and closed-loop delivery becomes system-level review rather than single-thread execution.
+
+## Summary
+- This module project is about automation without over-delegation.
+- Advanced workflows need explicit risk boundaries.
+- The upgrade from M1 to M7 is a shift from personal execution to system orchestration.
+
+## References
+- `curriculum-m5-m8.md`

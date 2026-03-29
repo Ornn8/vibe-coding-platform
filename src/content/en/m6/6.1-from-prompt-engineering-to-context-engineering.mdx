@@ -1,0 +1,76 @@
+---
+title: "From Prompt Engineering to Context Engineering"
+description: "Understand the limits of one-off prompts and adopt a layered view of system instructions, project context, task input, and tools."
+module: "m6"
+order: 1
+estimatedMins: 45
+methodologyTag: "Context Stabilization"
+---
+
+<Callout title="Method Focus" tone="success">
+Prompt engineering asks, "How should I phrase this turn?" Context engineering asks, "What must stay available across the whole collaboration?"
+</Callout>
+
+## Step 1: Why a single prompt is not enough
+
+For a short task, one strong prompt can be enough. For a long project, the work spans files, sessions, tools, and decisions. At that point, the problem is no longer only wording. It is keeping the right context available.
+
+The curriculum contrasts a one-hour project with a two-week project for a reason. In the short case, you can often keep everything in your head. In the long case, you need a durable system that survives the gaps between sessions.
+
+### Scenario
+
+- Short project: the assistant can complete the task before the context gets messy.
+- Long project: the assistant starts forgetting rules, repeating itself, or missing earlier decisions.
+
+The second case is where prompt engineering stops being enough.
+
+<Exercise id="ex-6.1.1.1" level="L1" title="Decide when context engineering is needed" description="Compare three scenarios and decide which ones can be handled with prompting alone and which ones require a broader context system." />
+
+<Separator />
+
+## Step 2: The four-layer context model
+
+You can think about AI collaboration in four layers:
+
+- System layer: the lasting rules and priorities
+- Project layer: the background, goals, and shared history
+- Task layer: the current assignment and success criteria
+- Tool layer: the capabilities, integrations, and commands that are available
+
+The point of the model is not decoration. It gives you a map for diagnosing where collaboration is failing.
+
+### Scenario
+
+If the model keeps ignoring a rule, the problem might be at the system layer. If it remembers the rule but not the project's current state, the issue might be in the project layer. If it understands the project but not the current request, the task layer is weak.
+
+<Exercise id="ex-6.1.2.1" level="L2" title="Map the four layers" description="Map the system, project, task, and tool layers for one real project and describe what belongs in each." />
+
+<Separator />
+
+## Step 3: What to do when context degrades
+
+If AI starts repeating old mistakes, ignoring rules, or drifting in style, the context has usually degraded. The fix is not to paste more random history into the thread. The fix is to restore the missing layer.
+
+### Scenario
+
+Common degradation signals:
+- AI keeps making the same mistake
+- It forgets a project rule you already wrote down
+- The output style changes for no good reason
+- It answers the wrong question even when the prompt is clear
+
+The right response is to compress history, restore the important context, or start a new conversation when the thread is no longer trustworthy.
+
+<Exercise id="ex-6.1.3.1" level="L2" title="Analyze one decay example" description="Review one case where AI drifted on a project and explain which context layer had broken down." />
+<Exercise id="ex-6.1.3.2" level="L3" title="Recover a degraded thread" description="Apply a recovery strategy to one degraded conversation and record what you restored." />
+
+## Summary
+- Long-lived work shifts the problem from prompt design to context design.
+- Layered context makes failure easier to diagnose.
+- Fixing drift means restoring the right layer, not just adding more text.
+
+## Methodology Review
+This unit deepens context stabilization by treating system rules, project memory, task framing, and tool setup as layers that must be maintained together.
+
+## References
+- `curriculum-m5-m8.md`

@@ -1,0 +1,68 @@
+---
+title: "User Journey Maps and Requirement Expression"
+description: "Map the user journey from the user's perspective and express requirements in a format both AI and teammates can understand."
+module: "m2"
+order: 4
+estimatedMins: 35
+methodologyTag: "Closed-Loop Delivery"
+---
+
+<Callout type="methodology" title="Methodology Focus">
+Closed-loop delivery starts here: a requirement is only useful if it can be understood, implemented, and reviewed without guessing.
+</Callout>
+
+## Step 1: See the Product Through the User's Eyes
+
+A user journey map describes what happens from the user's point of view, not the internal architecture. The important parts are the moments where the user opens the product, uses it, and finishes the task.
+
+When you draw the journey, you start seeing friction points that are invisible in feature lists.
+
+Feature lists are about what exists. Journey maps are about what happens. For AI, the second is usually easier to understand because it reflects the sequence of actions.
+
+<Exercise id="ex-2.4.1.1" level="L1" title="Map a first journey" description="Describe one product journey in three phases: open, use, and complete." />
+
+<Separator />
+
+## Step 2: Requirements Must Be Expressible
+
+Even a good idea fails if nobody can read it clearly. A requirement should be specific enough that AI can act on it and teammates can review it. That means avoiding vague wording and writing the decision points out explicitly.
+
+If a sentence cannot help someone build or verify the work, it is probably still too fuzzy.
+
+For example, "The user can save a favorite lesson for later review" is clearer than "Users should have a better learning experience."
+
+<Exercise id="ex-2.4.2.1" level="L2" title="Rewrite a vague requirement" description="Take one fuzzy requirement and rewrite it so the user, action, and expected result are all clear." />
+
+<Separator />
+
+## Step 3: Turn the Journey Into a Build Brief
+
+Once you have the journey and the requirement language, combine them into a short build brief. This is the kind of document you can hand to AI later so it knows what problem it is solving and how to frame the output.
+
+That is the bridge from product thinking into execution discipline.
+
+The following kinds of requirement mistakes usually cause trouble:
+
+- Too vague: "Make it better"
+- Too greedy: "Add everything the product could ever need"
+- Only output: "Just give me the result"
+- No constraints: "Do whatever you think is best"
+- Skipping requirements and jumping to technology
+
+<Exercise id="ex-2.4.3.1" level="L1" title="Identify requirement mistakes" description="Look at five sample requirements and identify which mistake each one makes." />
+
+<Exercise id="ex-2.4.3.2" level="L2" title="Fix a bad requirement set" description="Rewrite three weak requirements so they become specific enough for implementation." />
+
+## Unit Summary
+
+- User journey maps reveal friction that feature lists hide.
+- Requirements must be clear enough for both AI and humans to act on.
+- The journey becomes useful when it turns into a build brief.
+
+## Methodology Review
+
+This unit is about closing the gap between product thinking and execution artifacts.
+
+## References
+
+- `curriculum-v3.md`

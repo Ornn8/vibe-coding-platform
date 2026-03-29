@@ -1,0 +1,57 @@
+---
+title: "编写你自己的 Skill"
+description: "学会把一个稳定流程写成可复用的 SKILL.md，并通过测试不断迭代。"
+module: "m6"
+order: 3
+estimatedMins: 45
+methodologyTag: "胶水编程"
+---
+
+<Callout title="本单元方法论焦点" tone="success">
+写 Skill 的重点不是炫技，而是把你已经验证过的方法变成 AI 下次还能稳定执行的流程。
+</Callout>
+
+## Step 1: 先写出最小可用的 SKILL.md
+一个可复用 Skill 至少要说清楚：它什么时候被触发、它要做什么、不要做什么、输出长什么样。  
+你可以先用一个简单场景试写，比如 Tailwind CSS 的常见操作，先做骨架，再慢慢补约束和示例。
+场景对比：如果只是给 AI 一堆背景，它会自由发挥；如果把触发、边界和输出写清，它就会更像在执行一份说明书。
+
+<Exercise id="ex-6.3.1" level="L2" title="写一个最小 Skill 骨架" description="用 Tailwind CSS 或类似场景，写出一个最小可用的 SKILL.md 骨架。" />
+
+<Separator />
+
+## Step 2: 好 Skill 和坏 Skill 的差别
+坏 Skill 往往是触发条件模糊、边界不清、示例太少、约束不具体。好 Skill 则会告诉 AI：什么时候用、怎么用、什么时候停。  
+对比三段片段时，你很容易发现，最有效的不是最长的那段，而是最能降低歧义的那段。
+场景对比：同一个操作，坏 Skill 让 AI 每次都猜一步，好 Skill 则让它按固定结构执行。
+
+<Exercise id="ex-6.3.2" level="L1" title="判断哪段 Skill 更好" description="比较 3 段 Skill 片段，指出哪一段质量更高并说明理由。" />
+
+<Separator />
+
+## Step 3: 用 AI 帮你生成 Skill
+如果你已经有一套成熟流程，可以把技术文档、API 参考和流程说明喂给 AI，让它先帮你整理成 Skill 草稿。  
+这个做法的关键是：AI 不是凭空发明，而是把你已经验证过的经验提炼成可执行结构。
+场景对比：手写草稿容易漏结构，用 AI 草稿可以先把骨架搭出来，再由你补边界和示例。
+
+<Exercise id="ex-6.3.3" level="L3" title="为一个库生成 Skill 草稿" description="选择一个你熟悉的库或框架，用 AI 生成一个 Skill 草稿，并整理成规范结构。" />
+
+<Separator />
+
+## Step 4: 测试并迭代你的 Skill
+Skill 不是写完就结束，而是要拿到真实任务里测试。你要观察它是否真的减少了返工、是否减少了重复解释、是否让 AI 更稳定。  
+发现问题后就迭代：补触发条件、收紧约束、补真实示例，直到它在真实任务里能稳定发挥作用。
+场景对比：如果 Skill 在真实任务里总让 AI 走偏，那说明不是“写得差不多”就行，而是必须继续调到能稳定复用。
+
+<Exercise id="ex-6.3.4" level="L3" title="用真实任务测试 Skill" description="把你写的 Skill 用在一个真实任务中，记录效果和下一轮迭代要补的地方。" />
+
+## 本单元小结
+- Skill 要写成可复用的操作说明，不是写成灵感笔记。
+- 好 Skill 的核心是边界清楚、约束具体、示例真实。
+- 必须把 Skill 放进真实任务中测试，再根据结果迭代。
+
+## 方法论回顾
+胶水编程在这里变成“把经验产品化”。
+
+## 参考来源
+- `curriculum-m5-m8.md`

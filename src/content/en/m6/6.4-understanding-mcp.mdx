@@ -1,0 +1,68 @@
+---
+title: "MCP: Connect AI to External Systems"
+description: "Understand how MCP provides access, how Skills provide operating guidance, and how both combine inside real workflows."
+module: "m6"
+order: 4
+estimatedMins: 40
+methodologyTag: "Glue Coding"
+---
+
+<Callout title="Method Focus" tone="warning">
+MCP answers "Can AI connect to this system?" Skills answer "How should AI use that connection well?" You usually need both.
+</Callout>
+
+## Step 1: What MCP actually solves
+
+Without a shared protocol, every external integration needs its own adapter. MCP standardizes how AI tools access outside systems like repositories, databases, and document platforms.
+
+### Scenario
+
+Before MCP:
+- Every tool needs a custom integration path
+- Each connection behaves differently
+
+After MCP:
+- One standard protocol can connect many systems
+- The toolchain becomes easier to extend and reason about
+
+<Exercise id="ex-6.4.1.1" level="L1" title="Explain MCP in your own words" description="Explain what MCP solves inside an AI toolchain and why that matters." />
+
+<Separator />
+
+## Step 2: Access is not the same as good usage
+
+Even if AI can connect to GitHub, a database, or Drive, that does not mean it knows how to use those systems safely or efficiently. That is why MCP often needs to be paired with a Skill: one provides access, the other provides method.
+
+### Scenario
+
+Access without guidance is like giving a person keys without a manual. They can enter the room, but they may still not know which actions are safe, repeatable, or correct.
+
+<Exercise id="ex-6.4.2.1" level="L2" title="Design access plus guidance" description="Choose one external system and define both the MCP capability and the Skill guidance it would need." />
+
+<Separator />
+
+## Step 3: Design the combined workflow
+
+Once MCP and Skills work together, you need to think about the full chain:
+- What triggers the work?
+- What system is accessed?
+- What data is used?
+- Where does the output go?
+- Who verifies it?
+
+### Scenario
+
+The curriculum's point is that a useful workflow is not just "call the tool." It is a chain with inputs, outputs, and a verification boundary.
+
+<Exercise id="ex-6.4.3.1" level="L3" title="Design one MCP workflow" description="Design a real workflow that includes an MCP connection, Skill guidance, and a verification step." />
+
+## Summary
+- MCP standardizes how AI connects to external systems.
+- Access alone is not enough, so Skills still matter.
+- Real workflows require both connection and method.
+
+## Methodology Review
+This unit pushes glue coding outward: MCP provides the connection to the external world, while method keeps that connection useful and safe.
+
+## References
+- `curriculum-m5-m8.md`

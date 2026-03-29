@@ -1,0 +1,50 @@
+---
+title: "版本控制与工具协作"
+description: "把 Git、Codex、Claude Code 和其他工具放到各自最擅长的位置。"
+module: "m5"
+order: 4
+estimatedMins: 35
+methodologyTag: "闭环交付"
+---
+
+<Callout title="本单元方法论焦点" tone="warning">
+版本控制不是附属技能，而是让 AI 产出可回退、可比较、可审查的前提。
+</Callout>
+
+## Step 1: 为什么代码一改坏了就必须有 checkpoint
+如果 AI 把页面改崩了，而你没有版本记录，就只能从头补救。Git 的价值就在于把每次有效状态都存成一个可回到的点。  
+对比一下：没有 checkpoint 时，出问题只能靠记忆回滚；有 checkpoint 时，问题发生后你只需要回到最近一次稳定提交。
+场景对比：一次没提交就让 AI 连续改三轮，出错后几乎没有回退依据；每改完一段就 commit，则能清楚知道是哪一次变化引入了问题。
+
+<Exercise id="ex-5.4.1" level="L2" title="完成三次有意义的提交" description="在你的项目里做 3 次 commit，每次都对应一个清晰的功能变化或修复点。" />
+
+<Separator />
+
+## Step 2: Codex 适合做什么
+Claude Code 更像是你边说边改的协作者，Codex 更像是你发出明确任务后异步生成的执行者。两者不是谁替代谁，而是适合不同工作方式。  
+当你有一个相对独立、边界清晰的模块时，Codex 特别适合做批量生成、整理和改写；当你需要频繁看中间结果、持续修正时，Claude Code 更顺手。
+场景对比：一个清晰的独立模块更适合丢给 Codex 批量处理；一个需要边看边改的复杂页面，更适合 Claude Code 实时协作。
+
+<Exercise id="ex-5.4.2" level="L2" title="用 Codex 完成一个独立模块" description="选择一个边界清晰的小模块，尝试让 Codex 先生成，再由你审查和调整。" />
+
+<Separator />
+
+## Step 3: 不同工具该放在什么场景
+工具选择本身就是规划的一部分。探索性调试适合 Claude Code，明确规格的大批量任务适合 Codex，快速原型和图形化编辑适合 GUI 工具，日常小修小补可以交给你最熟悉的编辑器。  
+最重要的不是“某个工具最强”，而是“这个场景里谁最少打断闭环”。
+场景对比：同一件事，如果你要看中间状态、随时停手，那就选交互式工具；如果你要处理边界清晰的大块任务，就选异步生成工具。
+
+<Exercise id="ex-5.4.3.1" level="L1" title="为五个场景选工具" description="给 5 个常见场景分别选择最合适的工具，并说明原因。" />
+
+<Exercise id="ex-5.4.3.2" level="L3" title="同一任务用两种工具完成" description="用两种不同工具完成同一个任务，并比较效率、可控性和返工成本。" />
+
+## 本单元小结
+- Git 提供回退点，checkpoint 提供过程安全感。
+- Codex 和 Claude Code 适合不同节奏的任务。
+- 工具选择本身就是闭环设计的一部分。
+
+## 方法论回顾
+版本控制让协作从“靠记忆”变成“靠状态”。
+
+## 参考来源
+- `curriculum-m5-m8.md`
