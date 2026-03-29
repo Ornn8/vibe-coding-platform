@@ -1,118 +1,211 @@
-# Vibe Coding 学习平台
+# Vibe Coding Learning Platform
 
-一个面向中文优先、支持中英双语的免费开源学习平台，用来系统化教授 Vibe Coding，从基础概念一路覆盖到 Agentic Engineering。项目基于 Next.js 15、Prisma、Auth.js v5 和 MDX 构建。
+Online learning is available at: [https://vibe-coding-platform-livid-psi.vercel.app](https://vibe-coding-platform-livid-psi.vercel.app)
 
-## 当前状态
+**A methodology-driven, systematic learning path for Vibe Coding — from beginner to Agentic Engineering**
 
-- OpenSpec change: `build-vibe-coding-platform-mvp`
-- 实现进度: `30/32` 个任务完成
-- 已完成: 平台骨架、i18n、Prisma schema、seed、学习区、项目提交流、Prompt Portfolio、管理后台、评审流、基础验证
-- 待外部环境完成:
-  - `2.2` 真实数据库 migration / schema apply
-  - `3.4` GitHub / Google OAuth 登录联调与权限验收
+[中文版](README-ZH.md)
 
-## 本地开发
+---
 
-1. 安装依赖
+A free, open-source learning platform for systematic Vibe Coding education. Rather than just teaching tool operations, this platform is built around four core methodology principles — Planning-Driven, Context Anchoring, Glue Programming, and Closed-Loop Delivery — covering the complete journey from Vibe Coding basics to Agentic Engineering.
+
+## Why This Platform Exists
+
+Vibe Coding has evolved from Andrej Karpathy's single tweet into a mainstream development workflow. But most practitioners don't struggle with "how to use the tools" — they struggle with:
+
+- No systematic learning path — unclear what to learn first vs. later
+- Vague requirements, context confusion, unstable outputs, and excessive rework during vibe coding
+- Hearing about Skills, MCP, CLAUDE.md but not understanding how they improve vibe coding quality
+- No stage goals or practice feedback, making it hard to gauge real progress
+
+This platform aims to solve these problems systematically.
+
+## Curriculum
+
+8 modules, 37 learning units, ~250 progressive exercises, 8 hands-on projects.
+
+### Foundation
+
+| Module | Content | Duration |
+|--------|---------|----------|
+| M1 Awareness | What is Vibe Coding, three modes compared, tool landscape, first AI webpage | ~1 week |
+| M2 Requirements & Product Thinking | Three soul questions, MVP thinking, P0/P1/P2 prioritization, user journey maps | ~1.5 weeks |
+| M3 Prompt Engineering | Context principles, four-element framework, CLAUDE.md writing, anti-pattern identification | ~2 weeks |
+
+### Intermediate
+
+| Module | Content | Duration |
+|--------|---------|----------|
+| M4 Planning-Driven Workflows | PRD writing, implementation plans, PEV loop, Claude Code hands-on | ~2 weeks |
+| M5 Iterative Delivery & Debug | Step-by-step implementation, AI-assisted debugging, Memory Bank, version control, Codex intro | ~2 weeks |
+| M6 Extended Capabilities | Context engineering, Skill system, meta-skills, MCP protocol, full-stack project | ~2 weeks |
+
+### Advanced (Elective)
+
+| Module | Content | Duration |
+|--------|---------|----------|
+| M7 Agentic Engineering | Multi-agent workflows, sub-agents, automation integration, quality guardrails | ~2 weeks |
+| M8 Deployment & Evolution | Deployment options, security checks, continuous iteration, personal knowledge system, capstone project | ~1.5 weeks |
+
+### Four Methodology Principles
+
+The intellectual backbone running through every module, derived from [2025Emma/vibe-coding-cn](https://github.com/2025Emma/vibe-coding-cn):
+
+- **Planning-Driven** — Planning is everything. Letting AI code without a plan turns your codebase into unmanageable chaos
+- **Context Anchoring** — Crystallize project memory through CLAUDE.md and Memory Bank so AI stays consistent across sessions
+- **Glue Programming** — Don't let AI generate code from scratch (hallucination source); let it connect proven, mature modules instead
+- **Closed-Loop Delivery** — Requirements → context docs → implementation plan → step-by-step execution → self-test → progress log — fully traceable and transferable
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 15 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS + shadcn/ui |
+| Database | PostgreSQL |
+| ORM | Prisma |
+| Auth | Auth.js v5 (GitHub / Google OAuth) |
+| Content | MDX + next-mdx-remote + Shiki |
+| i18n | next-intl (Chinese / English) |
+| Deployment | Vercel |
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- PostgreSQL (local or Docker)
+- GitHub OAuth App and/or Google OAuth credentials
+
+### Local Development
 
 ```bash
+# Clone the repository
+git clone https://github.com/Ornn8/vibe-coding-platform.git
+cd vibe-coding-platform
+
+# Install dependencies
 npm install
-```
 
-2. 复制环境变量
-
-```bash
+# Configure environment variables
 cp .env.example .env.local
-```
+# Edit .env.local with your database URL and OAuth credentials
 
-3. 填入至少以下变量
-
-```env
-DATABASE_URL=
-AUTH_SECRET=
-AUTH_GITHUB_ID=
-AUTH_GITHUB_SECRET=
-AUTH_GOOGLE_ID=
-AUTH_GOOGLE_SECRET=
-```
-
-也可以先自动生成一个本地开发用 `AUTH_SECRET`:
-
-```bash
-npm run setup:env
-```
-
-4. 初始化数据库
-
-```bash
+# Initialize database
 npx prisma migrate dev
-npx prisma generate
-npm run prisma:seed
-```
+npx prisma db seed
 
-5. 启动开发环境
-
-```bash
+# Start development server
 npm run dev
 ```
 
-## 可用脚本
+Visit `http://localhost:3000/en` for English, `http://localhost:3000/zh` for Chinese.
+
+### Docker Development Environment
 
 ```bash
-npm run dev
-npm run build
-npm run lint
-npm run typecheck
-npm run setup:env
-npm run verify:env
-npm run verify:routes
-npm run prisma:migrate
-npm run prisma:generate
-npm run prisma:seed
+# Start PostgreSQL
+docker run --name vibe-pg \
+  -e POSTGRES_PASSWORD=postgres \
+  -e POSTGRES_DB=vibe \
+  -p 5432:5432 -d postgres:16
+
+# Set in .env.local:
+# DATABASE_URL="postgresql://postgres:postgres@localhost:5432/vibe"
 ```
 
-## 已完成的本地验证
-
-以下验证已经在当前代码状态下通过:
-
-- `npm run typecheck`
-- `npm run lint`
-- `npm run build`
-- `npm run verify:routes`
-
-以下验证当前会失败，属于预期行为，因为还没有外部环境:
-
-- `npm run verify:env`
-
-## 最后两项如何完成
-
-### 完成 2.2
-
-需要一个可访问的 PostgreSQL `DATABASE_URL`，然后执行:
+### Common Commands
 
 ```bash
-npx prisma migrate dev
-npx prisma generate
-npm run prisma:seed
+npm run dev          # Start dev server
+npm run build        # Production build
+npm run lint         # Lint check
+npx tsc --noEmit     # Type check
+npx prisma studio    # Database GUI
+npx prisma db seed   # Seed course data
 ```
 
-### 完成 3.4
+## Project Structure
 
-需要配置:
+```
+src/
+├── app/
+│   ├── [locale]/              # i18n routing (zh / en)
+│   │   ├── (learn)/           # Student-facing (modules, units, projects, profile, tools)
+│   │   ├── (admin)/           # Admin (dashboard, content, users, reviews)
+│   │   └── page.tsx           # Landing page
+│   └── api/                   # API routes
+├── components/
+│   ├── ui/                    # shadcn/ui primitives
+│   ├── learn/                 # Learning components
+│   ├── admin/                 # Admin components
+│   └── shared/                # Shared (MDX rendering, navigation)
+├── content/
+│   ├── zh/                    # Chinese MDX course files
+│   │   ├── m1/ ... m8/        # Organized by module
+│   │   └── tools/             # Tool reference guides
+│   └── en/                    # English MDX course files
+├── lib/                       # Database, auth, MDX utilities
+└── i18n/                      # i18n strings
+```
 
-- `AUTH_SECRET`
-- `AUTH_GITHUB_ID`
-- `AUTH_GITHUB_SECRET`
-- `AUTH_GOOGLE_ID`
-- `AUTH_GOOGLE_SECRET`
+## Features
 
-然后启动应用并验证:
+### Learning
 
-- 未登录访问 `/{locale}/modules` 会跳转到 `/{locale}/login`
-- 未登录访问 `/{locale}/dashboard` 会跳转到 `/{locale}/login`
-- GitHub 登录可成功建立会话
-- Google 登录可成功建立会话
-- 非管理员账号访问 `/{locale}/dashboard` 会被重定向到 `/{locale}/modules`
-- 管理员账号可进入 `/{locale}/dashboard`
+- Course browsing and reading (MDX rendering + syntax highlighting)
+- Progressive exercises within learning units
+- Module projects with self-assessment checklists
+- Personal center (progress tracking, study stats, streak counter)
+- Prompt Portfolio management
+- Tool reference area (installation guides and command cheat sheets for Claude Code, Codex, Cursor, Bolt.new, etc.)
 
-更细的检查步骤见 [docs/verification-checklist.md](D:\VibeCodingPlaform\docs\verification-checklist.md)。
+### Admin
+
+- Data dashboard (user stats, module funnel, activity trends)
+- Course content management (module / unit CRUD)
+- User management (role switching, learning trajectory)
+- Project review queue
+
+## Knowledge Sources & Credits
+
+Course content is originally written based on methodologies and conceptual frameworks from these open-source projects — no content is directly copied:
+
+| Project | License | What We Referenced |
+|---------|---------|-------------------|
+| [datawhalechina/vibe-vibe](https://github.com/datawhalechina/vibe-vibe) | CC BY-NC-SA 4.0 | Learning path structure, curriculum design, product thinking pedagogy |
+| [2025Emma/vibe-coding-cn](https://github.com/2025Emma/vibe-coding-cn) | MIT | Four methodology principles, Ask/Plan workflow, CLAUDE.md design, Skill system, prompt library |
+| [datawhalechina/hello-agents](https://github.com/datawhalechina/hello-agents) | CC BY-NC-SA 4.0 | Context engineering, MCP protocol, Agent Skills concepts |
+
+Also informed by Andrej Karpathy's public writings on Vibe Coding and Agentic Engineering, and industry practices including the PEV loop and glue programming patterns.
+
+## Roadmap
+
+- [x] Platform architecture and core features
+- [x] M1-M8 complete course content (Chinese & English)
+- [x] Tool reference area (installation guides, command cheat sheets, Skill/MCP configuration)
+- [x] Admin panel
+- [ ] Production deployment
+- [ ] Community: project gallery
+- [ ] Community: Prompt / Skill sharing library
+- [ ] Community: study groups
+- [ ] Community: periodic challenges
+- [ ] Admin WYSIWYG content editor
+
+## Contributing
+
+Contributions are welcome! You can help by:
+
+- Suggesting course content improvements (Issues)
+- Fixing bugs or improving features (PRs)
+- Adding tool guides or tutorials
+- Translating content to other languages
+- Sharing your learning experience and feedback
+
+## License
+
+Platform code is released under the [MIT License](LICENSE).
+
+Course content references open-source projects under CC BY-NC-SA 4.0. All course material in this platform is originally written based on the referenced methodologies, with sources credited in relevant lessons.
